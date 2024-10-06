@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Courses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #00d4ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #000;
+        }
+
+        .courses {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .course-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .course-card img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+
+        .course-card h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .course-card p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .start-button {
+            background-color: transparent;
+            border: 2px solid #000;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .start-button:hover {
+            background-color: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>English</h1>
+</header>
+
+<div class="courses">
+    <div class="course-card">
+        <img src="https://thelightuphub.s3.eu-west-2.amazonaws.com/uploads/0bWWBpVXctUu7mSqsAYVISFroFOfcHPWHiuLwEm6.png" alt="English Literature">
+        <h2>English Literature</h2>
+        <p>Unveiling Core Texts and Poetry Insights for Your...</p>
+        <a href="english-literature/index.html">
+            <button class="start-button">Start Now</button>
+        </a>        
+    </div>
+    <div class="course-card">
+        <img src="https://thelightuphub.s3.eu-west-2.amazonaws.com/uploads/gvB27YO0r4krv8lOEc5cI0w3dyoCKP9dyWFUQhw9.png" alt="English Language">
+        <h2>English Language</h2>
+        <p>Your Complete Guide To Mastering The Language...</p>
+        <a href="english-language/index.html">
+            <button class="start-button">Start Now</button>
+        </a>
+    </div>
+    <div class="course-card">
+        <img src="https://thelightuphub.s3.eu-west-2.amazonaws.com/uploads/9AA1PZsuInsvh3QxRiGCfPdqfZW8BBNQxe3B9kHM.png" alt="Essay Skills">
+        <h2>Essay Skills</h2>
+        <p>Elevate All Your Essays with These Fundamental...</p>
+        <a href="essay-skills/index.html">
+            <button class="start-button">Start Now</button>
+        </a>
+    </div>
+    <div class="course-card">
+        <img src="https://thelightuphub.s3.eu-west-2.amazonaws.com/uploads/Bwge6S6oZNT8i1IUKOEny5Vx10K7Z7zR1kFy2ZPp.png" alt="Revision">
+        <h2>Revision</h2>
+        <p>Master GCSE English: Effective Methods for...</p>
+        <a href="revision/index.html">
+            <button class="start-button">Start Now</button>
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
