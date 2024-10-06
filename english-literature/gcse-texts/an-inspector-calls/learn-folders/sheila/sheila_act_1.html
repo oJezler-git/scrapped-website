@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn An Inspector Calls</title>
+    <link rel="icon" href="https://english.ojezler.com/icon.png">
+    <style>
+      :root {
+        --background-color: #00d4ff;
+        --text-color: #000;
+        --container-bg: #fff;
+        --separator-color: #8a2be2;
+        --link-color: #8a2be2;
+        --ticklist-bg: #8a2be2;
+        --ticklist-color: #8a2be2;
+        --ticklist-bg: #8a2be2;
+        --ticklist-bg-rgb: 138, 43, 226;
+        --pdf-preview-bg: #E0FFFF;
+      }
+
+      .dark-mode {
+        --background-color: #1a1a1a;
+        --text-color: #fff;
+        --container-bg: #333;
+        --separator-color: #ff8a4c;
+        --link-color: #ff8a4c;
+        --ticklist-bg: #ff8a4c;
+        --ticklist-color: #ff8a4c;
+        --ticklist-bg: #ff8a4c;
+        --ticklist-bg-rgb: 255, 138, 76;
+        --pdf-preview-bg: #2a2a2a;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .sidebar {
+        scrollbar-width: thin;
+        scrollbar-color: var(--separator-color) var(--background-color);
+      }
+
+      .sidebar::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .sidebar::-webkit-scrollbar-track {
+        background: var(--background-color);
+      }
+
+      .sidebar::-webkit-scrollbar-thumb {
+        background-color: var(--separator-color);
+        border-radius: 10px;
+        border: 2px solid var(--background-color);
+      }
+
+      .sidebar::-webkit-scrollbar-thumb:hover {
+        background-color: var(--ticklist-bg);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+      }
+
+      h1 .back-button {
+        width: 30px;
+        height: 30px;
+        background-color: transparent;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 0;
+        margin-right: 10px;
+      }
+
+      h1 .back-button svg {
+        width: 100%;
+        height: 100%;
+        transition: transform 0.2s, fill 0.3s;
+        fill: var(--text-color);
+      }
+
+      h1 .back-button:hover svg {
+        transform: scale(1.1);
+      }
+
+      .content {
+        display: flex;
+        transition: gap 0.3s;
+      }
+
+      .sidebar {
+        width: 30%;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+        transition: width 0.3s, margin-left 0.3s;
+        position: relative;
+        padding-right: 20px;
+        box-sizing: border-box;
+      }
+
+      .main-content {
+        width: 70%;
+        transition: width 0.3s, padding-left 0.3s;
+        padding-left: 20px;
+      }
+
+      .sidebar-collapsed {
+        width: 0;
+        padding-right: 0;
+      }
+
+      .main-content-expanded {
+        width: calc(100% - 40px);
+        padding-left: 60px;
+      }
+
+      #sidebar-toggle {
+        position: fixed;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1001;
+        background-color: var(--separator-color);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        transition: left 0.3s;
+      }
+
+      .sidebar:not(.sidebar-collapsed) #sidebar-toggle {
+        left: calc(30% - 20px);
+      }
+
+      .video-container {
+        position: relative;
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto 20px;
+      }
+
+      .video-container::before {
+        content: "";
+        display: block;
+        padding-top: 56.25%;
+        /* 16:9 aspect ratio */
+      }
+
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      #sidebar-toggle,
+      #mode-toggle {
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      .faded {
+        opacity: 0.3;
+      }
+
+      .separator {
+        border-top: 2px solid var(--separator-color);
+        margin: 10px 0;
+        transition: border-color 0.3s;
+      }
+
+      .button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+      }
+
+      .button-purple {
+        background-color: var(--separator-color);
+      }
+
+      .button-orange {
+        background-color: #ff8a4c;
+      }
+
+      .video-container {
+        margin-bottom: 20px;
+      }
+
+      .pdf-preview {
+        background-color: var(--pdf-preview-bg);
+        padding: 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      .pdf-preview h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      .pdf-button {
+        background-color: var(--separator-color);
+      }
+
+      .ticklist {
+        background-color: rgba(var(--ticklist-bg-rgb), 0.1);
+        color: var(--ticklist-color);
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        border: 2px solid rgba(var(--ticklist-bg-rgb), 0.5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      ul {
+        list-style-type: disc;
+        padding-left: 20px;
+      }
+
+      a {
+        color: var(--link-color);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      #mode-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="mode-toggle" class="button button-purple">Toggle Dark Mode</button>
+    <div class="container">
+      <div class="back-button-container">
+        <h1>
+          <a href="../../../an-inspector-calls/index.html" aria-label="Back To GCSE Texts">
+            <button aria-label="Back Button" class="back-button">
+              <svg fill="#000000" width="30px" height="30px" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100,15a85,85,0,1,0,85,85A84.93,84.93,0,0,0,100,15Zm0,150a65,65,0,1,1,65-65A64.87,64.87,0,0,1,100,165ZM116.5,57.5a9.67,9.67,0,0,0-14,0L74,86a19.92,19.92,0,0,0,0,28.5L102.5,143a9.9,9.9,0,0,0,14-14l-28-29L117,71.5C120.5,68,120.5,61.5,116.5,57.5Z" />
+              </svg>
+            </button>
+          </a>
+          <span>An Inspector Calls</span>
+        </h1>
+      </div>
+      <div class="content">
+        <div class="sidebar">
+          <button style="border-radius: 5px;" id="sidebar-toggle">◀</button>
+          <div class="separator"></div>
+          <h3>Learn AIC</h3>
+          <li style="margin-bottom: 10px;">
+            <a href="../../learn-folders/learn-aic/learn.html">Learn</a>
+          </li>
+          <div class="separator"></div>
+          <h3>Notes</h3>
+          <ul>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/notes/how_to_make_notes_for_an_inspector_calls.html">How To Make Notes For An Inspector Calls</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/notes/summary.html">Summary</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/notes/context.html">Context</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/notes/grade_9_key_words.html">Grade 9 Key Words</a>
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Key Themes</h3>
+          <ul>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/key-themes/mr_birling.html">Mr Birling</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/key-themes/mrs_birling.html">Mrs Birling</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/key-themes/sheila.html">Sheila</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/key-themes/eric.html">Eric</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/key-themes/gerald.html">Gerald</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/key-themes/inspector.html">Inspector</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/key-themes/responsibility_theme_table.html">Responsibility Theme Table</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/key-themes/social_class_theme_table.html">Social Class Theme Table</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/key-themes/older_vs_younger_theme_table.html">Olders vs Younger Theme Table</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/key-themes/capitalism_vs_socialism_theme_table.html">Capitalism vs Socialism Theme Table</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/key-themes/guilt_theme_table.html">Guilt Theme Table</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/key-themes/gender_theme_table.html">Gender Theme Table</a>
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Mr Birling</h3>
+          <ul>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/mr-birling/mr_birling_act_1.html">Mr Birling Act 1</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/mr-birling/mr_birling_act_2.html">Mr Birling Act 2</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/mr-birling/mr_birling_act_3.html">Mr Birling Act 3</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/mr-birling/summarised_notes.html">Summarised Notes</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/mr-birling/mr_birling_theme_table.html">Mr Birling Theme Table</a>
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Mrs Birling</h3>
+          <ul>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/mrs-birling/mrs_birling_act_1.html">Mrs Birling Act 1</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/mrs-birling/mrs_birling_act_2.html">Mrs Birling Act 2</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/mrs-birling/mrs_birling_act_3.html">Mrs Birling Act 3</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/mrs-birling/summarised_notes.html">Summarised Notes</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/mrs-birling/mrs_birling_theme_table.html">Mrs Birling Theme Table</a>
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Sheila</h3>
+          <ul>
+            <li class="ticklist">
+              <a href="../../learn-folders/sheila/sheila_act_1.html">Sheila Act 1</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/sheila/sheila_act_2.html">Sheila Act 2</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/sheila/sheila_act_3.html">Sheila Act 3</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/sheila/summarised_notes.html">Summarised Notes</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/sheila/sheila_theme_table.html">Sheila Theme Table</a>
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Eric</h3>
+          <ul>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/eric/eric_act_1.html">Eric Act 1</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/eric/eric_act_2.html">Eric Act 2</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/eric/eric_act_3.html">Eric Act 3</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/eric/summarised_notes.html">Summarised Notes</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/eric/eric_theme_table.html">Eric Theme Table</a>
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Gerald</h3>
+          <ul>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/gerald/gerald_act_1.html">Gerald Act 1</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/gerald/gerald_act_2.html">Gerald Act 2</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/gerald/gerald_act_3.html">Gerald Act 3</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/gerald/summarised_notes.html">Summarised Notes</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/gerald/gerald_theme_table.html">Gerald Theme Table</a>
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>The Inspector</h3>
+          <ul>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/the-inspector/the_inspector_act_1.html">Inspector Act 1</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/the-inspector/the_inspector_act_2.html">Inspector Act 2</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/the-inspector/the_inspector_act_3.html">Inspector Act 3</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/the-inspector/summarised_notes.html">Summarised Notes</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/the-inspector/the_inspector_theme_table.html">Inspector Theme Table</a>
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Practice Questions</h3>
+          <ul>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/practice-questions/aqa_style_practice_questions.html">AQA Style Practice Questions</a>
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Essay Plans</h3>
+          <ul>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/essay-plans/guilt_essay_plan.html">Guilt essay plan</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/essay-plans/social_responsibility_essay_plan.html">Social responsibility essay plan</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/essay-plans/mrs_birling_essay_plan.html">Mrs Birling essay plan</a>
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Past Paper Questions</h3>
+          <ul>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/past-paper-questions/aqa_past_paper_questions.html">AQA Past Paper Questions</a>
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Grade 9 Essays</h3>
+          <ul>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/grade-9-essays/how_does_priestley_present_society_as_unfair.html">How does Priestley present society as unfair?</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/grade-9-essays/how_far_does_priestley_present_male_characters_as_irresponsible.html">How far does Priestley present male characters as irresponsible?</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/grade-9-essays/how_does_priestley_use_mr_birling_to_present_his_concerns_in_society.html">How does Priestley use Mr Birling to present his concerns in society?</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/grade-9-essays/how_does_priestley_use_mrs_birling_to_explore_ideas_about_social_class.html">How does Priestley use Mrs Birling to explore ideas about social class?</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/grade-9-essays/how_is_sheila_presented_as_a_character_who_changes.html">How is Sheila presented as a character who changes?</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/grade-9-essays/how_far_is_eric_presented_as_a_character_who_changes.html">How far is Eric presented as a character who changes?</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/grade-9-essays/how_does_priestley_use_gerald_crofts_status_to_show_his_ideas_about_society.html">How does Priestley use Gerald Croft's status to show his ideas about society?</a>
+            </li>
+            <li style="margin-bottom: 10px;">
+              <a href="../../learn-folders/grade-9-essays/how_does_priestley_use_the_inspector_to_suggest_ways_society_could_be_improved.html">How does Priestley use the Inspector to suggest ways society could be improved?</a>
+            </li>
+          </ul>
+        </div>
+        <div class="main-content">
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/IT9_ZKTQ6o4" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <button class="button-purple" id="open-pdf-button">Open PDF in New Tab</button>
+          <div class="pdf-preview">
+            <embed id="pdf-embed" src="../../aic-pdfs/Sheila/Sheila act 1.pdf" width="100%" height="500px" type="application/pdf">
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      //////////////////////////////////////////////////////////////////////////////////////////////////
+      // smooth scrolling
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+      //////////////////////////////////////////////////////////////////////////////////////////////////
+      // pdf
+      const pdfUrl = '../../aic-pdfs/Sheila/Sheila act 1.pdf';
+      document.getElementById('pdf-embed').src = pdfUrl;
+      document.getElementById('open-pdf-button').addEventListener('click', function() {
+        window.open(pdfUrl, '_blank');
+      });
+      //////////////////////////////////////////////////////////////////////////////////////////////////
+      // dark mode
+      const modeToggle = document.getElementById('mode-toggle');
+      const body = document.body;
+
+      function setColourScheme(scheme) {
+        if (scheme === 'dark') {
+          body.classList.remove('light-mode');
+          body.classList.add('dark-mode');
+          modeToggle.textContent = 'Toggle Light Mode';
+        } else {
+          body.classList.remove('dark-mode');
+          body.classList.add('light-mode');
+          modeToggle.textContent = 'Toggle Dark Mode';
+        }
+      }
+      // check system preference for dark mode
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setColourScheme('dark');
+      } else {
+        setColourScheme('light');
+      }
+      // detect changes in system preference
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        setColourScheme(e.matches ? 'dark' : 'light');
+      });
+      // manual toggle
+      modeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) {
+          modeToggle.textContent = 'Toggle Light Mode';
+        } else {
+          modeToggle.textContent = 'Toggle Dark Mode';
+        }
+      });
+      //////////////////////////////////////////////////////////////////////////////////////////////////
+      // sidebar open and close
+      const sidebarToggle = document.getElementById('sidebar-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      const mainContent = document.querySelector('.main-content');
+      const container = document.querySelector('.container');
+      const pdfOpen = document.getElementById('open-pdf-button');
+      sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('sidebar-collapsed');
+        mainContent.classList.toggle('main-content-expanded');
+        container.style.maxWidth = sidebar.classList.contains('sidebar-collapsed') ? '100%' : '1200px';
+        sidebarToggle.textContent = sidebar.classList.contains('sidebar-collapsed') ? '▶' : '◀';
+        if (sidebar.classList.contains('sidebar-collapsed')) {
+          mainContent.style.paddingLeft = '60px';
+        } else {
+          mainContent.style.paddingLeft = '20px';
+        }
+      });
+      //////////////////////////////////////////////////////////////////////////////////////////////////
+      // button fading
+      const buttons = [sidebarToggle, modeToggle, pdfOpen];
+      let fadeTimeout;
+
+      function fadeButtons() {
+        buttons.forEach(button => button.classList.add('faded'));
+      }
+
+      function resetFade() {
+        buttons.forEach(button => button.classList.remove('faded'));
+        clearTimeout(fadeTimeout);
+        fadeTimeout = setTimeout(fadeButtons, 2000); // 2 secs
+      }
+      resetFade();
+      document.addEventListener('mousemove', resetFade);
+      // no fade when hover
+      buttons.forEach(button => {
+        button.addEventListener('mouseenter', () => {
+          button.classList.remove('faded');
+        });
+        button.addEventListener('mouseleave', resetFade);
+      });
+    </script>
+  </body>
+</html>
