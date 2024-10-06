@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your go-to resource for GCSE English revision, including study guides, practice questions, and exam tips.">
+    <meta name="keywords" content="GCSE English, English revision, GCSE study guides, English practice questions, English exam tips">
+    <meta name="author" content="Your Name">
+    <meta name="robots" content="noindex, nofollow">
+    <meta property="og:title" content="GCSE English Revision Resources">
+    <meta property="og:description" content="The inspector kinda hot ngl.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="https://english.ojezler.com/icon.png">
+    <!-- start title -->
+    <title>An Inspector Calls</title>
+    <!-- end title -->
+    <!-- start styles -->
+    <style>
+        :root {
+            --bg-color: #00d4ff;
+            --text-color: #000;
+            --panel-bg: #fff;
+            --accordion-bg: #8a2be2;
+            --accordion-text: #fff;
+            --accordion-active: #6a1b9a;
+            --quiz-accordion-bg: #ff8a4c;
+            --button-bg: #8a2be2;
+            --button-hover: #6a1b9a;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #1a1a1a;
+                --text-color: #fff;
+                --panel-bg: #2c2c2c;
+                --accordion-bg: #4a148c;
+                --accordion-text: #fff;
+                --accordion-active: #7b1fa2;
+                --quiz-accordion-bg: #e65100;
+                --button-bg: #4a148c;
+                --button-hover: #7b1fa2;
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .header-content h1 {
+            font-size: 2.5em;
+            margin-left: 20px;
+        }
+
+        header p {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .content {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .left-panel, .right-panel {
+            background-color: var(--panel-bg);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .left-panel {
+            width: 60%;
+        }
+
+        .right-panel {
+            width: 40%;
+        }
+
+        .accordion {
+            background-color: var(--accordion-bg);
+            color: var(--accordion-text);
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .active, .accordion:hover {
+            background-color: var(--accordion-active);
+        }
+
+        .accordion:after {
+            content: '\002B';
+            color: var(--accordion-text);
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active:after {
+            content: "\2212";
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: var(--panel-bg);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-radius: 0 0 5px 5px;
+            margin-bottom: 10px;
+        }
+
+        .quiz-accordion {
+            background-color: var(--quiz-accordion-bg);
+            color: var(--accordion-text);
+            cursor: default;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .quiz-panel {
+            padding: 0 18px;
+            background-color: var(--panel-bg);
+            max-height: none;
+            overflow: visible;
+            border-radius: 0 0 5px 5px;
+            margin-bottom: 10px;
+        }
+
+        .topic {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .topic:last-child {
+            border-bottom: none;
+        }
+
+        .start-learning {
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .start-learning:hover {
+            background-color: var(--button-hover);
+        }
+
+        .pdf-icons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .pdf-icons a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .pdf-icons div {
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .pdf-icons img {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .quiz-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .quiz-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .quiz-list li:last-child {
+            border-bottom: none;
+        }
+
+        .quiz-list li:hover {
+            background-color: rgba(128, 128, 128, 0.1);
+        }
+
+        .back-button {
+            width: 50px;
+            height: 50px;
+            background-color: transparent;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .back-button svg {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.2s, fill 0.3s;
+            fill: var(--text-color);
+        }
+
+        .back-button:hover svg {
+            transform: scale(1.1);
+        }
+
+        #mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            z-index: 1000;
+        }
+
+        #mode-toggle:hover {
+            background-color: var(--button-hover);
+        }
+
+        /* for weirdos who want light mode */
+        body.light-mode {
+            --bg-color: #00d4ff;
+            --text-color: #000;
+            --panel-bg: #fff;
+            --accordion-bg: #8a2be2;
+            --accordion-text: #fff;
+            --accordion-active: #6a1b9a;
+            --quiz-accordion-bg: #ff8a4c;
+            --button-bg: #8a2be2;
+            --button-hover: #6a1b9a;
+        }
+    </style>
+    <!-- end styles -->
+</head>
+
+<body>
+    <button id="mode-toggle">Toggle Dark Mode</button>
+    <header>
+        <!-- start header -->
+        <div class="header-content">
+            <div class="back-button-container">
+                <a href="../index.html" aria-label="Back To GCSE Texts">
+                    <button aria-label="Back Button" class="back-button">
+                        <svg fill="#000000" width="30px" height="30px" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100,15a85,85,0,1,0,85,85A84.93,84.93,0,0,0,100,15Zm0,150a65,65,0,1,1,65-65A64.87,64.87,0,0,1,100,165ZM116.5,57.5a9.67,9.67,0,0,0-14,0L74,86a19.92,19.92,0,0,0,0,28.5L102.5,143a9.9,9.9,0,0,0,14-14l-28-29L117,71.5C120.5,68,120.5,61.5,116.5,57.5Z"/>
+                        </svg>
+                    </button>
+                </a>
+            </div>
+            <h1>An Inspector Calls</h1>
+        </div>
+        <p>Unveil An Inspector Calls: context, key themes, top-grade analysis, Priestley's aims, and examiner-impressing critical insights</p>
+        <!-- end header -->
+    </header>
+    <div class="content">
+        <div class="left-panel">
+            <!-- start sections -->
+            <button class="accordion">Learn</button>
+            <div class="panel">
+                <div class="topic">
+                    <span>Learn</span>
+                    <a href="learn-folders/learn-aic/learn.html">
+                        <button class="start-learning">Start Learning</button>
+                    </a>
+                </div>
+            </div>
+            <!--####################################################################################-->
+            <button class="accordion">Notes</button>
+            <div class="panel">
+                <div class="topic">
+                    <span>How To Make Notes For An Inspector Calls</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Summary</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Context</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Grade 9 Key Words</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+            </div>
+            <!--####################################################################################-->
+            <button class="accordion">Key Themes</button>
+            <div class="panel">
+                <div class="topic">
+                    <span>Mr Birling</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Mrs Birling</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Sheila</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Eric</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Gerald</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Inspector</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Responsibility Theme Table</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Social Class Theme Table</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Olders vs Younger Theme Table</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Capitalism vs Socialism Theme Table</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Guilt Theme Table</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Gender Theme Table</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+            </div>
+            <!--####################################################################################-->
+            <button class="accordion">Mr Birling</button>
+            <div class="panel">
+                <div class="topic">
+                    <span>Mr Birling Act 1</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Mr Birling Act 2</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Mr Birling Act 3</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Summarised Notes</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Mr Birling Theme Table</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+            </div>
+            <!--####################################################################################-->
+            <button class="accordion">Mrs Birling</button>
+            <div class="panel">
+                <div class="topic">
+                    <span>Mrs Birling Act 1</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Mrs Birling Act 2</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Mrs Birling Act 3</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Summarised Notes</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Mrs Birling Theme Table</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+            </div>
+            <!--####################################################################################-->
+            <button class="accordion">Shelia</button>
+            <div class="panel">
+                <div class="topic">
+                    <span>Shelia Act 1</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Shelia Act 2</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Shelia Act 3</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Summarised Notes</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Shelia Theme Table</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+            </div>
+            <!--####################################################################################-->
+            <button class="accordion">Eric</button>
+            <div class="panel">
+                <div class="topic">
+                    <span>Eric Act 1</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Eric Act 2</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Eric Act 3</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Summarised Notes</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Eric Theme Table</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+            </div>
+            <!--####################################################################################-->
+            <button class="accordion">Gerald</button>
+            <div class="panel">
+                <div class="topic">
+                    <span>Gerald Act 1</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Gerald Act 2</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Gerald Act 3</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Summarised Notes</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Gerald Theme Table</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+            </div>
+            <!--####################################################################################-->
+            <button class="accordion">The Inspector</button>
+            <div class="panel">
+                <div class="topic">
+                    <span>The Inspector Act 1</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>The Inspector Act 2</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>The Inspector Act 3</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Summarised Notes</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>The Inspector Theme Table</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+            </div>
+            <!--####################################################################################-->
+            <button class="accordion">Practice Questions</button>
+            <div class="panel">
+                <div class="topic">
+                    <span>AQA Style Practice Questions</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+            </div>
+            <!--####################################################################################-->
+            <button class="accordion">Essay Plans</button>
+            <div class="panel">
+                <div class="topic">
+                    <span>Guilt essay plan</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Social Responsibility essay plan</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>Mrs Birling essay plan</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+            </div>
+            <!--####################################################################################-->
+            <button class="accordion">Past Paper Questions</button>
+            <div class="panel">
+                <div class="topic">
+                    <span>AQA Past Paper Questions</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+            </div>
+            <!--####################################################################################-->
+            <button class="accordion">Grade 9 Essays</button>
+            <div class="panel">
+                <div class="topic">
+                    <span>'How does Priestley present society as unfair?'</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>'How far does Priestley present male characters as irresponsible?'</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>'How does Priestley use Mr Birling to present his concerns in society?'</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>'How does Priestley use Mrs Birling to explore ideas about social class?'</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>'How is Sheila presented as a character who changes?'</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>'How far is Eric presented as a character who changes?'</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>'How does Priestley use Gerald Croft's status to show his ideas about society?'</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+                <div class="topic">
+                    <span>'How does Priestley use the Inspector to suggest ways society could be improved?'</span>
+                    <button class="start-learning">Start Learning</button>
+                </div>
+            </div>
+            <!--####################################################################################-->
+            <!-- end sections -->
+        </div>
+        <div class="right-panel">
+            <div class="pdf-icons">
+                <!-- start pdf's -->
+                <a href="https://thelightuphub.s3.eu-west-2.amazonaws.com/uploads/act-1-yM6K.pdf" target="_blank">
+                    <img src="https://thelightuphub.com/assets/images/pdf.png" alt="PDF Act-1">
+                    <div>Act 1</div>
+                </a>
+                <a href="https://thelightuphub.s3.eu-west-2.amazonaws.com/uploads/act-2-6AjN.pdf" target="_blank">
+                    <img src="https://thelightuphub.com/assets/images/pdf.png" alt="PDF Act-2">
+                    <div>Act 2</div>
+                </a>
+                <a href="https://thelightuphub.s3.eu-west-2.amazonaws.com/uploads/act-3-2jcP.pdf" target="_blank">
+                    <img src="https://thelightuphub.com/assets/images/pdf.png" alt="PDF Act-3">
+                    <div>Act 3</div>
+                </a>
+                <!-- end pdf's -->
+            </div>
+            
+            <button class="quiz-accordion">Quiz</button>
+            <div class="quiz-panel">
+                <ul class="quiz-list">
+                    <!-- start quiz -->
+                    <li>Mr Birling Act 1 Quiz <button class="start-learning">Start Quiz</button></li>
+                    <li>Mr Birling Act 2 Quiz <button class="start-learning">Start Quiz</button></li>
+                    <li>Mr Birling Act 3 Quiz <button class="start-learning">Start Quiz</button></li>
+                    <li>Mrs Birling Act 1 Quiz <button class="start-learning">Start Quiz</button></li>
+                    <li>Mrs Birling Act 2 Quiz <button class="start-learning">Start Quiz</button></li>
+                    <li>Mrs Birling Act 3 Quiz <button class="start-learning">Start Quiz</button></li>
+                    <li>Sheila Act 1 Quiz <button class="start-learning">Start Quiz</button></li>
+                    <li>Sheila Act 2 Quiz <button class="start-learning">Start Quiz</button></li>
+                    <li>Sheila Act 3 Quiz <button class="start-learning">Start Quiz</button></li>
+                    <li>Eric Act 1 Quiz <button class="start-learning">Start Quiz</button></li>
+                    <li>Eric Act 2 Quiz <button class="start-learning">Start Quiz</button></li>
+                    <li>Eric Act 3 Quiz <button class="start-learning">Start Quiz</button></li>
+                    <li>Gerald Act 1 Quiz <button class="start-learning">Start Quiz</button></li>
+                    <li>Gerald Act 2 Quiz <button class="start-learning">Start Quiz</button></li>
+                    <li>Gerald Act 3 Quiz <button class="start-learning">Start Quiz</button></li>
+                    <li>Inspector Act 1 Quiz <button class="start-learning">Start Quiz</button></li>
+                    <!-- end quiz -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- start script -->
+    <script>
+        // open sections
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+    
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+        // dark mode
+        const modeToggle = document.getElementById('mode-toggle');
+        const body = document.body;
+        const backButtonSvg = document.querySelector('.back-button svg');
+
+        function setColourScheme(scheme) {
+            if (scheme === 'dark') {
+                body.classList.remove('light-mode');
+                modeToggle.textContent = 'Toggle Light Mode';
+            } else {
+                body.classList.add('light-mode');
+                modeToggle.textContent = 'Toggle Dark Mode';
+            }
+        }
+
+        // system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setColourScheme('dark');
+        } else {
+            setColourScheme('light');
+        }
+
+        // detect changes in system preference
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            setColourScheme(e.matches ? 'dark' : 'light');
+        });
+
+        // manual toggle
+        modeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            if (body.classList.contains('light-mode')) {
+                modeToggle.textContent = 'Toggle Dark Mode';
+            } else {
+                modeToggle.textContent = 'Toggle Light Mode';
+            }
+        });
+    </script>
+    <!-- end script -->
+
+</body>
+
+</html>
