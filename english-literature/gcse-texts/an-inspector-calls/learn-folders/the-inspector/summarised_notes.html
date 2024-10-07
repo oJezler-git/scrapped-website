@@ -445,7 +445,7 @@
             <li style="margin-bottom: 10px;">
               <a href="../../learn-folders/the-inspector/the_inspector_act_3.html">Inspector Act 3</a>
             </li>
-            <li style="margin-bottom: 10px;">
+            <li class="ticklist">
               <a href="../../learn-folders/the-inspector/summarised_notes.html">Summarised Notes</a>
             </li>
             <li style="margin-bottom: 10px;">
@@ -509,12 +509,12 @@
           </ul>
         </div>
         <div class="main-content">
-          <div class="video-container">
+          <!-- <div class="video-container">
             <iframe src="https://www.youtube.com/embed/" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" allowfullscreen></iframe>
-          </div>
+          </div> -->
           <button class="button-purple" id="open-pdf-button">Open PDF in New Tab</button>
           <div class="pdf-preview">
-            <embed id="pdf-embed" src="../../aic-pdfs/" width="100%" height="500px" type="application/pdf">
+            <embed id="pdf-embed" src="../../aic-pdfs/The inspector/The inspector summarised notes.pdf" width="100%" height="500px" type="application/pdf">
           </div>
         </div>
       </div>
@@ -532,7 +532,7 @@
       });
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // pdf
-      const pdfUrl = '../../aic-pdfs/';
+      const pdfUrl = '../../aic-pdfs/The inspector/The inspector summarised notes.pdf';
       document.getElementById('pdf-embed').src = pdfUrl;
       document.getElementById('open-pdf-button').addEventListener('click', function() {
         window.open(pdfUrl, '_blank');
