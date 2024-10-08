@@ -302,54 +302,120 @@
       }
     </style>
     <style>
-      /* Overlay styling */
+      /* Quiz overlay styling */
       .quiz-overlay {
-        display: none; /* Hidden by default */
+        display: none;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+        background: rgba(0, 0, 0, 0.8);
         justify-content: center;
         align-items: center;
       }
 
       .quiz-modal {
-        background: white;
+        background: var(--panel-bg);
+        color: var(--text-color);
         padding: 20px;
         width: 50%;
         max-width: 500px;
         border-radius: 10px;
         box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+        position: relative;
       }
 
-      .quiz-modal h2 {
-        margin-top: 0;
+      /* Close button styles */
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 1.5em;
+        cursor: pointer;
+        color: var(--text-color);
+      }
+
+      /* Divider styles */
+      .divider {
+        border-top: 1px solid var(--text-color);
+        margin: 15px 0;
+      }
+
+      /* Updated styles for options with bullet points */
+      #quiz-options {
+        list-style-type: none;
+        padding-left: 0;
+      }
+
+      .option {
+        display: flex;
+        align-items: flex-start;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .option::before {
+        content: "•";
+        margin-right: 10px;
+        font-size: 1.2em;
+      }
+
+      .option:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .option.selected {
+        background-color: #ffb6c1; /* Light pink for selected wrong answer */
+      }
+
+      .option.correct {
+        background-color: #90ee90; /* Light green for correct answer */
+      }
+
+      .explanation {
+        margin-top: 5px;
+        margin-left: 20px;
+        font-style: italic;
       }
 
       .quiz-buttons {
-        margin-top: 20px;
         display: flex;
         justify-content: space-between;
+        margin-top: 20px;
       }
 
-      .close-btn {
-        background: #f44336;
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-
+      .prev-btn,
       .next-btn {
-        background: #4caf50;
-        color: white;
-        padding: 10px;
+        padding: 10px 15px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        background-color: var(--button-bg);
+        color: var(--text-color);
+      }
+
+      .prev-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .feedback {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .correct {
+        background-color: rgba(76, 175, 80, 0.3);
+      }
+
+      .incorrect {
+        background-color: rgba(244, 67, 54, 0.3);
       }
     </style>
     <!-- end styles -->
@@ -907,60 +973,93 @@
             </li>
             <li>
               Mrs Birling Act 1 Quiz
-              <button class="start-learning">Start Quiz</button>
+              <button class="start-learning" data-quiz="mrs-birling-act1">
+                Start Quiz
+              </button>
             </li>
             <li>
               Mrs Birling Act 2 Quiz
-              <button class="start-learning">Start Quiz</button>
+              <button class="start-learning" data-quiz="mrs-birling-act2">
+                Start Quiz
+              </button>
             </li>
             <li>
               Mrs Birling Act 3 Quiz
-              <button class="start-learning">Start Quiz</button>
+              <button class="start-learning" data-quiz="mrs-birling-act3">
+                Start Quiz
+              </button>
             </li>
             <li>
               Sheila Act 1 Quiz
-              <button class="start-learning">Start Quiz</button>
+              <button class="start-learning" data-quiz="sheila-act1">
+                Start Quiz
+              </button>
             </li>
             <li>
               Sheila Act 2 Quiz
-              <button class="start-learning">Start Quiz</button>
+              <button class="start-learning" data-quiz="sheila-act2">
+                Start Quiz
+              </button>
             </li>
             <li>
               Sheila Act 3 Quiz
-              <button class="start-learning">Start Quiz</button>
+              <button class="start-learning" data-quiz="sheila-act3">
+                Start Quiz
+              </button>
             </li>
             <li>
-              Eric Act 1 Quiz <button class="start-learning">Start Quiz</button>
+              Eric Act 1 Quiz
+              <button class="start-learning" data-quiz="eric-act1">
+                Start Quiz
+              </button>
             </li>
             <li>
-              Eric Act 2 Quiz <button class="start-learning">Start Quiz</button>
+              Eric Act 2 Quiz
+              <button class="start-learning" data-quiz="eric-act2">
+                Start Quiz
+              </button>
             </li>
             <li>
-              Eric Act 3 Quiz <button class="start-learning">Start Quiz</button>
+              Eric Act 3 Quiz
+              <button class="start-learning" data-quiz="eric-act3">
+                Start Quiz
+              </button>
             </li>
             <li>
               Gerald Act 1 Quiz
-              <button class="start-learning">Start Quiz</button>
+              <button class="start-learning" data-quiz="gerald-act1">
+                Start Quiz
+              </button>
             </li>
             <li>
               Gerald Act 2 Quiz
-              <button class="start-learning">Start Quiz</button>
+              <button class="start-learning" data-quiz="gerald-act2">
+                Start Quiz
+              </button>
             </li>
             <li>
               Gerald Act 3 Quiz
-              <button class="start-learning">Start Quiz</button>
+              <button class="start-learning" data-quiz="gerald-act3">
+                Start Quiz
+              </button>
             </li>
             <li>
               Inspector Act 1 Quiz
-              <button class="start-learning">Start Quiz</button>
+              <button class="start-learning" data-quiz="inspector-act1">
+                Start Quiz
+              </button>
             </li>
             <li>
               Inspector Act 2 Quiz
-              <button class="start-learning">Start Quiz</button>
+              <button class="start-learning" data-quiz="inspector-act2">
+                Start Quiz
+              </button>
             </li>
             <li>
               Inspector Act 3 Quiz
-              <button class="start-learning">Start Quiz</button>
+              <button class="start-learning" data-quiz="inspector-act3">
+                Start Quiz
+              </button>
             </li>
             <!-- end quiz -->
           </ul>
@@ -969,151 +1068,233 @@
     </div>
     <div id="quiz-overlay" class="quiz-overlay">
       <div class="quiz-modal">
-        <h2 id="quiz-title"></h2>
+        <button class="close-btn" onclick="closeQuiz()">×</button>
+        <h1 id="quiz-title"></h1>
+        <h4 id="question-number"></h4>
         <div id="quiz-question"></div>
-        <div id="quiz-options"></div>
+        <div class="divider"></div>
+        <ul id="quiz-options"></ul>
         <div class="quiz-buttons">
-          <button class="close-btn" onclick="closeQuiz()">Close</button>
+          <button class="prev-btn" id="prev-btn" onclick="previousQuestion()">
+            Previous Question
+          </button>
           <button class="next-btn" id="next-btn" onclick="nextQuestion()">
-            Next
+            Next Question
           </button>
         </div>
       </div>
     </div>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Sample data for quizzes
-        const quizzes = {
-          "birling-act1": {
-            title: "Mr Birling Act 1 Quiz",
-            questions: [
-              {
-                question:
-                  "What is Mr Birling's attitude towards social responsibility?",
-                options: ["Positive", "Negative", "Neutral", "Unsure"],
-                answer: "Negative",
-              },
-              {
-                question: "Which act contains Mr Birling’s key speech?",
-                options: ["Act 1", "Act 2", "Act 3", "None"],
-                answer: "Act 1",
-              },
-            ],
-          },
-          "birling-act2": {
-            title: "Mr Birling Act 2 Quiz",
-            questions: [
-              {
-                question: "What does Mr Birling think about the inspector?",
-                options: ["Respectful", "Dismissive", "Afraid", "Unsure"],
-                answer: "Dismissive",
-              },
-            ],
-          },
-        };
+      const quizzes = {
+        "birling-act1": {
+          title: "Mr Birling Act 1 Quiz",
+          questions: [
+            {
+              question: "What does Mr. Birling personify?",
+              options: [
+                "Socialism",
+                "Marxist values",
+                "The aristocracy",
+                "Capitalism",
+              ],
+              correctAnswer: "Capitalism",
+              explanation:
+                "Capitalism. He stands to represent the British social elite and their disregard for the lower classes.",
+            },
+            {
+              question:
+                "The description of his home as “substantial and heavily comfortable” shows what?",
+              options: [
+                "He lives in an affluent milieu",
+                "His house is homely and warm",
+                "Links to the theme of capitalism",
+                "His home is old-fashioned",
+              ],
+              correctAnswer: "He lives in an affluent milieu",
+              explanation:
+                "He lives in an affluent milieu (social environment), the cosmetic and superficial nature of his wealth is exposed through his home.",
+            },
+            {
+              question:
+                "Which literary technique describes “heavily comfortable”?",
+              options: ["Hyperbole", "Paradox", "Oxymoron", "Façade"],
+              correctAnswer: "Oxymoron",
+              explanation:
+                "Oxymoron. This presents the pseudo-luxury (it seems luxurious but is it really?) of the social elite as artificial.",
+            },
+            {
+              question: "Which quote is a reference to Sir Stanley Baldwin?",
+              options: [
+                "“hard-headed practical man of business”",
+                "“rather portentous man in his middle fifties”",
+                "“rather provincial in his speech”",
+                "“heavy looking”",
+              ],
+              correctAnswer: "“hard-headed practical man of business”",
+              explanation:
+                "“hard-headed practical man of business”. Sir Stanley Baldwin, a Prime minister between the two world wars accused “hard-faced men” of profiting out of the war. Mr Birling stands to represent these affluent businessmen who callously took advantage of the suffering of war for financial gain.",
+            },
+          ],
+        },
+        "birling-act2": {
+          title: "Mr Birling Act 2 Quiz",
+          questions: [
+            {
+              question: "What does Mr Birling think about the inspector?",
+              options: ["Respectful", "Dismissive", "Afraid", "Unsure"],
+              correctAnswer: "Dismissive",
+              explanation:
+                "Mr Birling is dismissive of the inspector. He tries to intimidate him by mentioning his friendship with the chief constable and suggests that the inspector is overstepping his authority. This dismissive attitude shows Birling's belief in his own importance and his attempts to avoid responsibility.",
+            },
+          ],
+        },
+      };
 
-        let currentQuizId = "";
-        let currentQuestionIndex = 0;
-        let userAnswers = [];
+      let currentQuizId = "";
+      let currentQuestionIndex = 0;
+      let userAnswers = [];
 
-        // Function to start the quiz
-        function startQuiz(quizId) {
-          currentQuizId = quizId;
-          currentQuestionIndex = 0;
-          userAnswers = [];
+      function startQuiz(quizId) {
+        currentQuizId = quizId;
+        currentQuestionIndex = 0;
+        userAnswers = new Array(quizzes[quizId].questions.length).fill(null);
 
-          const quiz = quizzes[quizId];
-          document.getElementById("quiz-title").textContent = quiz.title;
-          showQuestion();
-          document.getElementById("quiz-overlay").style.display = "flex";
-        }
+        const quiz = quizzes[quizId];
+        document.getElementById("quiz-title").textContent = quiz.title;
+        showQuestion();
+        document.getElementById("quiz-overlay").style.display = "flex";
+      }
 
-        // Function to show the current question
-        function showQuestion() {
-          const quiz = quizzes[currentQuizId];
-          const currentQuestion = quiz.questions[currentQuestionIndex];
+      function showQuestion() {
+        const quiz = quizzes[currentQuizId];
+        const currentQuestion = quiz.questions[currentQuestionIndex];
 
-          document.getElementById(
-            "quiz-question"
-          ).innerHTML = `<p>${currentQuestion.question}</p>`;
+        document.getElementById("question-number").textContent = `${
+          currentQuestionIndex + 1
+        } of ${quiz.questions.length} Questions`;
+        document.getElementById("quiz-question").textContent =
+          currentQuestion.question;
 
-          const optionsContainer = document.getElementById("quiz-options");
-          optionsContainer.innerHTML = ""; // Clear previous options
+        const optionsContainer = document.getElementById("quiz-options");
+        optionsContainer.innerHTML = "";
 
-          currentQuestion.options.forEach((option) => {
-            const label = document.createElement("label");
-            const radio = document.createElement("input");
-            radio.type = "radio";
-            radio.name = `question-${currentQuestionIndex}`;
-            radio.value = option;
-            label.appendChild(radio);
-            label.appendChild(document.createTextNode(option));
-            optionsContainer.appendChild(label);
-            optionsContainer.appendChild(document.createElement("br"));
-          });
-
-          // Update Next button text
-          document.getElementById("next-btn").textContent =
-            currentQuestionIndex < quiz.questions.length - 1
-              ? "Next"
-              : "Submit";
-        }
-
-        // Function to go to the next question or submit the quiz
-        function nextQuestion() {
-          const selected = document.querySelector(
-            `input[name="question-${currentQuestionIndex}"]:checked`
-          );
-          if (!selected) {
-            alert("Please select an option");
-            return;
-          }
-          userAnswers.push(selected.value);
-
-          const quiz = quizzes[currentQuizId];
-
-          // If there are more questions, show the next one
-          if (currentQuestionIndex < quiz.questions.length - 1) {
-            currentQuestionIndex++;
-            showQuestion();
-          } else {
-            checkAnswers();
-          }
-        }
-
-        // Function to check answers and display score
-        function checkAnswers() {
-          const quiz = quizzes[currentQuizId];
-          let score = 0;
-
-          quiz.questions.forEach((q, index) => {
-            if (userAnswers[index] === q.answer) {
-              score++;
-            }
-          });
-
-          alert(`You scored ${score} out of ${quiz.questions.length}`);
-          closeQuiz();
-        }
-
-        // Function to close the quiz overlay
-        function closeQuiz() {
-          document.getElementById("quiz-overlay").style.display = "none";
-        }
-
-        // Add event listeners to quiz buttons
-        document.querySelectorAll(".start-learning").forEach((button) => {
-          button.addEventListener("click", function () {
-            const quizId = this.getAttribute("data-quiz");
-            startQuiz(quizId);
-          });
+        currentQuestion.options.forEach((option, index) => {
+          const optionLi = document.createElement("li");
+          optionLi.classList.add("option");
+          optionLi.textContent = option;
+          optionLi.onclick = () => selectAnswer(index);
+          optionsContainer.appendChild(optionLi);
         });
 
-        // Expose functions to the global scope
-        window.nextQuestion = nextQuestion;
-        window.closeQuiz = closeQuiz;
+        document.getElementById("prev-btn").disabled =
+          currentQuestionIndex === 0;
+        document.getElementById("next-btn").textContent =
+          currentQuestionIndex === quiz.questions.length - 1
+            ? "Finish Quiz"
+            : "Next Question";
+        document.getElementById("next-btn").onclick =
+          currentQuestionIndex === quiz.questions.length - 1
+            ? checkAnswers
+            : nextQuestion;
+
+        // previous answer if exists
+        if (userAnswers[currentQuestionIndex] !== null) {
+          const selectedOption =
+            document.querySelectorAll(".option")[
+              userAnswers[currentQuestionIndex]
+            ];
+          selectAnswer(userAnswers[currentQuestionIndex], false);
+        }
+      }
+
+      function selectAnswer(index, isNewSelection = true) {
+        const quiz = quizzes[currentQuizId];
+        const currentQuestion = quiz.questions[currentQuestionIndex];
+        const selectedOption = document.querySelectorAll(".option")[index];
+        const correctOptionIndex = currentQuestion.options.indexOf(
+          currentQuestion.correctAnswer
+        );
+        const correctOption =
+          document.querySelectorAll(".option")[correctOptionIndex];
+
+        // rm any previous selections
+        document.querySelectorAll(".option").forEach((option) => {
+          option.classList.remove("selected", "correct");
+          const explanation = option.querySelector(".explanation");
+          if (explanation) explanation.remove();
+        });
+
+        if (index === correctOptionIndex) {
+          selectedOption.classList.add("correct");
+        } else {
+          selectedOption.classList.add("selected");
+          correctOption.classList.add("correct");
+        }
+
+        // explanation to correct answer
+        const explanationDiv = document.createElement("div");
+        explanationDiv.classList.add("explanation");
+        explanationDiv.textContent = `Reason: ${currentQuestion.explanation}`;
+        correctOption.appendChild(explanationDiv);
+
+        // disable further selections
+        document.querySelectorAll(".option").forEach((option) => {
+          option.onclick = null;
+        });
+
+        if (isNewSelection) {
+          userAnswers[currentQuestionIndex] = index;
+        }
+      }
+
+      function nextQuestion() {
+        if (
+          currentQuestionIndex <
+          quizzes[currentQuizId].questions.length - 1
+        ) {
+          currentQuestionIndex++;
+          showQuestion();
+        }
+      }
+
+      function previousQuestion() {
+        if (currentQuestionIndex > 0) {
+          currentQuestionIndex--;
+          showQuestion();
+        }
+      }
+
+      function checkAnswers() {
+        const quiz = quizzes[currentQuizId];
+        let score = 0;
+
+        userAnswers.forEach((answer, index) => {
+          if (
+            answer !== null &&
+            quiz.questions[index].options[answer] ===
+              quiz.questions[index].correctAnswer
+          ) {
+            score++;
+          }
+        });
+
+        alert(`You scored ${score} out of ${quiz.questions.length}`);
+        closeQuiz();
+      }
+
+      function closeQuiz() {
+        document.getElementById("quiz-overlay").style.display = "none";
+      }
+
+      // quiz buttons event listeners
+      document.querySelectorAll(".start-learning").forEach((button) => {
+        button.addEventListener("click", function () {
+          const quizId = this.getAttribute("data-quiz");
+          startQuiz(quizId);
+        });
       });
     </script>
+
     <!-- start script -->
     <script>
       // open sections
