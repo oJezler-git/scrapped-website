@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
     <title>English Literature Subcategories</title>
     <style>
       :root {
@@ -273,7 +274,7 @@
         githubOverlay.addEventListener("click", function (e) {
           if (e.target.tagName.toLowerCase() !== "a") {
             clickCount++;
-            if (clickCount === 5) {
+            if (clickCount === 3) {
               githubOverlay.classList.add("hidden");
             }
           }
