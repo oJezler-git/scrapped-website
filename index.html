@@ -1,215 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Courses</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Not Found</title>
     <style>
+      :root {
+        --bg-color: #00d4ff;
+        --text-color: #000;
+        --panel-bg: #fff;
+        --button-bg: #8a2be2;
+        --button-hover: #6a1b9a;
+        --button-text: #fff;
+      }
+
+      @media (prefers-color-scheme: dark) {
         :root {
-            --bg-color: #00d4ff;
-            --text-color: #000;
-            --panel-bg: #fff;
-            --button-bg: #8a2be2;
-            --button-hover: #6a1b9a;
-            --button-text: #fff;
+          --bg-color: #1a1a1a;
+          --text-color: #fff;
+          --panel-bg: #2c2c2c;
+          --button-bg: #4a148c;
+          --button-hover: #7b1fa2;
+          --button-text: #fff;
         }
+      }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #1a1a1a;
-                --text-color: #fff;
-                --panel-bg: #2c2c2c;
-                --button-bg: #4a148c;
-                --button-hover: #7b1fa2;
-                --button-text: #fff;
-            }
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        transition: background-color 0.3s, color 0.3s;
+      }
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            transition: background-color 0.3s, color 0.3s;
-        }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
 
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
+      header h1 {
+        font-size: 2.5em;
+      }
 
-        header h1 {
-            font-size: 2.5em;
-        }
+      .courses {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
 
-        .courses {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+      .course-card {
+        background-color: var(--panel-bg);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 250px;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s, background-color 0.3s;
+      }
 
-        .course-card {
-            background-color: var(--panel-bg);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 250px;
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s, background-color 0.3s;
-        }
+      .course-card:hover {
+        transform: translateY(-10px);
+      }
 
-        .course-card:hover {
-            transform: translateY(-10px);
-        }
+      .course-card img {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 20px;
+      }
 
-        .course-card img {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 20px;
-        }
+      .course-card h2 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+      }
 
-        .course-card h2 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
+      .course-card p {
+        font-size: 1em;
+        color: var(--text-color);
+        margin-bottom: 20px;
+      }
 
-        .course-card p {
-            font-size: 1em;
-            color: var(--text-color);
-            margin-bottom: 20px;
-        }
+      .start-button {
+        background-color: var(--button-bg);
+        color: var(--button-text);
+        border: none;
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border-radius: 5px;
+      }
 
-        .start-button {
-            background-color: var(--button-bg);
-            color: var(--button-text);
-            border: none;
-            padding: 10px 20px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            border-radius: 5px;
-        }
+      .start-button:hover {
+        background-color: var(--button-hover);
+      }
 
-        .start-button:hover {
-            background-color: var(--button-hover);
-        }
+      #mode-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: var(--button-bg);
+        color: var(--button-text);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+        z-index: 1000;
+      }
 
-        #mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: var(--button-bg);
-            color: var(--button-text);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            z-index: 1000;
-        }
+      #mode-toggle:hover {
+        background-color: var(--button-hover);
+      }
 
-        #mode-toggle:hover {
-            background-color: var(--button-hover);
-        }
+      body.light-mode {
+        --bg-color: #00d4ff;
+        --text-color: #000;
+        --panel-bg: #fff;
+        --button-bg: #8a2be2;
+        --button-hover: #6a1b9a;
+        --button-text: #fff;
+      }
 
-        body.light-mode {
-            --bg-color: #00d4ff;
-            --text-color: #000;
-            --panel-bg: #fff;
-            --button-bg: #8a2be2;
-            --button-hover: #6a1b9a;
-            --button-text: #fff;
-        }
+      #github-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #f1f1f1;
+        color: #666;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+
+      #github-content {
+        text-align: center;
+        max-width: 600px;
+        margin-top: -20%;
+      }
+
+      #github-content h1 {
+        font-size: 60px;
+        font-weight: 100;
+        margin: 0 0 20px 0;
+        color: #333;
+      }
+
+      #github-content p {
+        margin: 20px 0;
+      }
+
+      #github-content a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      #github-content a:hover {
+        text-decoration: underline;
+      }
+
+      #suggestions {
+        margin-top: 35px;
+      }
+
+      #suggestions a {
+        font-weight: 200;
+        font-size: 14px;
+        margin: 0 10px;
+      }
+
+      .hidden {
+        display: none !important;
+      }
     </style>
-</head>
-<body>
-<button id="mode-toggle">Toggle Mode</button>
+  </head>
+  <body>
+    <button id="mode-toggle">Toggle Mode</button>
 
-<header>
-    <h1>English</h1>
-</header>
+    <div id="github-overlay">
+      <div id="github-content">
+        <h1>404</h1>
+        <p><strong>File not found</strong></p>
+        <p>
+          The site configured at this address does not contain the requested
+          file.
+        </p>
+        <p>
+          If this is your site, make sure that the filename case matches the URL
+          as well as any file permissions.<br />
+          For root URLs (like <code>http://example.com/</code>) you must provide
+          an <code>index.html</code> file.
+        </p>
+        <p>
+          <a href="https://help.github.com/pages/"
+            >Read the full documentation</a
+          >
+          for more information about using <strong>GitHub Pages</strong>.
+        </p>
+        <div id="suggestions">
+          <a href="https://githubstatus.com">GitHub Status</a> &mdash;
+          <a href="https://twitter.com/githubstatus">@githubstatus</a>
+        </div>
+        <div class="logo" style="margin-top: 5%">
+          <img
+            width="32"
+            height="32"
+            title=""
+            alt=""
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpFMTZCRDY3REIzRjAxMUUyQUQzREIxQzRENUFFNUM5NiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpFMTZCRDY3RUIzRjAxMUUyQUQzREIxQzRENUFFNUM5NiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkUxNkJENjdCQjNGMDExRTJBRDNEQjFDNEQ1QUU1Qzk2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkUxNkJENjdDQjNGMDExRTJBRDNEQjFDNEQ1QUU1Qzk2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+SM9MCAAAA+5JREFUeNrEV11Ik1EY3s4+ddOp29Q5b0opCgKFsoKoi5Kg6CIhuwi6zLJLoYLopq4qsKKgi4i6CYIoU/q5iDAKs6syoS76IRWtyJ+p7cdt7sf1PGOD+e0c3dygAx/67ZzzPM95/877GYdHRg3ZjMXFxepQKNS6sLCwJxqNNuFpiMfjVs4ZjUa/pmmjeD6VlJS8NpvNT4QQ7mxwjSsJiEQim/1+/9lgMHgIr5ohuxG1WCw9Vqv1clFR0dCqBODElV6v90ogEDjGdYbVjXhpaendioqK07CIR7ZAqE49PT09BPL2PMgTByQGsYiZlQD4uMXtdr+JxWINhgINYhGT2MsKgMrm2dnZXgRXhaHAg5jEJodUAHxux4LudHJE9RdEdA+i3Juz7bGHe4mhE9FNrgwBCLirMFV9Okh5eflFh8PR5nK5nDabrR2BNJlKO0T35+Li4n4+/J+/JQCxhmu5h3uJoXNHPbmWZAHMshWB8l5/ipqammaAf0zPDDx1ONV3vurdidqwAQL+pEc8sLcAe1CCvQ3YHxIW8Pl85xSWNC1hADDIv0rIE/o4J0k3kww4xSlwIhcq3EFFOm7KN/hUGOQkt0CFa5WpNJlMvxBEz/IVQAxg/ZRZl9wiHA63yDYieM7DnLP5CiAGsC7I5sgtYKJGWe2A8seFqgFJrJjEPY1Cn3pJ8/9W1e5VWsFDTEmFrBcoDhZJEQkXuhICMyKpjhahqN21hRYATKfUOlDmkygrR4o4C0VOLGJKrOITKB4jijzdXygBKixyC5TDQdnk/Pz8qRw6oOWGlsTKGOQW6OH6FBWsyePxdOXLTgxiyebILZCjz+GLgMIKnXNzc49YMlcRdHXcSwxFVgTInQhC9G33UhNoJLuqq6t345p9y3eUy8OTk5PjAHuI9uo4b07FBaOhsu0A4Unc+T1TU1Nj3KsSSE5yJ65jqF2DDd8QqWYmAZrIM2VlZTdnZmb6AbpdV9V6ec9znf5Q7HjYumdRE0JOp3MjitO4SFa+cZz8Umqe3TCbSLvdfkR/kWDdNQl5InuTcysOcpFT35ZrbBxx4p3JAHlZVVW1D/634VRt+FvLBgK/v5LV9WS+10xMTEwtRw7XvqOL+e2Q8V3AYIOIAXQ26/heWVnZCVfcyKHg2CBgTpmPmjYM8l24GyaUHyaIh7XwfR9ErE8qHoDfn2LTNAVC0HX6MFcBIP8Bi+6F6cdW/DICkANRfx99fEYFQ7Nph5i/uQiA214gno7K+guhaiKg9gC62+M8eR7XsBsYJ4ilam60Fb7r7uAj8wFyuwM1oIOWgfmDy6RXEEQzJMPe23DXrVS7rtyD3Df8z/FPgAEAzWU5Ku59ZAUAAAAASUVORK5CYII="
+          />
+        </div>
+      </div>
+    </div>
 
-<div class="courses">
-    <div class="course-card">
-        <img src="https://thelightuphub.s3.eu-west-2.amazonaws.com/uploads/0bWWBpVXctUu7mSqsAYVISFroFOfcHPWHiuLwEm6.png" alt="English Literature">
+    <header>
+      <h1>English</h1>
+    </header>
+
+    <div class="courses">
+      <div class="course-card">
+        <img
+          src="https://thelightuphub.s3.eu-west-2.amazonaws.com/uploads/0bWWBpVXctUu7mSqsAYVISFroFOfcHPWHiuLwEm6.png"
+          alt="English Literature"
+        />
         <h2>English Literature</h2>
         <p>Unveiling Core Texts and Poetry Insights for Your...</p>
         <a href="english-literature/index.html">
-            <button class="start-button">Start Now</button>
-        </a>        
-    </div>
-    <div class="course-card">
-        <img src="https://thelightuphub.s3.eu-west-2.amazonaws.com/uploads/gvB27YO0r4krv8lOEc5cI0w3dyoCKP9dyWFUQhw9.png" alt="English Language">
+          <button class="start-button">Start Now</button>
+        </a>
+      </div>
+      <div class="course-card">
+        <img
+          src="https://thelightuphub.s3.eu-west-2.amazonaws.com/uploads/gvB27YO0r4krv8lOEc5cI0w3dyoCKP9dyWFUQhw9.png"
+          alt="English Language"
+        />
         <h2>English Language</h2>
         <p>Your Complete Guide To Mastering The Language...</p>
         <a href="english-language/index.html">
-            <button class="start-button">Start Now</button>
+          <button class="start-button">Start Now</button>
         </a>
-    </div>
-    <div class="course-card">
-        <img src="https://thelightuphub.s3.eu-west-2.amazonaws.com/uploads/9AA1PZsuInsvh3QxRiGCfPdqfZW8BBNQxe3B9kHM.png" alt="Essay Skills">
+      </div>
+      <div class="course-card">
+        <img
+          src="https://thelightuphub.s3.eu-west-2.amazonaws.com/uploads/9AA1PZsuInsvh3QxRiGCfPdqfZW8BBNQxe3B9kHM.png"
+          alt="Essay Skills"
+        />
         <h2>Essay Skills</h2>
         <p>Elevate All Your Essays with These Fundamental...</p>
         <a href="essay-skills/index.html">
-            <button class="start-button">Start Now</button>
+          <button class="start-button">Start Now</button>
         </a>
-    </div>
-    <div class="course-card">
-        <img src="https://thelightuphub.s3.eu-west-2.amazonaws.com/uploads/Bwge6S6oZNT8i1IUKOEny5Vx10K7Z7zR1kFy2ZPp.png" alt="Revision">
+      </div>
+      <div class="course-card">
+        <img
+          src="https://thelightuphub.s3.eu-west-2.amazonaws.com/uploads/Bwge6S6oZNT8i1IUKOEny5Vx10K7Z7zR1kFy2ZPp.png"
+          alt="Revision"
+        />
         <h2>Revision</h2>
         <p>Master GCSE English: Effective Methods for...</p>
         <a href="revision/index.html">
-            <button class="start-button">Start Now</button>
+          <button class="start-button">Start Now</button>
         </a>
+      </div>
     </div>
-</div>
 
-<script>
-    // dark mode
-    const modeToggle = document.getElementById('mode-toggle');
-    const body = document.body;
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const githubOverlay = document.getElementById("github-overlay");
+        const modeToggle = document.getElementById("mode-toggle");
+        const body = document.body;
+        let clickCount = 0;
+        githubOverlay.addEventListener("click", function (e) {
+          if (e.target.tagName.toLowerCase() !== "a") {
+            clickCount++;
+            if (clickCount === 5) {
+              githubOverlay.classList.add("hidden");
+            }
+          }
+        });
 
-    function setColourScheme(scheme) {
-        if (scheme === 'dark') {
-            body.classList.remove('light-mode');
-            modeToggle.textContent = 'Toggle Light Mode';
-        } else {
-            body.classList.add('light-mode');
-            modeToggle.textContent = 'Toggle Dark Mode';
+        // dark mode
+        function setColourScheme(scheme) {
+          if (scheme === "dark") {
+            body.classList.remove("light-mode");
+            modeToggle.textContent = "Toggle Light Mode";
+          } else {
+            body.classList.add("light-mode");
+            modeToggle.textContent = "Toggle Dark Mode";
+          }
         }
-    }
 
-    // system preference
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        setColourScheme('dark');
-    } else {
-        setColourScheme('light');
-    }
-
-    // detect changes in system preference
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-        setColourScheme(e.matches ? 'dark' : 'light');
-    });
-
-    // manual toggle
-    modeToggle.addEventListener('click', () => {
-        body.classList.toggle('light-mode');
-        if (body.classList.contains('light-mode')) {
-            modeToggle.textContent = 'Toggle Dark Mode';
+        // system preference
+        if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ) {
+          setColourScheme("dark");
         } else {
-            modeToggle.textContent = 'Toggle Light Mode';
+          setColourScheme("light");
         }
-    });
-</script>
 
-</body>
+        // detect changes in system preference
+        window
+          .matchMedia("(prefers-color-scheme: dark)")
+          .addEventListener("change", (e) => {
+            setColourScheme(e.matches ? "dark" : "light");
+          });
+
+        // manual toggle
+        modeToggle.addEventListener("click", () => {
+          body.classList.toggle("light-mode");
+          if (body.classList.contains("light-mode")) {
+            modeToggle.textContent = "Toggle Dark Mode";
+          } else {
+            modeToggle.textContent = "Toggle Light Mode";
+          }
+        });
+      });
+    </script>
+  </body>
 </html>
