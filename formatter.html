@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formatter</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        max-width: 600px;
+        margin: auto;
+      }
+      textarea {
+        width: 100%;
+        height: 100px;
+      }
+      label {
+        display: block;
+        margin-top: 10px;
+      }
+      button {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Text Formatter -->
+    <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+
+    <label>
+      <input type="checkbox" id="replaceUnderscore" />
+      Replace spaces with underscores (_)
+    </label>
+
+    <label>
+      <input type="checkbox" id="replaceHyphen" />
+      Replace spaces with hyphens (-)
+    </label>
+
+    <button onclick="textFormatter()">Format Text</button>
+
+    <p id="outputText"></p>
+
+    <!-- HTML Modifier -->
+    <h2>HTML Modifier</h2>
+    <p>
+      This will remove the href path in links like
+      "learn-folders/folder/page.html" (removes the "folder/page.html" part).
+    </p>
+    <textarea id="inputHtml" placeholder="Input HTML here..."></textarea>
+    <button onclick="hrefStripper()">Modify HTML</button>
+
+    <h2>Modified HTML Output</h2>
+    <textarea id="outputHtml" readonly></textarea>
+
+    <script>
+      function textFormatter() {
+        let text = document.getElementById("inputText").value;
+
+        // rm punctuation, convert to lowercase
+        text = text.replace(/[.,\/#!$%\^&\*;:{}=\=`'~()]/g, "").toLowerCase();
+
+        // _ or -
+        if (document.getElementById("replaceUnderscore").checked) {
+          text = text.replace(/\s+/g, "_");
+        } else if (document.getElementById("replaceHyphen").checked) {
+          text = text.replace(/\s+/g, "-");
+        } else {
+          text = text.replace(/\s+/g, " "); // js clean up extra spaces
+        }
+
+        document.getElementById("outputText").textContent = text;
+      }
+
+      function hrefStripper() {
+        const inputHtml = document.getElementById("inputHtml").value;
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(inputHtml, "text/html");
+
+        // change all href attributes that include "learn-folders/"
+        const links = doc.querySelectorAll('a[href*="learn-folders/"]');
+        links.forEach((link) => {
+          link.setAttribute("href", "learn-folders/");
+        });
+
+        const outputHtml = doc.body.innerHTML;
+        document.getElementById("outputHtml").value = outputHtml;
+      }
+    </script>
+  </body>
+
+  <!-- balls -->
+</html>
