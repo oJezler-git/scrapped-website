@@ -168,10 +168,16 @@
         align-items: center;
         padding: 10px 0;
         border-bottom: 1px solid #eee;
+        gap: 15px;
       }
 
       .topic:last-child {
         border-bottom: none;
+      }
+
+      .topic span {
+        flex: 1;
+        min-width: 0;
       }
 
       .start-learning {
@@ -182,6 +188,10 @@
         border-radius: 5px;
         cursor: pointer;
         font-size: 0.9em;
+        min-width: 120px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .start-learning:hover {
@@ -289,6 +299,123 @@
         --button-hover: #6a1b9a;
       }
     </style>
+    <style>
+      /* Quiz overlay styling */
+      .quiz-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .quiz-modal {
+        background: var(--panel-bg);
+        color: var(--text-color);
+        padding: 20px;
+        width: 50%;
+        max-width: 500px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+        position: relative;
+      }
+
+      /* Close button styles */
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 1.5em;
+        cursor: pointer;
+        color: var(--text-color);
+      }
+
+      /* Divider styles */
+      .divider {
+        border-top: 1px solid var(--text-color);
+        margin: 15px 0;
+      }
+
+      /* Updated styles for options with bullet points */
+      #quiz-options {
+        list-style-type: none;
+        padding-left: 0;
+      }
+
+      .option {
+        display: flex;
+        align-items: flex-start;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .option::before {
+        content: "•";
+        margin-right: 10px;
+        font-size: 1.2em;
+      }
+
+      .option:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .option.selected {
+        background-color: #ffb6c1; /* Light pink for selected wrong answer */
+      }
+
+      .option.correct {
+        background-color: #90ee90; /* Light green for correct answer */
+      }
+
+      .explanation {
+        margin-top: 5px;
+        margin-left: 20px;
+        font-style: italic;
+      }
+
+      .quiz-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+
+      .prev-btn,
+      .next-btn {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: var(--button-bg);
+        color: var(--text-color);
+      }
+
+      .prev-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .feedback {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .correct {
+        background-color: rgba(76, 175, 80, 0.3);
+      }
+
+      .incorrect {
+        background-color: rgba(244, 67, 54, 0.3);
+      }
+    </style>
     <!-- end styles -->
   </head>
 
@@ -317,7 +444,9 @@
         <h1>Language Paper 2</h1>
       </div>
       <p>
-        Ace Language Paper 2: how to write exceptional letters, speeches, articles, proven question structures, and techniques to leave an impact on the examiner.
+        Ace Language Paper 2: how to write exceptional letters, speeches,
+        articles, proven question structures, and techniques to leave an impact
+        on the examiner.
       </p>
       <!-- end header -->
     </header>
@@ -370,7 +499,6 @@
             <span>How To Plan Language Papers</span>
             <button class="start-learning">Start Learning</button>
           </div>
-
         </div>
         <!--####################################################################################-->
         <button class="accordion">Question 1</button>

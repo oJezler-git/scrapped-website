@@ -168,10 +168,16 @@
         align-items: center;
         padding: 10px 0;
         border-bottom: 1px solid #eee;
+        gap: 15px;
       }
 
       .topic:last-child {
         border-bottom: none;
+      }
+
+      .topic span {
+        flex: 1;
+        min-width: 0;
       }
 
       .start-learning {
@@ -182,6 +188,10 @@
         border-radius: 5px;
         cursor: pointer;
         font-size: 0.9em;
+        min-width: 120px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .start-learning:hover {
