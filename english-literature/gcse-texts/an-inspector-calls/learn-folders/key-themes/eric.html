@@ -753,16 +753,6 @@
     </div>
     <script>
       //////////////////////////////////////////////////////////////////////////////////////////////////
-      // smooth scrolling
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          document.querySelector(this.getAttribute("href")).scrollIntoView({
-            behavior: "smooth",
-          });
-        });
-      });
-      //////////////////////////////////////////////////////////////////////////////////////////////////
       // pdf
       // const pdfUrl = '../../aic-pdfs/Learn/Learn.pdf';
       // document.getElementById('pdf-embed').src = pdfUrl;
