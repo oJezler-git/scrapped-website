@@ -234,7 +234,9 @@
           src="https://thelightuphub.s3.eu-west-2.amazonaws.com/uploads/stQWQSgpZiS0JqF9wtl5irhvA3RDO6edNAPNRSti.png"
         />
         <h2>Language Paper 1</h2>
-        <p>Excel in Language Paper 1: pre-exam creative writing hacks, question</p>
+        <p>
+          Excel in Language Paper 1: pre-exam creative writing hacks, question
+        </p>
         <a href="paper-one/index.html">
           <button class="start-button">Start Now</button>
         </a>
@@ -244,7 +246,10 @@
           src="https://thelightuphub.s3.eu-west-2.amazonaws.com/uploads/VIwn7RyNdb8wYWgKZdjDFdHES5sBOSI6CqMzBmjU.png"
         />
         <h2>Language Paper 2</h2>
-        <p>Ace Language Paper 2: how to write exceptional letters, speeches, articles...</p>
+        <p>
+          Ace Language Paper 2: how to write exceptional letters, speeches,
+          articles...
+        </p>
         <a href="paper-two/index.html">
           <button class="start-button">Start Now</button>
         </a>
@@ -256,13 +261,23 @@
         const githubOverlay = document.getElementById("github-overlay");
         const modeToggle = document.getElementById("mode-toggle");
         const body = document.body;
-        let clickCount = 0;
 
+        const hasCompletedClicks =
+          localStorage.getItem("overlayClicked") === "true";
+
+        // hide overlay if passed before
+        if (hasCompletedClicks) {
+          githubOverlay.classList.add("hidden");
+        }
+
+        let clickCount = 0;
         githubOverlay.addEventListener("click", function (e) {
           if (e.target.tagName.toLowerCase() !== "a") {
             clickCount++;
-            if (clickCount === 2) {
+            if (clickCount === 5) {
               githubOverlay.classList.add("hidden");
+              // save that user has completed the clicks
+              localStorage.setItem("overlayClicked", "true");
             }
           }
         });

@@ -280,12 +280,23 @@
         const githubOverlay = document.getElementById("github-overlay");
         const modeToggle = document.getElementById("mode-toggle");
         const body = document.body;
+
+        const hasCompletedClicks =
+          localStorage.getItem("overlayClicked") === "true";
+
+        // hide overlay if passed before
+        if (hasCompletedClicks) {
+          githubOverlay.classList.add("hidden");
+        }
+
         let clickCount = 0;
         githubOverlay.addEventListener("click", function (e) {
           if (e.target.tagName.toLowerCase() !== "a") {
             clickCount++;
             if (clickCount === 5) {
               githubOverlay.classList.add("hidden");
+              // save that user has completed the clicks
+              localStorage.setItem("overlayClicked", "true");
             }
           }
         });
