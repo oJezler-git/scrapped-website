@@ -396,7 +396,7 @@
           <div class="separator"></div>
           <h3>Notes</h3>
           <ul>
-            <li style="margin-bottom: 10px">
+            <li class="ticklist">
               <a
                 href="../../learn-folders/Notes/how_to_make_notes_for_language_papers.html"
                 >How To Make Notes For Language Papers</a
@@ -571,13 +571,14 @@
               allowfullscreen
             ></iframe>
           </div>
+          <!-- JEZLER FIXx -->
           <button class="button-purple" id="open-pdf-button">
             Open PDF in New Tab
           </button>
           <div class="pdf-preview">
             <embed
               id="pdf-embed"
-              src="../../paper-one-pdfs/"
+              src="../../paper-one-pdfs/notes/how to write notes for language papers.pdf"
               width="100%"
               height="500px"
               type="application/pdf"
@@ -589,7 +590,8 @@
     <script>
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // pdf
-      const pdfUrl = "../../paper-one-pdfs/";
+      const pdfUrl =
+        "../../paper-one-pdfs/notes/how to write notes for language papers.pdf";
       document.getElementById("pdf-embed").src = pdfUrl;
       document
         .getElementById("open-pdf-button")

@@ -496,7 +496,7 @@
                 >Questions</a
               >
             </li>
-            <li style="margin-bottom: 10px">
+            <li class="ticklist">
               <a href="../../learn-folders/2020 Past Paper/mark_scheme.html"
                 >Mark Scheme</a
               >
@@ -562,7 +562,7 @@
           </ul>
         </div>
         <div class="main-content">
-          <div class="video-container">
+          <!-- <div class="video-container">
             <iframe
               src="https://www.youtube-nocookie.com/embed/"
               frameborder="0"
@@ -570,18 +570,24 @@
               loading="lazy"
               allowfullscreen
             ></iframe>
-          </div>
+          </div> -->
           <button class="button-purple" id="open-pdf-button">
             Open PDF in New Tab
           </button>
           <div class="pdf-preview">
             <embed
               id="pdf-embed"
-              src="../../paper-one-pdfs/"
+              src="../../paper-one-pdfs/past paper/were not allowed.pdf"
               width="100%"
               height="500px"
               type="application/pdf"
             />
+            <li>
+              <a
+                href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2020/november/AQA-87001-QP-NOV20.PDF"
+                >https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2020/november/AQA-87001-QP-NOV20.PDF</a
+              >
+            </li>
           </div>
         </div>
       </div>
@@ -589,7 +595,7 @@
     <script>
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // pdf
-      const pdfUrl = "../../paper-one-pdfs/";
+      const pdfUrl = "../../paper-one-pdfs/past paper/were not allowed.pdf";
       document.getElementById("pdf-embed").src = pdfUrl;
       document
         .getElementById("open-pdf-button")
