@@ -628,13 +628,14 @@
               allowfullscreen
             ></iframe>
           </div>
+          <!-- JEZLER FIX -->
           <button class="button-purple" id="open-pdf-button">
             Open PDF in New Tab
           </button>
           <div class="pdf-preview">
             <embed
               id="pdf-embed"
-              src="../../love-and-relationships-pdfs/"
+              src="../../love-and-relationships-pdfs/letters-from-yorkshire.pdf"
               width="100%"
               height="500px"
               type="application/pdf"
@@ -646,7 +647,8 @@
     <script>
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // pdf
-      const pdfUrl = "../../love-and-relationships-pdfs/";
+      const pdfUrl =
+        "../../love-and-relationships-pdfs/letters-from-yorkshire.pdf";
       document.getElementById("pdf-embed").src = pdfUrl;
       document
         .getElementById("open-pdf-button")
