@@ -1,3 +1,16 @@
-git add .
-git commit -m "commit"
-git push origin main
+1. fix 404 being shifted to left
+2. prevent scrolling on 404 page
+3. fix light/dark mode not being able to be toggled on home pages (when default is light mode)
+4. make accordian pages be responsive for mobile 
+5. add more colour themes
+6. change topic descriptions
+7. add video links to embedded videos
+
+8. add quizzes for: 
+a christmas carol
+romeo and juliet
+love & relationship poetry
+unseen poetry
+language paper 1 and 2
+essay skills
+revision
