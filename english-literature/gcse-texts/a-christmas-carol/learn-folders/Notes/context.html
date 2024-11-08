@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Christmas Charol</title>
+
+    <style>
+      :root {
+        --background-color: #00d4ff;
+        --text-color: #000;
+        --container-bg: #fff;
+        --separator-color: #8a2be2;
+        --link-color: #8a2be2;
+        --ticklist-bg: #8a2be2;
+        --ticklist-color: #8a2be2;
+        --ticklist-bg: #8a2be2;
+        --ticklist-bg-rgb: 138, 43, 226;
+        --pdf-preview-bg: #e0ffff;
+      }
+
+      .dark-mode {
+        --background-color: #1a1a1a;
+        --text-color: #fff;
+        --container-bg: #333;
+        --separator-color: #ff8a4c;
+        --link-color: #ff8a4c;
+        --ticklist-bg: #ff8a4c;
+        --ticklist-color: #ff8a4c;
+        --ticklist-bg: #ff8a4c;
+        --ticklist-bg-rgb: 255, 138, 76;
+        --pdf-preview-bg: #2a2a2a;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .sidebar {
+        scrollbar-width: thin;
+        scrollbar-color: var(--separator-color) var(--background-color);
+      }
+
+      .sidebar::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .sidebar::-webkit-scrollbar-track {
+        background: var(--background-color);
+      }
+
+      .sidebar::-webkit-scrollbar-thumb {
+        background-color: var(--separator-color);
+        border-radius: 10px;
+        border: 2px solid var(--background-color);
+      }
+
+      .sidebar::-webkit-scrollbar-thumb:hover {
+        background-color: var(--ticklist-bg);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+      }
+
+      h1 .back-button {
+        width: 30px;
+        height: 30px;
+        background-color: transparent;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 0;
+        margin-right: 10px;
+      }
+
+      h1 .back-button svg {
+        width: 100%;
+        height: 100%;
+        transition: transform 0.2s, fill 0.3s;
+        fill: var(--text-color);
+      }
+
+      h1 .back-button:hover svg {
+        transform: scale(1.1);
+      }
+
+      .content {
+        display: flex;
+        transition: gap 0.3s;
+      }
+
+      .sidebar {
+        width: 30%;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+        transition: width 0.3s, margin-left 0.3s;
+        position: relative;
+        padding-right: 20px;
+        box-sizing: border-box;
+      }
+
+      .main-content {
+        width: 70%;
+        transition: width 0.3s, padding-left 0.3s;
+        padding-left: 20px;
+      }
+
+      .sidebar-collapsed {
+        width: 0;
+        padding-right: 0;
+      }
+
+      .main-content-expanded {
+        width: calc(100% - 40px);
+        padding-left: 60px;
+      }
+
+      #sidebar-toggle {
+        position: fixed;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1001;
+        background-color: var(--separator-color);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        transition: left 0.3s;
+      }
+
+      .sidebar:not(.sidebar-collapsed) #sidebar-toggle {
+        left: calc(30% - 20px);
+      }
+
+      .video-container {
+        position: relative;
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto 20px;
+      }
+
+      .video-container::before {
+        content: "";
+        display: block;
+        padding-top: 56.25%;
+        /* 16:9 aspect ratio */
+      }
+
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      #sidebar-toggle,
+      #mode-toggle {
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      .faded {
+        opacity: 0.3;
+      }
+
+      .separator {
+        border-top: 2px solid var(--separator-color);
+        margin: 10px 0;
+        transition: border-color 0.3s;
+      }
+
+      .button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+      }
+
+      .button-purple {
+        background-color: var(--separator-color);
+      }
+
+      .button-orange {
+        background-color: #ff8a4c;
+      }
+
+      .video-container {
+        margin-bottom: 20px;
+      }
+
+      .pdf-preview {
+        background-color: var(--pdf-preview-bg);
+        padding: 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      .pdf-preview h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      .pdf-button {
+        background-color: var(--separator-color);
+      }
+
+      .ticklist {
+        background-color: rgba(var(--ticklist-bg-rgb), 0.1);
+        color: var(--ticklist-color);
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        border: 2px solid rgba(var(--ticklist-bg-rgb), 0.5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      ul {
+        list-style-type: disc;
+        padding-left: 20px;
+      }
+
+      a {
+        color: var(--link-color);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      #mode-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="mode-toggle" class="button button-purple">
+      Toggle Dark Mode
+    </button>
+    <div class="container">
+      <div class="back-button-container">
+        <h1>
+          <a
+            href="../../../a-christmas-carol/index.html"
+            aria-label="Back To GCSE Texts"
+          >
+            <button aria-label="Back Button" class="back-button">
+              <svg
+                fill="#000000"
+                width="30px"
+                height="30px"
+                viewBox="0 0 200 200"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M100,15a85,85,0,1,0,85,85A84.93,84.93,0,0,0,100,15Zm0,150a65,65,0,1,1,65-65A64.87,64.87,0,0,1,100,165ZM116.5,57.5a9.67,9.67,0,0,0-14,0L74,86a19.92,19.92,0,0,0,0,28.5L102.5,143a9.9,9.9,0,0,0,14-14l-28-29L117,71.5C120.5,68,120.5,61.5,116.5,57.5Z"
+                />
+              </svg>
+            </button>
+          </a>
+          <span>A Christmas Carol</span>
+        </h1>
+      </div>
+      <div class="content">
+        <div class="sidebar">
+          <button style="border-radius: 5px" id="sidebar-toggle">◀</button>
+          <div class="separator"></div>
+          <h3>Learn A Christmas Carol</h3>
+          <li style="margin-bottom: 10px">
+            <a href="../learn/learn.html">Learn</a>
+          </li>
+          <div class="separator"></div>
+          <h3>Notes</h3>
+          <ul>
+            <li style="margin-bottom: 10px">
+              <a href="../notes/how_to_make_notes_for_a_christmas_carol.html"
+                >How To Make Notes For A Christmas Carol</a
+              >
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../notes/summary.html">Summary</a>
+            </li>
+            <li class="ticklist">
+              <a href="../notes/context.html">Context</a>
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../notes/grade_9_key_words.html">Grade 9 Key Words</a>
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Key Themes</h3>
+          <ul>
+            <li style="margin-bottom: 10px">
+              <a href="../Key Themes/scrooge_key_themes.html"
+                >Scrooge Key Themes</a
+              >
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../Key Themes/the_ghosts_key_themes.html"
+                >The Ghosts Key Themes</a
+              >
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../Key Themes/bob_cratchit_cratchits_key_themes.html"
+                >Bob Cratchit/Cratchits Key Themes</a
+              >
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../Key Themes/fred_key_themes.html">Fred Key Themes</a>
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Romeo</h3>
+          <ul>
+            <li style="margin-bottom: 10px">
+              <a href="../Scrooge/scrooge_stave_1.html">Scrooge Stave 1</a>
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../Scrooge/scrooge_stave_2.html">Scrooge Stave 2</a>
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../Scrooge/scrooge_stave_3.html">Scrooge Stave 3</a>
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../Scrooge/scrooge_stave_4.html">Scrooge Stave 4</a>
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../Scrooge/scrooge_stave_5.html">Scrooge Stave 5</a>
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../Scrooge/scrooge_themes_table.html"
+                >Scrooge Theme Table</a
+              >
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>The Ghosts</h3>
+          <ul>
+            <li style="margin-bottom: 10px">
+              <a href="../The Ghosts/the_ghost_of_christmas_past.html"
+                >The Ghosts Of Christmas Past</a
+              >
+            </li>
+            <li style="margin-bottom: 10px">
+              <a
+                href="../The Ghosts/the_ghost_of_christmas_past_theme_table.html"
+                >The Ghost of Christmas Past Theme Table</a
+              >
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../The Ghosts/marley.html">Marley</a>
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../The Ghosts/marley_theme_table.html"
+                >Marley Theme Table</a
+              >
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../The Ghosts/the_ghost_of_christmas_present.html"
+                >The Ghosts Of Christmas Present</a
+              >
+            </li>
+            <li style="margin-bottom: 10px">
+              <a
+                href="../The Ghosts/the_ghost_of_christmas_present_theme_table.html"
+                >The Ghosts Of Christmas Present Theme Table</a
+              >
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../The Ghosts/the_ghost_of_christmas_yet_to_come.html"
+                >The Ghosts Of Yet To Come</a
+              >
+            </li>
+            <li style="margin-bottom: 10px">
+              <a
+                href="../The Ghosts/the_ghost_of_christmas_yet_to_come_theme_table.html"
+                >The Ghosts Of Yet To Come Theme Table</a
+              >
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Bob Cratchit</h3>
+          <ul>
+            <li style="margin-bottom: 10px">
+              <a href="../Bob Cratchit/Bob_Cratchit.html">Bob Cratchit</a>
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../Bob Cratchit/bob_cratchit_theme_table.html"
+                >Bob Cratchit Theme Table</a
+              >
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Fred</h3>
+          <ul>
+            <li style="margin-bottom: 10px">
+              <a href="../Fred/fred.html">Fred</a>
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../Fred/fred_theme_table.html">Fred Theme Table</a>
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Practice Questions</h3>
+          <ul>
+            <li style="margin-bottom: 10px">
+              <a
+                href="../Lightup Practice Questions/aqa_style_practice_questions.html"
+                >AQA Style Practice Questions</a
+              >
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Essay Plans</h3>
+          <ul>
+            <li style="margin-bottom: 10px">
+              <a href="../Essay Plans/transformation_essay_plan.html"
+                >Transformation Essay Plan</a
+              >
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../Essay Plans/kindness_and_family_essay_plan.html"
+                >Kindness And Family Essay Plan</a
+              >
+            </li>
+            <li style="margin-bottom: 10px">
+              <a href="../Essay Plans/supernatural_essay_plan.html"
+                >Supernatural Essay Plan</a
+              >
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Past Paper Questions</h3>
+          <ul>
+            <li style="margin-bottom: 10px">
+              <a href="../Past Paper Questions/aqa_past_paper_questions.html"
+                >Fate essay plan</a
+              >
+            </li>
+          </ul>
+          <div class="separator"></div>
+          <h3>Grade 9 Essays</h3>
+          <ul>
+            <li style="margin-bottom: 10px">
+              <a
+                href="../Grade 9 Essays/joy_and_happiness_in_a_christmas_carol.html"
+                >Joy and happiness in A Christmas Carol</a
+              >
+            </li>
+          </ul>
+          <ul>
+            <li style="margin-bottom: 10px">
+              <a
+                href="../Grade 9 Essays/ghosts_help_scrooge_to_change_his_behaviour_and_attitude.html"
+                >Ghosts help Scrooge to change his behaviour and attitude</a
+              >
+            </li>
+          </ul>
+          <ul>
+            <li style="margin-bottom: 10px">
+              <a
+                href="../Grade 9 Essays/how_dickens_creates_atmosphere_in_the_novella.html"
+                >How Dickens creates atmosphere in the novella</a
+              >
+            </li>
+          </ul>
+          <ul>
+            <li style="margin-bottom: 10px">
+              <a
+                href="../Grade 9 Essays/explore_how_redemption_is_presented.html"
+                >Explore how redemption is presented</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="main-content">
+          <div class="video-container">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/"
+              frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              loading="lazy"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <button class="button-purple" id="open-pdf-button">
+            Open PDF in New Tab
+          </button>
+          <div class="pdf-preview">
+            <embed
+              id="pdf-embed"
+              src="../../acc-pdfs"
+              width="100%"
+              height="500px"
+              type="application/pdf"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      //////////////////////////////////////////////////////////////////////////////////////////////////
+      // pdf
+      const pdfUrl = "../../acc-pdfs";
+      document.getElementById("pdf-embed").src = pdfUrl;
+      document
+        .getElementById("open-pdf-button")
+        .addEventListener("click", function () {
+          window.open(pdfUrl, "_blank");
+        });
+      //////////////////////////////////////////////////////////////////////////////////////////////////
+      // dark mode
+      const modeToggle = document.getElementById("mode-toggle");
+      const body = document.body;
+
+      function setColourScheme(scheme) {
+        if (scheme === "dark") {
+          body.classList.remove("light-mode");
+          body.classList.add("dark-mode");
+          modeToggle.textContent = "Toggle Light Mode";
+        } else {
+          body.classList.remove("dark-mode");
+          body.classList.add("light-mode");
+          modeToggle.textContent = "Toggle Dark Mode";
+        }
+      }
+      // check system preference for dark mode
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        setColourScheme("dark");
+      } else {
+        setColourScheme("light");
+      }
+      // detect changes in system preference
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", (e) => {
+          setColourScheme(e.matches ? "dark" : "light");
+        });
+      // manual toggle
+      modeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        if (body.classList.contains("dark-mode")) {
+          modeToggle.textContent = "Toggle Light Mode";
+        } else {
+          modeToggle.textContent = "Toggle Dark Mode";
+        }
+      });
+      //////////////////////////////////////////////////////////////////////////////////////////////////
+      // sidebar open and close
+      const sidebarToggle = document.getElementById("sidebar-toggle");
+      const sidebar = document.querySelector(".sidebar");
+      const mainContent = document.querySelector(".main-content");
+      const container = document.querySelector(".container");
+      const pdfOpen = document.getElementById("open-pdf-button");
+      sidebarToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("sidebar-collapsed");
+        mainContent.classList.toggle("main-content-expanded");
+        container.style.maxWidth = sidebar.classList.contains(
+          "sidebar-collapsed"
+        )
+          ? "100%"
+          : "1200px";
+        sidebarToggle.textContent = sidebar.classList.contains(
+          "sidebar-collapsed"
+        )
+          ? "▶"
+          : "◀";
+        if (sidebar.classList.contains("sidebar-collapsed")) {
+          mainContent.style.paddingLeft = "60px";
+        } else {
+          mainContent.style.paddingLeft = "20px";
+        }
+      });
+      //////////////////////////////////////////////////////////////////////////////////////////////////
+      // button fading
+      const buttons = [sidebarToggle, modeToggle, pdfOpen];
+      let fadeTimeout;
+
+      function fadeButtons() {
+        buttons.forEach((button) => button.classList.add("faded"));
+      }
+
+      function resetFade() {
+        buttons.forEach((button) => button.classList.remove("faded"));
+        clearTimeout(fadeTimeout);
+        fadeTimeout = setTimeout(fadeButtons, 2000); // 2 secs
+      }
+      resetFade();
+      document.addEventListener("mousemove", resetFade);
+      // no fade when hover
+      buttons.forEach((button) => {
+        button.addEventListener("mouseenter", () => {
+          button.classList.remove("faded");
+        });
+        button.addEventListener("mouseleave", resetFade);
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/oJezler-git/scrapped-website/key.js"></script>
+  </body>
+</html>
