@@ -153,19 +153,20 @@
       }
 
       .video-container {
+        position: relative;
         width: 100%;
         max-width: 1000px;
         margin: 0 auto 20px;
       }
 
-      .video-wrapper {
-        position: relative;
-        width: 100%;
-        padding-bottom: 56.25%; /* 16:9 aspect ratio */
-        height: 0;
+      .video-container::before {
+        content: "";
+        display: block;
+        padding-top: 56.25%;
+        /* 16:9 aspect ratio */
       }
 
-      .video-wrapper iframe {
+      .video-container iframe {
         position: absolute;
         top: 0;
         left: 0;
