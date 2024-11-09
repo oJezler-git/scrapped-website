@@ -664,6 +664,7 @@
       const pdfEmbed = document.getElementById("pdf-embed");
       const pdfFallback = document.getElementById("pdf-fallback");
       const directPdfLink = document.getElementById("direct-pdf-link");
+      const openPdfButton = document.getElementById("open-pdf-button");
 
       // Function to check if device is mobile
       function isMobileDevice() {
@@ -676,13 +677,15 @@
       // Function to handle PDF display
       function handlePdfDisplay() {
         if (isMobileDevice()) {
-          // Hide embed and show fallback for mobile
+          // Hide embed and button, show fallback for mobile
           pdfEmbed.style.display = "none";
+          openPdfButton.style.display = "none";
           pdfFallback.style.display = "block";
           directPdfLink.href = pdfUrl;
         } else {
-          // Show embed and hide fallback for desktop
+          // Show embed and button, hide fallback for desktop
           pdfEmbed.src = pdfUrl;
+          openPdfButton.style.display = "block";
           pdfFallback.style.display = "none";
         }
       }
@@ -691,11 +694,10 @@
       document.addEventListener("DOMContentLoaded", handlePdfDisplay);
 
       // Handle open in new tab button
-      document
-        .getElementById("open-pdf-button")
-        .addEventListener("click", function () {
-          window.open(pdfUrl, "_blank");
-        });
+      openPdfButton.addEventListener("click", function () {
+        window.open(pdfUrl, "_blank");
+      });
+
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // youtube video for mobile
       document.addEventListener("DOMContentLoaded", function () {
