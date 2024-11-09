@@ -152,25 +152,50 @@
       }
 
       .video-container {
-        position: relative;
         width: 100%;
         max-width: 1000px;
         margin: 0 auto 20px;
       }
 
-      .video-container::before {
-        content: "";
-        display: block;
-        padding-top: 56.25%;
-        /* 16:9 aspect ratio */
+      .video-wrapper {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
       }
 
-      .video-container iframe {
+      .video-wrapper iframe {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+      }
+
+      .video-fallback {
+        text-align: center;
+        padding: 10px;
+        margin-top: 10px;
+        background-color: var(--container-bg);
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s;
+      }
+
+      .video-fallback p {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+
+      .video-fallback a {
+        color: var(--link-color);
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .video-fallback a:hover {
+        text-decoration: underline;
       }
 
       #sidebar-toggle,
@@ -207,6 +232,33 @@
 
       .video-container {
         margin-bottom: 20px;
+      }
+
+      .pdf-fallback {
+        text-align: center;
+        padding: 10px;
+        margin-top: 10px;
+        background-color: var(--container-bg);
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s;
+        display: none;
+      }
+
+      .pdf-fallback p {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+
+      .pdf-fallback a {
+        color: var(--link-color);
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .pdf-fallback a:hover {
+        text-decoration: underline;
       }
 
       .pdf-preview {
@@ -498,13 +550,24 @@
         </div>
         <div class="main-content">
           <div class="video-container">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/"
-              frameborder="0"
-              allow="autoplay; fullscreen; picture-in-picture"
-              loading="lazy"
-              allowfullscreen
-            ></iframe>
+            <div class="video-wrapper">
+              <iframe
+                id="video-iframe"
+                src="https://www.youtube-nocookie.com/embed/J_75wPS4FH0"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                loading="lazy"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div id="video-fallback" class="video-fallback">
+              <p>
+                Video not loading?
+                <a href="" id="direct-video-link" target="_blank" rel="noopener"
+                  >Watch directly on YouTube</a
+                >
+              </p>
+            </div>
           </div>
           <button class="button-purple" id="open-pdf-button">
             Open PDF in New Tab
@@ -512,11 +575,19 @@
           <div class="pdf-preview">
             <embed
               id="pdf-embed"
-              src="../../acc-pdfs"
+              src="../../acc-pdfs/Cratchits/Cratchits theme table.pdf"
               width="100%"
               height="500px"
               type="application/pdf"
             />
+            <div id="pdf-fallback" class="pdf-fallback">
+              <p>
+                PDF not loading?
+                <a href="" id="direct-pdf-link" target="_blank" rel="noopener"
+                  >Open PDF directly</a
+                >
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -524,13 +595,96 @@
     <script>
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // pdf
-      const pdfUrl = "../../acc-pdfs";
-      document.getElementById("pdf-embed").src = pdfUrl;
-      document
-        .getElementById("open-pdf-button")
-        .addEventListener("click", function () {
-          window.open(pdfUrl, "_blank");
+      document.addEventListener("DOMContentLoaded", function () {
+        const pdfEmbed = document.getElementById("pdf-embed");
+        const directLink = document.getElementById("direct-pdf-link");
+        const pdfFallback = document.getElementById("pdf-fallback");
+        const pdfUrl = "../../acc-pdfs/Cratchits/Cratchits theme table.pdf";
+
+        // Set up the direct link
+        directLink.href = pdfUrl;
+        document.getElementById("open-pdf-button").href = pdfUrl;
+
+        // Function to check if PDF is loaded
+        function checkPdfLoading() {
+          // Try to access the PDF plugin
+          try {
+            if (pdfEmbed.contentDocument === null) {
+              throw new Error("PDF failed to load");
+            }
+            pdfFallback.style.display = "none";
+          } catch (e) {
+            pdfFallback.style.display = "block";
+          }
+        }
+
+        // Check PDF loading after a short delay
+        setTimeout(checkPdfLoading, 2000);
+
+        // Also check when the embed element loads
+        pdfEmbed.addEventListener("load", function () {
+          checkPdfLoading();
         });
+
+        // Check for errors
+        pdfEmbed.addEventListener("error", function () {
+          pdfFallback.style.display = "block";
+        });
+
+        // Additional check for mobile devices
+        if (/Mobi|Android/i.test(navigator.userAgent)) {
+          pdfEmbed.addEventListener("click", function () {
+            if (this.contentDocument === null) {
+              window.open(pdfUrl, "_blank");
+            }
+          });
+        }
+      });
+      //////////////////////////////////////////////////////////////////////////////////////////////////
+      // youtube video for mobile
+      document.addEventListener("DOMContentLoaded", function () {
+        const videoIframe = document.getElementById("video-iframe");
+        const directLink = document.getElementById("direct-video-link");
+        const videoFallback = document.getElementById("video-fallback");
+
+        // handle video loading
+        videoIframe.addEventListener("load", function () {
+          videoFallback.style.display = "none";
+        });
+
+        videoIframe.addEventListener("error", function () {
+          videoFallback.style.display = "block";
+        });
+
+        // extract video ID
+        function getVideoId(embedUrl) {
+          const match = embedUrl.match(/embed\/([\w-]+)/);
+          return match ? match[1] : "";
+        }
+
+        // set direct link if iframe src changes
+        const observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
+            if (
+              mutation.type === "attributes" &&
+              mutation.attributeName === "src"
+            ) {
+              const videoId = getVideoId(videoIframe.src);
+              if (videoId) {
+                directLink.href = `https://www.youtube.com/watch?v=${videoId}`;
+              }
+            }
+          });
+        });
+
+        observer.observe(videoIframe, { attributes: true });
+
+        // initial direct link if iframe has a src
+        const initialVideoId = getVideoId(videoIframe.src);
+        if (initialVideoId) {
+          directLink.href = `https://www.youtube.com/watch?v=${initialVideoId}`;
+        }
+      });
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // dark mode
       const modeToggle = document.getElementById("mode-toggle");
