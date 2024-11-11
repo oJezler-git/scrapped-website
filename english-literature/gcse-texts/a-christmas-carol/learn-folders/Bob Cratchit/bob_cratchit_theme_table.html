@@ -616,16 +616,14 @@
         </div>
         <div class="main-content">
           <div class="video-container">
-            <div class="video-wrapper">
-              <iframe
-                id="video-iframe"
-                src="https://www.youtube-nocookie.com/embed/"
-                frameborder="0"
-                allow="autoplay; fullscreen; picture-in-picture"
-                loading="lazy"
-                allowfullscreen
-              ></iframe>
-            </div>
+            <iframe
+              id="video-iframe"
+              src="https://www.youtube-nocookie.com/embed/"
+              frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              loading="lazy"
+              allowfullscreen
+            ></iframe>
             <div id="video-fallback" class="video-fallback">
               <p>
                 Video not loading?
@@ -641,14 +639,14 @@
           <div class="pdf-preview">
             <embed
               id="pdf-embed"
-              src="../../acc-pdfs/Cratchits/Cratchits theme table.pdf"
+              src="../../acc-pdfs"
               width="100%"
               height="500px"
               type="application/pdf"
             />
             <div id="pdf-fallback" class="video-fallback" style="display: none">
               <p>
-                PDF not loading?
+                Mobile Device Detected:
                 <a href="" id="direct-pdf-link" target="_blank" rel="noopener"
                   >Open PDF directly</a
                 >
@@ -661,13 +659,13 @@
     <script>
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // pdf
-      const pdfUrl = "../../acc-pdfs/Cratchits/Cratchits theme table.pdf";
+      const pdfUrl = "../../acc-pdfs";
       const pdfEmbed = document.getElementById("pdf-embed");
       const pdfFallback = document.getElementById("pdf-fallback");
       const directPdfLink = document.getElementById("direct-pdf-link");
       const openPdfButton = document.getElementById("open-pdf-button");
 
-      // Function to check if device is mobile
+      // check if device is mobile
       function isMobileDevice() {
         return (
           typeof window.orientation !== "undefined" ||
@@ -675,7 +673,7 @@
         );
       }
 
-      // Function to handle PDF display
+      // PDF display
       function handlePdfDisplay() {
         if (isMobileDevice()) {
           // Hide embed and button, show fallback for mobile
@@ -691,10 +689,10 @@
         }
       }
 
-      // Call on page load
+      // call on page load
       document.addEventListener("DOMContentLoaded", handlePdfDisplay);
 
-      // Handle open in new tab button
+      // open in new tab button
       openPdfButton.addEventListener("click", function () {
         window.open(pdfUrl, "_blank");
       });
