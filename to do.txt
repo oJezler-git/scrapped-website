@@ -1,12 +1,12 @@
 ✅ 1. fix 404 being shifted to left
-❌ 2. prevent scrolling on 404 page
+✅ 2. prevent scrolling on 404 page
 ❌ 3. fix light/dark mode not being able to be toggled on home pages (when default is light mode)
 ❌ 4. make accordian pages be responsive for mobile 
-❌ 5. add more colour themes
-❌ 6. change topic descriptions
+❌ >>5. add more colour themes
+❌ >6. change topic descriptions
 ❌ 7. add video links to embedded videos
 ❌ 8. ^ update js and css from acc to rest of stuffs
-❌ 9. download linked resources from urls like https://thelightuphub. and put them into assets (since they may change urls)
+❌ >9. download linked resources from urls like https://thelightuphub. and put them into assets (since they may change urls)
 
 10. add quizzes for: 
 ✅ an inspector calls
