@@ -191,25 +191,52 @@
         const modeToggle = document.getElementById("mode-toggle");
         const body = document.body;
 
-        // dark mode
+        // get user's preferred colour scheme from local storage
+        const storedScheme = localStorage.getItem("colourScheme");
+        setColourScheme(
+          storedScheme ||
+            (window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light")
+        );
+
+        // set colour scheme
         function setColourScheme(scheme) {
           if (scheme === "dark") {
             body.classList.remove("light-mode");
+            document.documentElement.style.setProperty("--bg-color", "#1a1a1a");
+            document.documentElement.style.setProperty("--text-color", "#fff");
+            document.documentElement.style.setProperty("--panel-bg", "#2c2c2c");
+            document.documentElement.style.setProperty(
+              "--button-bg",
+              "#4a148c"
+            );
+            document.documentElement.style.setProperty(
+              "--button-hover",
+              "#7b1fa2"
+            );
+            document.documentElement.style.setProperty("--button-text", "#fff");
             modeToggle.textContent = "Toggle Light Mode";
           } else {
             body.classList.add("light-mode");
+            document.documentElement.style.setProperty("--bg-color", "#00d4ff");
+            document.documentElement.style.setProperty("--text-color", "#000");
+            document.documentElement.style.setProperty("--panel-bg", "#fff");
+            document.documentElement.style.setProperty(
+              "--button-bg",
+              "#8a2be2"
+            );
+            document.documentElement.style.setProperty(
+              "--button-hover",
+              "#6a1b9a"
+            );
+            document.documentElement.style.setProperty("--button-text", "#fff");
             modeToggle.textContent = "Toggle Dark Mode";
           }
-        }
 
-        // system preference
-        if (
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-        ) {
-          setColourScheme("dark");
-        } else {
-          setColourScheme("light");
+          // save to local storage
+          localStorage.setItem("colourScheme", scheme);
         }
 
         // detect changes in system preference
@@ -221,12 +248,9 @@
 
         // manual toggle
         modeToggle.addEventListener("click", () => {
-          body.classList.toggle("light-mode");
-          if (body.classList.contains("light-mode")) {
-            modeToggle.textContent = "Toggle Dark Mode";
-          } else {
-            modeToggle.textContent = "Toggle Light Mode";
-          }
+          setColourScheme(
+            body.classList.contains("light-mode") ? "dark" : "light"
+          );
         });
       });
     </script>

@@ -922,60 +922,84 @@
 
     <!-- start script -->
     <script>
-      // open sections
-      var acc = document.getElementsByClassName("accordion");
-      var i;
+      document.addEventListener("DOMContentLoaded", function () {
+        const modeToggle = document.getElementById("mode-toggle");
+        const body = document.body;
 
-      for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function () {
-          this.classList.toggle("active");
-          var panel = this.nextElementSibling;
-          if (panel.style.maxHeight) {
-            panel.style.maxHeight = null;
+        // get user's preferred colour scheme from local storage
+        const storedScheme = localStorage.getItem("colourScheme");
+        setColourScheme(
+          storedScheme ||
+            (window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light")
+        );
+
+        // set colour scheme
+        function setColourScheme(scheme) {
+          if (scheme === "dark") {
+            body.classList.remove("light-mode");
+            document.documentElement.style.setProperty("--bg-color", "#1a1a1a");
+            document.documentElement.style.setProperty("--text-color", "#fff");
+            document.documentElement.style.setProperty("--panel-bg", "#2c2c2c");
+            document.documentElement.style.setProperty(
+              "--button-bg",
+              "#4a148c"
+            );
+            document.documentElement.style.setProperty(
+              "--button-hover",
+              "#7b1fa2"
+            );
+            document.documentElement.style.setProperty("--button-text", "#fff");
+            modeToggle.textContent = "Toggle Light Mode";
           } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
+            body.classList.add("light-mode");
+            document.documentElement.style.setProperty("--bg-color", "#00d4ff");
+            document.documentElement.style.setProperty("--text-color", "#000");
+            document.documentElement.style.setProperty("--panel-bg", "#fff");
+            document.documentElement.style.setProperty(
+              "--button-bg",
+              "#8a2be2"
+            );
+            document.documentElement.style.setProperty(
+              "--button-hover",
+              "#6a1b9a"
+            );
+            document.documentElement.style.setProperty("--button-text", "#fff");
+            modeToggle.textContent = "Toggle Dark Mode";
           }
-        });
-      }
-      // dark mode
-      const modeToggle = document.getElementById("mode-toggle");
-      const body = document.body;
-      const backButtonSvg = document.querySelector(".back-button svg");
 
-      function setColourScheme(scheme) {
-        if (scheme === "dark") {
-          body.classList.remove("light-mode");
-          modeToggle.textContent = "Toggle Light Mode";
-        } else {
-          body.classList.add("light-mode");
-          modeToggle.textContent = "Toggle Dark Mode";
+          // save to local storage
+          localStorage.setItem("colourScheme", scheme);
         }
-      }
 
-      // system preference
-      if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
-        setColourScheme("dark");
-      } else {
-        setColourScheme("light");
-      }
+        // detect changes in system preference
+        window
+          .matchMedia("(prefers-color-scheme: dark)")
+          .addEventListener("change", (e) => {
+            setColourScheme(e.matches ? "dark" : "light");
+          });
 
-      // detect changes in system preference
-      window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .addEventListener("change", (e) => {
-          setColourScheme(e.matches ? "dark" : "light");
+        // manual toggle
+        modeToggle.addEventListener("click", () => {
+          setColourScheme(
+            body.classList.contains("light-mode") ? "dark" : "light"
+          );
         });
 
-      // manual toggle
-      modeToggle.addEventListener("click", () => {
-        body.classList.toggle("light-mode");
-        if (body.classList.contains("light-mode")) {
-          modeToggle.textContent = "Toggle Dark Mode";
-        } else {
-          modeToggle.textContent = "Toggle Light Mode";
+        // open sections
+        var acc = document.getElementsByClassName("accordion");
+        for (var i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+            } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+          });
         }
       });
     </script>
