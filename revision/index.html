@@ -298,6 +298,28 @@
         --button-bg: #8a2be2;
         --button-hover: #6a1b9a;
       }
+
+      @media (max-width: 768px) {
+        .content {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .left-panel,
+        .right-panel {
+          width: 100%;
+          box-sizing: border-box;
+        }
+
+        .left-panel {
+          order: 1;
+        }
+
+        .right-panel {
+          order: 2;
+        }
+      }
     </style>
     <style>
       /* Quiz overlay styling */
