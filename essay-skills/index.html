@@ -6,698 +6,735 @@
     <meta name="robots" content="noindex, nofollow" />
 
     <!-- start title -->
-    <title>Essay Skills</title>
-    <!-- end title -->
-    <!-- start styles -->
-    <style>
-      :root {
-        --bg-color: #00d4ff;
-        --text-color: #000;
-        --panel-bg: #fff;
-        --accordion-bg: #8a2be2;
-        --accordion-text: #fff;
-        --accordion-active: #6a1b9a;
-        --quiz-accordion-bg: #ff8a4c;
-        --button-bg: #8a2be2;
-        --button-hover: #6a1b9a;
-      }
-
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --bg-color: #1a1a1a;
-          --text-color: #fff;
-          --panel-bg: #2c2c2c;
-          --accordion-bg: #4a148c;
-          --accordion-text: #fff;
-          --accordion-active: #7b1fa2;
-          --quiz-accordion-bg: #e65100;
-          --button-bg: #4a148c;
-          --button-hover: #7b1fa2;
-        }
-      }
-
-      body {
-        font-family: Arial, sans-serif;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        margin: 0;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        transition: background-color 0.3s, color 0.3s;
-      }
-
-      header {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
-        width: 100%;
-      }
-
-      .header-content {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-      }
-
-      .header-content h1 {
-        font-size: 2.5em;
-        margin-left: 20px;
-      }
-
-      header p {
-        text-align: center;
-        max-width: 800px;
-      }
-
-      .content {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        width: 100%;
-        max-width: 1200px;
-      }
-
-      .left-panel,
-      .right-panel {
-        background-color: var(--panel-bg);
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      .left-panel {
-        width: 60%;
-      }
-
-      .right-panel {
-        width: 40%;
-      }
-
-      .accordion {
-        background-color: var(--accordion-bg);
-        color: var(--accordion-text);
-        cursor: pointer;
-        padding: 18px;
-        width: 100%;
-        border: none;
-        text-align: left;
-        outline: none;
-        font-size: 15px;
-        transition: 0.4s;
-        border-radius: 5px;
-        margin-bottom: 10px;
-      }
-
-      .active,
-      .accordion:hover {
-        background-color: var(--accordion-active);
-      }
-
-      .accordion:after {
-        content: "\002B";
-        color: var(--accordion-text);
-        font-weight: bold;
-        float: right;
-        margin-left: 5px;
-      }
-
-      .active:after {
-        content: "\2212";
-      }
-
-      .panel {
-        padding: 0 18px;
-        background-color: var(--panel-bg);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.2s ease-out;
-        border-radius: 0 0 5px 5px;
-        margin-bottom: 10px;
-      }
-
-      .quiz-accordion {
-        background-color: var(--quiz-accordion-bg);
-        color: var(--accordion-text);
-        cursor: default;
-        padding: 18px;
-        width: 100%;
-        border: none;
-        text-align: left;
-        outline: none;
-        font-size: 15px;
-        border-radius: 5px;
-        margin-bottom: 10px;
-      }
-
-      .quiz-panel {
-        padding: 0 18px;
-        background-color: var(--panel-bg);
-        max-height: none;
-        overflow: visible;
-        border-radius: 0 0 5px 5px;
-        margin-bottom: 10px;
-      }
-
-      .topic {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 0;
-        border-bottom: 1px solid #eee;
-        gap: 15px;
-      }
-
-      .topic:last-child {
-        border-bottom: none;
-      }
-
-      .topic span {
-        flex: 1;
-        min-width: 0;
-      }
-
-      .start-learning {
-        background-color: var(--button-bg);
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 0.9em;
-        min-width: 120px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .start-learning:hover {
-        background-color: var(--button-hover);
-      }
-
-      .pdf-icons {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        margin-bottom: 20px;
-      }
-
-      .pdf-icons a {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-decoration: none;
-      }
-
-      .pdf-icons div {
-        text-align: center;
-        margin-top: 5px;
-      }
-
-      .pdf-icons img {
-        width: 50px;
-        height: 50px;
-        cursor: pointer;
-      }
-
-      .quiz-list {
-        list-style-type: none;
-        padding: 0;
-      }
-
-      .quiz-list li {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 0;
-        border-bottom: 1px solid #eee;
-      }
-
-      .quiz-list li:last-child {
-        border-bottom: none;
-      }
-
-      .quiz-list li:hover {
-        background-color: rgba(128, 128, 128, 0.1);
-      }
-
-      .back-button {
-        width: 50px;
-        height: 50px;
-        background-color: transparent;
-        border: none;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        padding: 0;
-      }
-
-      .back-button svg {
-        width: 100%;
-        height: 100%;
-        transition: transform 0.2s, fill 0.3s;
-        fill: var(--text-color);
-      }
-
-      .back-button:hover svg {
-        transform: scale(1.1);
-      }
-
-      #mode-toggle {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background-color: var(--button-bg);
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1em;
-        z-index: 1000;
-      }
-
-      #mode-toggle:hover {
-        background-color: var(--button-hover);
-      }
-
-      /* for weirdos who want light mode */
-      body.light-mode {
-        --bg-color: #00d4ff;
-        --text-color: #000;
-        --panel-bg: #fff;
-        --accordion-bg: #8a2be2;
-        --accordion-text: #fff;
-        --accordion-active: #6a1b9a;
-        --quiz-accordion-bg: #ff8a4c;
-        --button-bg: #8a2be2;
-        --button-hover: #6a1b9a;
-      }
-
-      @media (max-width: 768px) {
-        .content {
-          display: flex;
-          flex-direction: column;
-          width: 100%;
-        }
-
-        .left-panel,
-        .right-panel {
-          width: 100%;
-          box-sizing: border-box;
-        }
-
-        .left-panel {
-          order: 1;
-        }
-
-        .right-panel {
-          order: 2;
-        }
-      }
-    </style>
-    <style>
-      /* Quiz overlay styling */
-      .quiz-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        justify-content: center;
-        align-items: center;
-      }
-
-      .quiz-modal {
-        background: var(--panel-bg);
-        color: var(--text-color);
-        padding: 20px;
-        width: 50%;
-        max-width: 500px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
-        position: relative;
-      }
-
-      /* Close button styles */
-      .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: none;
-        border: none;
-        font-size: 1.5em;
-        cursor: pointer;
-        color: var(--text-color);
-      }
-
-      /* Divider styles */
-      .divider {
-        border-top: 1px solid var(--text-color);
-        margin: 15px 0;
-      }
-
-      /* Updated styles for options with bullet points */
-      #quiz-options {
-        list-style-type: none;
-        padding-left: 0;
-      }
-
-      .option {
-        display: flex;
-        align-items: flex-start;
-        padding: 10px;
-        margin: 5px 0;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-
-      .option::before {
-        content: "•";
-        margin-right: 10px;
-        font-size: 1.2em;
-      }
-
-      .option:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-      }
-
-      .option.selected {
-        background-color: #ffb6c1; /* Light pink for selected wrong answer */
-      }
-
-      .option.correct {
-        background-color: #90ee90; /* Light green for correct answer */
-      }
-
-      .explanation {
-        margin-top: 5px;
-        margin-left: 20px;
-        font-style: italic;
-      }
-
-      .quiz-buttons {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
-      }
-
-      .prev-btn,
-      .next-btn {
-        padding: 10px 15px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        background-color: var(--button-bg);
-        color: var(--text-color);
-      }
-
-      .prev-btn:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-      .feedback {
-        margin-top: 10px;
-        padding: 10px;
-        border-radius: 5px;
-      }
-
-      .correct {
-        background-color: rgba(76, 175, 80, 0.3);
-      }
-
-      .incorrect {
-        background-color: rgba(244, 67, 54, 0.3);
-      }
-    </style>
-    <!-- end styles -->
-  </head>
-
-  <body>
-    <button id="mode-toggle">Toggle Dark Mode</button>
-    <header>
-      <!-- start header -->
-      <div class="header-content">
-        <div class="back-button-container">
-          <a href="../index.html" aria-label="Back To GCSE Texts">
-            <button aria-label="Back Button" class="back-button">
-              <svg
-                fill="#000000"
-                width="30px"
-                height="30px"
-                viewBox="0 0 200 200"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M100,15a85,85,0,1,0,85,85A84.93,84.93,0,0,0,100,15Zm0,150a65,65,0,1,1,65-65A64.87,64.87,0,0,1,100,165ZM116.5,57.5a9.67,9.67,0,0,0-14,0L74,86a19.92,19.92,0,0,0,0,28.5L102.5,143a9.9,9.9,0,0,0,14-14l-28-29L117,71.5C120.5,68,120.5,61.5,116.5,57.5Z"
-                />
-              </svg>
-            </button>
-          </a>
-        </div>
-        <h1>Essay Skills</h1>
-      </div>
-      <p>Elevate All Your Essays with These Fundamental Skills</p>
-      <!-- end header -->
-    </header>
-    <div class="content">
-      <div class="left-panel">
-        <!-- start sections -->
-        <!--####################################################################################-->
-        <button class="accordion">Analysing</button>
-        <div class="panel">
-          <div class="topic">
-            <span>How to Analyse</span>
-            <a href="learn-folders/analysing/how_to_analyse.html">
-              <button class="start-learning">Start Learning</button>
-            </a>
-          </div>
-          <div class="topic">
-            <span>Analytical Paragraph Structure</span>
-            <a
-              href="learn-folders/analysing/analytical_paragraph_structure.html"
-            >
-              <button class="start-learning">Start Learning</button>
-            </a>
-          </div>
-          <div class="topic">
-            <span>P (Point)</span>
-            <a href="learn-folders/analysing/point.html">
-              <button class="start-learning">Start Learning</button>
-            </a>
-          </div>
-          <div class="topic">
-            <span>ET (Evidence Technique)</span>
-            <a href="learn-folders/analysing/evidence_technique.html">
-              <button class="start-learning">Start Learning</button>
-            </a>
-          </div>
-          <div class="topic">
-            <span>A (Analysis)</span>
-            <a href="learn-folders/analysing/analysis.html">
-              <button class="start-learning">Start Learning</button>
-            </a>
-          </div>
-          <div class="topic">
-            <span>ETA 2 (Evidence, Technique, Analysis)</span>
-            <a href="learn-folders/analysing/evidence_technique_analysis.html">
-              <button class="start-learning">Start Learning</button>
-            </a>
-          </div>
-          <div class="topic">
-            <span>C (Context)</span>
-            <a href="learn-folders/analysing/context.html">
-              <button class="start-learning">Start Learning</button>
-            </a>
-          </div>
-          <div class="topic">
-            <span>WL (Writers Intentions + Link)</span>
-            <a href="learn-folders/analysing/writers_intentions_link.html">
-              <button class="start-learning">Start Learning</button>
-            </a>
-          </div>
-        </div>
-        <!--####################################################################################-->
-        <button class="accordion">Technique Sheets</button>
-        <div class="panel">
-          <div class="topic">
-            <span>Language Technique Sheet</span>
-            <a
-              href="learn-folders/technique-sheets/language_technique_sheet.html"
-            >
-              <button class="start-learning">Start Learning</button>
-            </a>
-          </div>
-          <div class="topic">
-            <span>Structure Techniques</span>
-            <a href="learn-folders/technique-sheets/structure_techniques.html">
-              <button class="start-learning">Start Learning</button>
-            </a>
-          </div>
-        </div>
-        <!--####################################################################################-->
-        <button class="accordion">Writing A Conclusion</button>
-        <div class="panel">
-          <div class="topic">
-            <span>Conclusion</span>
-            <a href="learn-folders/writing-a-conclusion/conclusion.html">
-              <button class="start-learning">Start Learning</button>
-            </a>
-          </div>
-        </div>
-        <!--####################################################################################-->
-        <button class="accordion">How to approach essay writing</button>
-        <div class="panel">
-          <div class="topic">
-            <span>How to get the most out of reading grade 9 essays</span>
-            <a
-              href="learn-folders/how-to-approach-essay-writing/how_to_get_the_most_out_of_reading_grade_9_essays.html"
-            >
-              <button class="start-learning">Start Learning</button>
-            </a>
-          </div>
-          <div class="topic">
-            <span>How to effectively plan any Literature essays</span>
-            <a
-              href="learn-folders/how-to-approach-essay-writing/how_to_properly_write_up_literature_essays.html"
-            >
-              <button class="start-learning">Start Learning</button>
-            </a>
-          </div>
-          <div class="topic">
-            <span>How to properly write up Literature essays</span>
-            <a
-              href="learn-folders/how-to-approach-essay-writing/how_to_properly_write_up_literature_essays.html"
-            >
-              <button class="start-learning">Start Learning</button>
-            </a>
-          </div>
-          <div class="topic">
-            <span>How to plan Language questions</span>
-            <a
-              href="learn-folders/how-to-approach-essay-writing/how_to_plan_language_questions.html"
-            >
-              <button class="start-learning">Start Learning</button>
-            </a>
-          </div>
-        </div>
-        <!--####################################################################################-->
-        <!-- end sections -->
-      </div>
-      <div class="right-panel">
-        <button class="quiz-accordion">Quiz</button>
-        <div class="quiz-panel">
-          <ul class="quiz-list">
-            <!-- start quiz -->
-            <li>
-              How to Analyse Quiz<button class="start-learning">
-                Start Quiz
-              </button>
-            </li>
-            <li>
-              Analytical Paragraph Structure Quiz
-              <button class="start-learning">Start Quiz</button>
-            </li>
-            <li>
-              Conclusion Quiz <button class="start-learning">Start Quiz</button>
-            </li>
-            <!-- end quiz -->
-          </ul>
-        </div>
-      </div>
-    </div>
-    <!-- start script -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const modeToggle = document.getElementById("mode-toggle");
-        const body = document.body;
-
-        // get user's preferred colour scheme from local storage
-        const storedScheme = localStorage.getItem("colourScheme");
-        setColourScheme(
-          storedScheme ||
-            (window.matchMedia &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches
-              ? "dark"
-              : "light")
-        );
-
-        // set colour scheme
-        function setColourScheme(scheme) {
-          if (scheme === "dark") {
-            body.classList.remove("light-mode");
-            document.documentElement.style.setProperty("--bg-color", "#1a1a1a");
-            document.documentElement.style.setProperty("--text-color", "#fff");
-            document.documentElement.style.setProperty("--panel-bg", "#2c2c2c");
-            document.documentElement.style.setProperty(
-              "--button-bg",
-              "#4a148c"
-            );
-            document.documentElement.style.setProperty(
-              "--button-hover",
-              "#7b1fa2"
-            );
-            document.documentElement.style.setProperty("--button-text", "#fff");
-            modeToggle.textContent = "Toggle Light Mode";
-          } else {
-            body.classList.add("light-mode");
-            document.documentElement.style.setProperty("--bg-color", "#00d4ff");
-            document.documentElement.style.setProperty("--text-color", "#000");
-            document.documentElement.style.setProperty("--panel-bg", "#fff");
-            document.documentElement.style.setProperty(
-              "--button-bg",
-              "#8a2be2"
-            );
-            document.documentElement.style.setProperty(
-              "--button-hover",
-              "#6a1b9a"
-            );
-            document.documentElement.style.setProperty("--button-text", "#fff");
-            modeToggle.textContent = "Toggle Dark Mode";
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex, nofollow" />
+        <title>Essay Skills</title>
+        <!-- end title -->
+        <!-- start styles -->
+        <style>
+          :root {
+            --bg-color: #00d4ff;
+            --text-color: #000;
+            --panel-bg: #fff;
+            --accordion-bg: #8a2be2;
+            --accordion-text: #fff;
+            --accordion-active: #6a1b9a;
+            --quiz-accordion-bg: #ff8a4c;
+            --button-bg: #8a2be2;
+            --button-hover: #6a1b9a;
           }
 
-          // save to local storage
-          localStorage.setItem("colourScheme", scheme);
-        }
+          @media (prefers-color-scheme: dark) {
+            :root {
+              --bg-color: #1a1a1a;
+              --text-color: #fff;
+              --panel-bg: #2c2c2c;
+              --accordion-bg: #4a148c;
+              --accordion-text: #fff;
+              --accordion-active: #7b1fa2;
+              --quiz-accordion-bg: #e65100;
+              --button-bg: #4a148c;
+              --button-hover: #7b1fa2;
+            }
+          }
 
-        // detect changes in system preference
-        window
-          .matchMedia("(prefers-color-scheme: dark)")
-          .addEventListener("change", (e) => {
-            setColourScheme(e.matches ? "dark" : "light");
-          });
+          body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background-color 0.3s, color 0.3s;
+          }
 
-        // manual toggle
-        modeToggle.addEventListener("click", () => {
-          setColourScheme(
-            body.classList.contains("light-mode") ? "dark" : "light"
-          );
-        });
+          header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 100%;
+          }
 
-        // open sections
-        var acc = document.getElementsByClassName("accordion");
-        for (var i = 0; i < acc.length; i++) {
-          acc[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.maxHeight) {
-              panel.style.maxHeight = null;
-            } else {
-              panel.style.maxHeight = panel.scrollHeight + "px";
+          .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+          }
+
+          .header-content h1 {
+            font-size: 2.5em;
+            margin-left: 20px;
+          }
+
+          header p {
+            text-align: center;
+            max-width: 800px;
+          }
+
+          .content {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+          }
+
+          .left-panel,
+          .right-panel {
+            background-color: var(--panel-bg);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          }
+
+          .left-panel {
+            width: 60%;
+          }
+
+          .right-panel {
+            width: 40%;
+          }
+
+          .accordion {
+            background-color: var(--accordion-bg);
+            color: var(--accordion-text);
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+            border-radius: 5px;
+            margin-bottom: 10px;
+          }
+
+          .active,
+          .accordion:hover {
+            background-color: var(--accordion-active);
+          }
+
+          .accordion:after {
+            content: "\002B";
+            color: var(--accordion-text);
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+          }
+
+          .active:after {
+            content: "\2212";
+          }
+
+          .panel {
+            padding: 0 18px;
+            background-color: var(--panel-bg);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-radius: 0 0 5px 5px;
+            margin-bottom: 10px;
+          }
+
+          .quiz-accordion {
+            background-color: var(--quiz-accordion-bg);
+            color: var(--accordion-text);
+            cursor: default;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+          }
+
+          .quiz-panel {
+            padding: 0 18px;
+            background-color: var(--panel-bg);
+            max-height: none;
+            overflow: visible;
+            border-radius: 0 0 5px 5px;
+            margin-bottom: 10px;
+          }
+
+          .topic {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            gap: 15px;
+          }
+
+          .topic:last-child {
+            border-bottom: none;
+          }
+
+          .topic span {
+            flex: 1;
+            min-width: 0;
+          }
+
+          .start-learning {
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            min-width: 120px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .start-learning:hover {
+            background-color: var(--button-hover);
+          }
+
+          .pdf-icons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+          }
+
+          .pdf-icons a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+          }
+
+          .pdf-icons div {
+            text-align: center;
+            margin-top: 5px;
+          }
+
+          .pdf-icons img {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+          }
+
+          .quiz-list {
+            list-style-type: none;
+            padding: 0;
+          }
+
+          .quiz-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+          }
+
+          .quiz-list li:last-child {
+            border-bottom: none;
+          }
+
+          .quiz-list li:hover {
+            background-color: rgba(128, 128, 128, 0.1);
+          }
+
+          .back-button {
+            width: 50px;
+            height: 50px;
+            background-color: transparent;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 0;
+          }
+
+          .back-button svg {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.2s, fill 0.3s;
+            fill: var(--text-color);
+          }
+
+          .back-button:hover svg {
+            transform: scale(1.1);
+          }
+
+          #mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            z-index: 1000;
+          }
+
+          #mode-toggle:hover {
+            background-color: var(--button-hover);
+          }
+
+          /* for weirdos who want light mode */
+          body.light-mode {
+            --bg-color: #00d4ff;
+            --text-color: #000;
+            --panel-bg: #fff;
+            --accordion-bg: #8a2be2;
+            --accordion-text: #fff;
+            --accordion-active: #6a1b9a;
+            --quiz-accordion-bg: #ff8a4c;
+            --button-bg: #8a2be2;
+            --button-hover: #6a1b9a;
+          }
+
+          @media (max-width: 768px) {
+            .content {
+              display: flex;
+              flex-direction: column;
+              width: 100%;
+            }
+
+            .left-panel,
+            .right-panel {
+              width: 100%;
+              box-sizing: border-box;
+            }
+
+            .left-panel {
+              order: 1;
+            }
+
+            .right-panel {
+              order: 2;
+            }
+          }
+        </style>
+        <style>
+          /* Quiz overlay styling */
+          .quiz-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+          }
+
+          .quiz-modal {
+            background: var(--panel-bg);
+            color: var(--text-color);
+            padding: 20px;
+            width: 50%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+          }
+
+          /* Close button styles */
+          .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: var(--text-color);
+          }
+
+          /* Divider styles */
+          .divider {
+            border-top: 1px solid var(--text-color);
+            margin: 15px 0;
+          }
+
+          /* Updated styles for options with bullet points */
+          #quiz-options {
+            list-style-type: none;
+            padding-left: 0;
+          }
+
+          .option {
+            display: flex;
+            align-items: flex-start;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+          }
+
+          .option::before {
+            content: "•";
+            margin-right: 10px;
+            font-size: 1.2em;
+          }
+
+          .option:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+          }
+
+          .option.selected {
+            background-color: #ffb6c1; /* Light pink for selected wrong answer */
+          }
+
+          .option.correct {
+            background-color: #90ee90; /* Light green for correct answer */
+          }
+
+          .explanation {
+            margin-top: 5px;
+            margin-left: 20px;
+            font-style: italic;
+          }
+
+          .quiz-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+          }
+
+          .prev-btn,
+          .next-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: var(--button-bg);
+            color: var(--text-color);
+          }
+
+          .prev-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+          .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+          }
+
+          .correct {
+            background-color: rgba(76, 175, 80, 0.3);
+          }
+
+          .incorrect {
+            background-color: rgba(244, 67, 54, 0.3);
+          }
+        </style>
+        <!-- end styles -->
+      </head>
+
+      <body>
+        <button id="mode-toggle">Toggle Dark Mode</button>
+        <header>
+          <!-- start header -->
+          <div class="header-content">
+            <div class="back-button-container">
+              <a href="../index.html" aria-label="Back To GCSE Texts">
+                <button aria-label="Back Button" class="back-button">
+                  <svg
+                    fill="#000000"
+                    width="30px"
+                    height="30px"
+                    viewBox="0 0 200 200"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M100,15a85,85,0,1,0,85,85A84.93,84.93,0,0,0,100,15Zm0,150a65,65,0,1,1,65-65A64.87,64.87,0,0,1,100,165ZM116.5,57.5a9.67,9.67,0,0,0-14,0L74,86a19.92,19.92,0,0,0,0,28.5L102.5,143a9.9,9.9,0,0,0,14-14l-28-29L117,71.5C120.5,68,120.5,61.5,116.5,57.5Z"
+                    />
+                  </svg>
+                </button>
+              </a>
+            </div>
+            <h1>Essay Skills</h1>
+          </div>
+          <p>Elevate All Your Essays with These Fundamental Skills</p>
+          <!-- end header -->
+        </header>
+        <div class="content">
+          <div class="left-panel">
+            <!-- start sections -->
+            <!--####################################################################################-->
+            <button class="accordion">Analysing</button>
+            <div class="panel">
+              <div class="topic">
+                <span>How to Analyse</span>
+                <a href="learn-folders/analysing/how_to_analyse.html">
+                  <button class="start-learning">Start Learning</button>
+                </a>
+              </div>
+              <div class="topic">
+                <span>Analytical Paragraph Structure</span>
+                <a
+                  href="learn-folders/analysing/analytical_paragraph_structure.html"
+                >
+                  <button class="start-learning">Start Learning</button>
+                </a>
+              </div>
+              <div class="topic">
+                <span>P (Point)</span>
+                <a href="learn-folders/analysing/point.html">
+                  <button class="start-learning">Start Learning</button>
+                </a>
+              </div>
+              <div class="topic">
+                <span>ET (Evidence Technique)</span>
+                <a href="learn-folders/analysing/evidence_technique.html">
+                  <button class="start-learning">Start Learning</button>
+                </a>
+              </div>
+              <div class="topic">
+                <span>A (Analysis)</span>
+                <a href="learn-folders/analysing/analysis.html">
+                  <button class="start-learning">Start Learning</button>
+                </a>
+              </div>
+              <div class="topic">
+                <span>ETA 2 (Evidence, Technique, Analysis)</span>
+                <a
+                  href="learn-folders/analysing/evidence_technique_analysis.html"
+                >
+                  <button class="start-learning">Start Learning</button>
+                </a>
+              </div>
+              <div class="topic">
+                <span>C (Context)</span>
+                <a href="learn-folders/analysing/context.html">
+                  <button class="start-learning">Start Learning</button>
+                </a>
+              </div>
+              <div class="topic">
+                <span>WL (Writers Intentions + Link)</span>
+                <a href="learn-folders/analysing/writers_intentions_link.html">
+                  <button class="start-learning">Start Learning</button>
+                </a>
+              </div>
+            </div>
+            <!--####################################################################################-->
+            <button class="accordion">Technique Sheets</button>
+            <div class="panel">
+              <div class="topic">
+                <span>Language Technique Sheet</span>
+                <a
+                  href="learn-folders/technique-sheets/language_technique_sheet.html"
+                >
+                  <button class="start-learning">Start Learning</button>
+                </a>
+              </div>
+              <div class="topic">
+                <span>Structure Techniques</span>
+                <a
+                  href="learn-folders/technique-sheets/structure_techniques.html"
+                >
+                  <button class="start-learning">Start Learning</button>
+                </a>
+              </div>
+            </div>
+            <!--####################################################################################-->
+            <button class="accordion">Writing A Conclusion</button>
+            <div class="panel">
+              <div class="topic">
+                <span>Conclusion</span>
+                <a href="learn-folders/writing-a-conclusion/conclusion.html">
+                  <button class="start-learning">Start Learning</button>
+                </a>
+              </div>
+            </div>
+            <!--####################################################################################-->
+            <button class="accordion">How to approach essay writing</button>
+            <div class="panel">
+              <div class="topic">
+                <span>How to get the most out of reading grade 9 essays</span>
+                <a
+                  href="learn-folders/how-to-approach-essay-writing/how_to_get_the_most_out_of_reading_grade_9_essays.html"
+                >
+                  <button class="start-learning">Start Learning</button>
+                </a>
+              </div>
+              <div class="topic">
+                <span>How to effectively plan any Literature essays</span>
+                <a
+                  href="learn-folders/how-to-approach-essay-writing/how_to_properly_write_up_literature_essays.html"
+                >
+                  <button class="start-learning">Start Learning</button>
+                </a>
+              </div>
+              <div class="topic">
+                <span>How to properly write up Literature essays</span>
+                <a
+                  href="learn-folders/how-to-approach-essay-writing/how_to_properly_write_up_literature_essays.html"
+                >
+                  <button class="start-learning">Start Learning</button>
+                </a>
+              </div>
+              <div class="topic">
+                <span>How to plan Language questions</span>
+                <a
+                  href="learn-folders/how-to-approach-essay-writing/how_to_plan_language_questions.html"
+                >
+                  <button class="start-learning">Start Learning</button>
+                </a>
+              </div>
+            </div>
+            <!--####################################################################################-->
+            <!-- end sections -->
+          </div>
+          <div class="right-panel">
+            <button class="quiz-accordion">Quiz</button>
+            <div class="quiz-panel">
+              <ul class="quiz-list">
+                <!-- start quiz -->
+                <li>
+                  How to Analyse Quiz<button class="start-learning">
+                    Start Quiz
+                  </button>
+                </li>
+                <li>
+                  Analytical Paragraph Structure Quiz
+                  <button class="start-learning">Start Quiz</button>
+                </li>
+                <li>
+                  Conclusion Quiz
+                  <button class="start-learning">Start Quiz</button>
+                </li>
+                <!-- end quiz -->
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- start script -->
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            const modeToggle = document.getElementById("mode-toggle");
+            const body = document.body;
+
+            // get user's preferred colour scheme from local storage
+            const storedScheme = localStorage.getItem("colourScheme");
+            setColourScheme(
+              storedScheme ||
+                (window.matchMedia &&
+                window.matchMedia("(prefers-color-scheme: dark)").matches
+                  ? "dark"
+                  : "light")
+            );
+
+            // set colour scheme
+            function setColourScheme(scheme) {
+              if (scheme === "dark") {
+                body.classList.remove("light-mode");
+                document.documentElement.style.setProperty(
+                  "--bg-color",
+                  "#1a1a1a"
+                );
+                document.documentElement.style.setProperty(
+                  "--text-color",
+                  "#fff"
+                );
+                document.documentElement.style.setProperty(
+                  "--panel-bg",
+                  "#2c2c2c"
+                );
+                document.documentElement.style.setProperty(
+                  "--button-bg",
+                  "#4a148c"
+                );
+                document.documentElement.style.setProperty(
+                  "--button-hover",
+                  "#7b1fa2"
+                );
+                document.documentElement.style.setProperty(
+                  "--button-text",
+                  "#fff"
+                );
+                modeToggle.textContent = "Toggle Light Mode";
+              } else {
+                body.classList.add("light-mode");
+                document.documentElement.style.setProperty(
+                  "--bg-color",
+                  "#00d4ff"
+                );
+                document.documentElement.style.setProperty(
+                  "--text-color",
+                  "#000"
+                );
+                document.documentElement.style.setProperty(
+                  "--panel-bg",
+                  "#fff"
+                );
+                document.documentElement.style.setProperty(
+                  "--button-bg",
+                  "#8a2be2"
+                );
+                document.documentElement.style.setProperty(
+                  "--button-hover",
+                  "#6a1b9a"
+                );
+                document.documentElement.style.setProperty(
+                  "--button-text",
+                  "#fff"
+                );
+                modeToggle.textContent = "Toggle Dark Mode";
+              }
+
+              // save to local storage
+              localStorage.setItem("colourScheme", scheme);
+            }
+
+            // detect changes in system preference
+            window
+              .matchMedia("(prefers-color-scheme: dark)")
+              .addEventListener("change", (e) => {
+                setColourScheme(e.matches ? "dark" : "light");
+              });
+
+            // manual toggle
+            modeToggle.addEventListener("click", () => {
+              setColourScheme(
+                body.classList.contains("light-mode") ? "dark" : "light"
+              );
+            });
+
+            // open sections
+            var acc = document.getElementsByClassName("accordion");
+            for (var i = 0; i < acc.length; i++) {
+              acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                  panel.style.maxHeight = null;
+                } else {
+                  panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+              });
             }
           });
-        }
-      });
-    </script>
-    <!-- end script -->
-    <script src="https://cdn.jsdelivr.net/gh/oJezler-git/scrapped-website/key.js"></script>
-  </body>
+        </script>
+        <!-- end script -->
+        <script src="https://cdn.jsdelivr.net/gh/oJezler-git/scrapped-website/key.js"></script>
+      </body>
+    </html>
+  </head>
 </html>

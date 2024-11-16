@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
     <title>Essay Skills</title>
 
     <style>
@@ -490,7 +496,7 @@
           </ul>
         </div>
         <div class="main-content">
-          <div class="video-container">
+          <!-- <div class="video-container">
             <iframe
               id="video-iframe"
               src="https://www.youtube-nocookie.com/embed/"
@@ -507,14 +513,14 @@
                 >
               </p>
             </div>
-          </div>
+          </div> -->
           <button class="button-purple" id="open-pdf-button">
             Open PDF in New Tab
           </button>
           <div class="pdf-preview">
             <embed
               id="pdf-embed"
-              src="../../essay-skills-pdfs/"
+              src="../../essay-skills-pdfs/structure-techniques.pdf"
               width="100%"
               height="500px"
               type="application/pdf"
@@ -534,7 +540,7 @@
     <script>
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // pdf
-      const pdfUrl = "../../essay-skills-pdfs";
+      const pdfUrl = "../../essay-skills-pdfs/structure-techniques.pdf";
       const pdfEmbed = document.getElementById("pdf-embed");
       const pdfFallback = document.getElementById("pdf-fallback");
       const directPdfLink = document.getElementById("direct-pdf-link");
