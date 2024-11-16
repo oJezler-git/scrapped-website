@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
     <title>Essay Skills</title>
 
     <style>
@@ -172,6 +166,32 @@
         left: 0;
         width: 100%;
         height: 100%;
+      }
+
+      .video-fallback {
+        text-align: center;
+        padding: 10px;
+        margin-top: 10px;
+        background-color: var(--container-bg);
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s;
+      }
+
+      .video-fallback p {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+
+      .video-fallback a {
+        color: var(--link-color);
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .video-fallback a:hover {
+        text-decoration: underline;
       }
 
       #sidebar-toggle,
