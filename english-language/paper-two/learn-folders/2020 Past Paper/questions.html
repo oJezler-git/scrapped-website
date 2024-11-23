@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Language Paper 2</title>
 
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+
     <style>
       :root {
         --background-color: #00d4ff;
@@ -100,6 +105,12 @@
 
       h1 .back-button:hover svg {
         transform: scale(1.1);
+      }
+
+      li h1 {
+        display: inline;
+        font-size: 1.5em;
+        margin: 0;
       }
 
       .content {
@@ -546,7 +557,7 @@
           </ul>
         </div>
         <div class="main-content">
-          <div class="video-container">
+          <!-- <div class="video-container">
             <iframe
               id="video-iframe"
               src="https://www.youtube-nocookie.com/embed/"
@@ -563,18 +574,30 @@
                 >
               </p>
             </div>
-          </div>
+          </div> -->
           <button class="button-purple" id="open-pdf-button">
             Open PDF in New Tab
           </button>
           <div class="pdf-preview">
             <embed
               id="pdf-embed"
-              src="../../paper-two-pdfs/"
+              src="../../paper-two-pdfs/past paper/were not allowed.pdf"
               width="100%"
               height="500px"
               type="application/pdf"
             />
+            <ul>
+              <li>
+                <a
+                  href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2020/november/AQA-87002-QP-NOV20.PDF"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <h1>November 2020 Question Paper </h1>
+                  <i class="fas fa-external-link-alt external-link-icon"></i>
+                </a>
+              </li>
+            </ul>
             <div id="pdf-fallback" class="video-fallback" style="display: none">
               <p>
                 Mobile Device Detected:
@@ -590,7 +613,7 @@
     <script>
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // pdf
-      const pdfUrl = "../../paper-two-pdfs/";
+      const pdfUrl = "../../paper-two-pdfs/past paper/were not allowed.pdf";
       const pdfEmbed = document.getElementById("pdf-embed");
       const pdfFallback = document.getElementById("pdf-fallback");
       const directPdfLink = document.getElementById("direct-pdf-link");
