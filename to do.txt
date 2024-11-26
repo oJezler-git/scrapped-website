@@ -2,7 +2,7 @@
 ✅ 2. prevent scrolling on 404 page
 ✅ 3. fix light/dark mode not being able to be toggled on home pages (when default is light mode)
 ✅ 4. make accordian pages be responsive for mobile 
-❌ >>5. add more colour themes
+❌ 5. add more colour themes
 ❌ >6. change topic descriptions
 ✅ 7. add video links to embedded videos
 ✅ 8. ^ update js and css from acc to rest of stuffs
@@ -19,5 +19,6 @@
 ❌ essay skills
 ❌ revision
 
-❌ 11. potentially make all the css's into external files 
-❌ 12. potentially minify all code
+❌ 11. potentially make all the styles into one external file 
+❌ 12. potentially make all the scripts into one external file 
+❌ 13. potentially minify all code
