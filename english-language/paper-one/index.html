@@ -735,18 +735,6 @@
                 Start Quiz
               </button>
             </li>
-            <li>
-              24 Mark Overview Quiz
-              <button class="start-learning" data-quiz="24-mark-overview">
-                Start Quiz
-              </button>
-            </li>
-            <li>
-              8 Mark Overview Quiz
-              <button class="start-learning" data-quiz="8-mark-overview">
-                Start Quiz
-              </button>
-            </li>
             <!-- end quiz -->
           </ul>
         </div>
@@ -773,25 +761,530 @@
     <!-- start script -->
     <script>
       const quizzes = {
-        "quiz-id1": {
-          title: "Title",
+        "question-1": {
+          title: "P1 Lan Question 1 Quiz",
           questions: [
             {
-              question: "question",
-              options: ["remove", "remove", "remove", "remove"],
-              correctAnswer: "answer",
-              explanation: "explaination",
+              question: "What does it ask you to do in question 1?",
+              options: [
+                "Tick off 4 true statements",
+                "Write down 4 true statements",
+                "Look at the whole first page and pick out 3 truths and a lie",
+                "Pick out language techniques",
+              ],
+              correctAnswer: "Write down 4 true statements",
+              explanation: "Write down 4 true statements.",
+            },
+            {
+              question: "What shouldn’t you do in this question?",
+              options: [
+                "Make up your own answers",
+                "Spend 2-4 minutes on the question",
+                "Copy and paste answers from the text",
+                "Pick out 4 true statements",
+              ],
+              correctAnswer: "Make up your own answers",
+              explanation:
+                "You shouldn’t make up your own answers as the answers you need will be in the text.",
+            },
+            {
+              question:
+                "In question 1 they will normally give you a set number of lines to find your answer in",
+              options: ["True", "False"],
+              correctAnswer: "True",
+              explanation:
+                "They will tell you ‘Read again the first part of the source from lines 1 to 4 and list…’",
+            },
+            {
+              question: "How long should you spend on this question roughly?",
+              options: [
+                "1-2 minutes",
+                "2-4 minutes",
+                "4-6 minutes",
+                "6-8 minutes",
+              ],
+              correctAnswer: "2-4 minutes",
+              explanation:
+                "Don’t spend any longer on this as this is worth the least amount of marks on the whole paper",
+            },
+            {
+              question:
+                "When I do my paper, this will be the ____ question I do on the paper.",
+              options: ["First", "Middle", "Last", "Billionth"],
+              correctAnswer: "Last",
+              explanation:
+                "We would always recommend to do this question last as it is worth the least amount of marks, if there is any question you can rush, it would be this one!",
+            },
+            {
+              question: "Question 1 is worth ____ marks.",
+              options: ["2", "3", "4", "5"],
+              correctAnswer: "4",
+              explanation: "There are 4 true statements, one mark for each.",
             },
           ],
         },
-        "quiz-id2": {
-          title: "Title",
+
+        "question-2": {
+          title: "P1 Lan Question 2 Quiz",
           questions: [
             {
-              question: "question",
-              options: ["remove", "remove", "remove", "remove"],
-              correctAnswer: "answer",
-              explanation: "explaination",
+              question: "How many marks is question 2 worth?",
+              options: ["4", "8", "12", "16"],
+              correctAnswer: "8",
+              explanation: "8 marks.",
+            },
+            {
+              question: "How long should you spend on question 2 roughly?",
+              options: [
+                "4-8 minutes",
+                "8-10 minutes",
+                "10-12 minutes",
+                "12-14 minutes",
+              ],
+              correctAnswer: "10-12 minutes",
+              explanation:
+                "Depending on how long it takes for your reading time, this is the sweet spot for timing for this question.",
+            },
+            {
+              question: "What techniques does question 2 want you to focus on?",
+              options: [
+                "Structure techniques",
+                "Language techniques",
+                "Language and structure techniques",
+                "No techniques",
+              ],
+              correctAnswer: "Language techniques",
+              explanation:
+                "The question will ask you something along these lines: “How does the writer use language to describe x?”",
+            },
+            {
+              question: "Pick out the non-language technique",
+              options: [
+                "Verbs",
+                "Connotation",
+                "Oxymoron",
+                "Chronological order",
+              ],
+              correctAnswer: "Chronological order",
+              explanation:
+                "This would count as a structure technique, as this is how the writer has structured the text to interest the reader (which question would think be better for? Have a think!)",
+            },
+            {
+              question:
+                "What is important to do to ensure you expand on your analysis?",
+              options: [
+                "Pick out a good technique",
+                "Focus on the question",
+                "Say why for everything you say",
+                "Use ambitious vocabulary",
+              ],
+              correctAnswer: "Say why for everything you say",
+              explanation:
+                "Say WHY for everything you say. If you say that a character in the extract is feeling sad, tell me WHY you’ve said that. Helpful words to help you explain why are ‘as’ and ‘because’",
+            },
+            {
+              question:
+                "Fill in the missing part of the structure: Point, Evidence, Technique _____ …..",
+              options: ["Evidence", "Analysis", "Zoom", "Link"],
+              correctAnswer: "Analysis",
+              explanation:
+                "This is the part where you will say what it shows and WHY it shows that.",
+            },
+            {
+              question:
+                "Fill in the missing part of the structure: Point, Evidence, Technique, Analysis, ____, Technique …..",
+              options: ["Evidence", "Alternative analysis", "Zoom", "Methods"],
+              correctAnswer: "Evidence",
+              explanation:
+                "Think about this, the structure of this question repeats itself. Point (ETA) (ETA). You can write it as Technique Analysis or Analysis Technique, it is completely up to you!",
+            },
+            {
+              question:
+                "Fill in the final missing part of the structure. Point, Evidence, Technique, Analysis, Evidence, Technique, Analysis, _____",
+              options: [
+                "Writers intentions",
+                "Alternative analysis",
+                "Zoom",
+                "Link",
+              ],
+              correctAnswer: "Zoom",
+              explanation:
+                "This means we want to zoom in on one word and its meaning, just to show the examiner that we can zoom in on small details and zoom out to gage the wider meaning (a high level skill!)",
+            },
+            {
+              question:
+                "In question 2, we are expected to write _____ paragraphs",
+              options: ["1", "2", "3", "4"],
+              correctAnswer: "2",
+              explanation:
+                "The second one you can do without the Zoom if you don’t have the time.",
+            },
+            {
+              question:
+                "Students who score 8/8 on this question never say_____",
+              options: [
+                "I think this because…",
+                "This is shown by the quote…",
+                "The writer shows that…",
+                "This suggests…",
+              ],
+              correctAnswer: "This is shown by the quote…",
+              explanation:
+                "All higher level students tend to embed in their quotes. Instead of them saying ‘this is shown by the quote’, they would say something alike to this: ‘Zoe’s extreme feelings of terror are clear when she “screams and bellows” when the avalanche begins to “growl” down the mountain.",
+            },
+          ],
+        },
+        "question-3": {
+          title: "P1 Lan Question 3 Quiz",
+          questions: [
+            {
+              question: "How many marks is question 3 worth?",
+              options: ["4", "8", "12", "16"],
+              correctAnswer: "8",
+              explanation: "(it’s the same as question 2) <- THANKS MATE??? ",
+            },
+            {
+              question: "How long should you spend on question 3 roughly?",
+              options: [
+                "4-8 minutes",
+                "8-10 minutes",
+                "10-12 minutes",
+                "12-14 minutes",
+              ],
+              correctAnswer: "10-12 minutes",
+              explanation:
+                "Depending on how long it takes for your reading time, this is the sweet spot for timing for this question. (again the same as question 2)",
+            },
+            {
+              question: "What techniques does question 3 want you to focus on?",
+              options: [
+                "Structure techniques",
+                "Language techniques",
+                "Language and structure techniques",
+                "No techniques",
+              ],
+              correctAnswer: "Structure techniques",
+              explanation:
+                "The question will always ask you “how is the text structured to interest you as a reader?” (the clue is STRUCTURED !)",
+            },
+            {
+              question: "Pick out the non-structure technique",
+              options: [
+                "Describe beginning",
+                "Shift in focus",
+                "Juxtaposition",
+                "Topic change",
+              ],
+              correctAnswer: "Juxtaposition",
+              explanation:
+                "This is a language technique and you could use thisin question 2, but just not inquestion 3!",
+            },
+            {
+              question: "When doing question 3, what should you not do?",
+              options: [
+                "Recall back the plot",
+                "Only use structure techniques",
+                "Explain the deeper meaning of the technique",
+                "Use a range of structural features",
+              ],
+              correctAnswer: "Recall back the plot",
+              explanation:
+                "The examiner doesn’t want you to recall back what happened in the plot, instead be able to pick out structure techniques and convey the deeper meaning of these techniques.",
+            },
+            {
+              question:
+                "There are 3 parts of the structure to this question we have created. Fill in the blank for part 1 of the structure : _______, Evidence, What atmosphere it creates.",
+              options: [
+                "Introduce technique",
+                "Describe beginning",
+                "Introduce key idea",
+                "Describe Plot",
+              ],
+              correctAnswer: "Describe beginning",
+              explanation:
+                "Just as all the top model answers do, we want to describe the beginning as it gives us a good amount to analyse and compare later on.",
+            },
+            {
+              question:
+                "There are 3 parts of the structure to this question we have created. Fill in the blank for part 2 of the structure: Shift in focus, _____, Pace it sets.",
+              options: [
+                "Evidence",
+                "Atmosphere at the end",
+                "Technique",
+                "Methods",
+              ],
+              correctAnswer: "Evidence",
+              explanation:
+                "Evidence is always the second bit of each part. Part 1, 2 and 3 all have evidence as the second section of the structure.",
+            },
+            {
+              question:
+                "There are 3 parts of the structure to this question we have created. Fill in the blank for part 3 of the structure: Describe atmopshre at the end and compare with beginning, Evidence, _____",
+              options: [
+                "Atmophere at the end",
+                "Shift in focus",
+                "Impact on reader",
+                "Writers Intentions",
+              ],
+              correctAnswer: "Impact on reader",
+              explanation:
+                "Here you can directly reference the impact on the reader, but should reference it throughout. E.g. ‘this shows the reader…’",
+            },
+            {
+              question:
+                "In question 3 we are expectedto write ____ paragraph(s)",
+              options: [
+                "1 long paragraph",
+                "2 medium paragraphs",
+                "3 short paragraphs",
+                "662 septillion Pages",
+              ],
+              correctAnswer: "1 long paragraph",
+              explanation:
+                "You could cut each part into a mini paragraph if you prefer so it’s easier, but we tend to write it as 1 longer one as we find it makes linking ideas easier (Both would score the same amount of marks if written correctly – choose what works for you best!)",
+            },
+            {
+              question: "Students who score 8/8 on this question always _____",
+              options: [
+                "Link back to the reader",
+                "Use a range of structure techniques",
+                "Always explain the effect of their technique",
+                "All of the above are correct",
+              ],
+              correctAnswer: "All of the above are correct",
+              explanation:
+                "All of these are correct as they’re all important skills for question 3.",
+            },
+          ],
+        },
+        "question-4": {
+          title: "P1 Lan Question 4 Quiz",
+          questions: [
+            {
+              question: "How many marks is question 4 worth?",
+              options: ["8", "12", "16", "20"],
+              correctAnswer: "20",
+              explanation:
+                "This is the second most heavily weighted question in the paper.",
+            },
+            {
+              question: "What does question 4 ask you to do in this question?",
+              options: [
+                "See how a writer depicts X",
+                "Argue a statement given",
+                "Talk about the difference between two sources",
+                "List reasons why you disagree with the character",
+              ],
+              correctAnswer: "Argue a statement given",
+              explanation:
+                "You will be given a statement such as “Charlie is extremely slow in this part of the extract, he has no energy and is clearly fed up”. NOW, LIGHTUPUHB FUCKING STOPPED THERE. 'To what extent do you agree with this statement?'",
+            },
+            {
+              question: "How long should you spend on question 4 roughly?",
+              options: [
+                "5-10 minutes",
+                "10-15 minutes",
+                "15-20 minutes",
+                "20-30 minutes",
+              ],
+              correctAnswer: "20-30 minutes",
+              explanation:
+                "This will depend on your reading time, and how long you take on the other questions. To play it safe for timing, aim for 20-25 minutes and then if you have the spare time, go back and add more!",
+            },
+            {
+              question: "What techniques does question 4 want you to pick out?",
+              options: [
+                "Structure techniques",
+                "Language techniques",
+                "Language and structure techniques",
+                "No techniques",
+              ],
+              correctAnswer: "Language and structure techniques",
+              explanation:
+                "The question will give you a statement and you have to use all your knowledge of language and structure techniques to argue the statement.",
+            },
+            {
+              question: "What do we recommend you do with the statement?",
+              options: [
+                "Agree",
+                "Disagree",
+                "Have a balanced argument",
+                "Don’t have a line of argument",
+              ],
+              correctAnswer: "Agree",
+              explanation:
+                "We would always recommend you agree with the statement, and don’t try create a balanced viewpoint. The statement will be based on the text and is usually crafted so you can agree with it. You can have counter points within it, but don’t make it a balanced argument.",
+            },
+            {
+              question: "Students who get 20/20 always ______",
+              options: [
+                "Use the whole source",
+                "Snort cocaine just before the exam",
+                "Link back to the statement",
+                "Don’t reference a wide range of techniques",
+              ],
+              correctAnswer: "Link back to the statement",
+              explanation:
+                "Awww.. snort cocaine wasn't right!! Students who perform well with the question, always tend to stay super focused on the statement, breaking up their response to fully answer each part of the statement given.",
+            },
+            {
+              question:
+                "The Porn Hub recommends we do ____ paragraph (s) for question 4.",
+              options: ["1", "2-3", "3-4", "5"],
+              correctAnswer: "2-3",
+              explanation:
+                "Depending on time, and how quick you are of a writer, we recommend doing 2-3 paragraphs using our structure. If you know you struggle for time, 2 detailed paragraphs following the structure can still allow you to gain full marks.",
+            },
+            {
+              question:
+                "The Lightup hub gives you 3 different paragraph structures, fill in the blanks for paragraph 1: Agree with statement (+_______ + evidence), ETA, Alt analysis, Evidence (+ Impact on reader)",
+              options: [
+                "Alternative analysis",
+                "Effect on reader",
+                "Zoom",
+                "Writers intentions",
+              ],
+              correctAnswer: "Effect on reader",
+              explanation:
+                "In the beginning of the agree with statement, you want to ensure you’ve linked it to how it effects the reader as then you’re beginning to craft a deeper understanding of the writers methods (mark scheme) and effect on the reader (mark scheme)",
+            },
+            {
+              question:
+                "The second paragraph will follow the same structure as the first one, but the _____ is the only thing that is different.",
+              options: [
+                "Technique",
+                "Effect on the reader",
+                "Meanings",
+                "Meanings",
+              ],
+              correctAnswer: "Technique",
+              explanation:
+                "In the first paragraph you will use LANGUAGE techniques, and in the second paragraph you will use STRUCTURE techniques.",
+            },
+            {
+              question:
+                "A top tip from The Lightup hub about focusing on the question is to ______",
+              options: [
+                "Pick out 6 parts of the statement to write paragraphs on",
+                "Pick out 2 parts of the statement to write paragraphs on",
+                "Always link back to the question",
+                "Stand on your desk in the exam hall and take a big fat shit infront of everyone to assert dominance",
+              ],
+              correctAnswer:
+                "Pick out 2 parts of the statement to write paragraphs on",
+              explanation:
+                "If the statement is the following “the writer portrays Ugwu’s feelings of pure excitement, but by the end it seems that he may be very disappointed”, the two main focuses are: excitement and disappointment. These can be your two focuses in each paragraph",
+            },
+          ],
+        },
+        "question-5": {
+          title: "P1 Lan Question 5 Quiz",
+          questions: [
+            {
+              question: "How many marks is this question worth?",
+              options: ["20", "30", "40", "50"],
+              correctAnswer: "40",
+              explanation: "This is worth half of the whole paper!",
+            },
+            {
+              question: "When should you do this question?",
+              options: [
+                "First",
+                "Last",
+                "In the middle",
+                "When the universe ends",
+              ],
+              correctAnswer: "First",
+              explanation:
+                "Don’t make the mistake of leaving this until last, if you run out of time, this is not the question you want to run out of time on.",
+            },
+            {
+              question:
+                "How many marks are for your writing? (not including SPAG)",
+              options: ["20 marks", "22 marks", "24 marks", "30 marks"],
+              correctAnswer: "24 marks",
+              explanation: "40-16=24 shocking, isn't it",
+            },
+            {
+              question: "What do low level students do on this 24 mark part?",
+              options: [
+                "They create a compelling story/ description",
+                "They use a range of structural features",
+                "They use simplistic ideas throughout",
+                "The paragraphs link together and flow",
+              ],
+              correctAnswer: "They use simplistic ideas throughout",
+              explanation:
+                "The student should use complex ideas backed with punctuation for effect. If you got this wrong, respectfully, you are stupid.",
+            },
+            {
+              question: "How many marks are awarded for SPAG?",
+              options: ["12 marks", "16 marks", "20 marks", "24 marks"],
+              correctAnswer: "16 marks",
+              explanation:
+                "16 whole marks are awarded for SPAG, it is so important to ensure you are focused on this.",
+            },
+            {
+              question: "To get 16/16 on your SPAG you must _______",
+              options: [
+                "Use complex and simple sentences",
+                "Use a few bits of punctuation",
+                "Use some high level vocabulary",
+                "Bribe the marker by hiding £100 in your scribe (test paper)",
+              ],
+              correctAnswer: "Use complex and simple sentences",
+              explanation:
+                "The other three you should do, but not use a ‘few’ use LOTS of punctuation, high level vocab and hide over £1000.",
+            },
+            {
+              question: "A semi-colon is used to ______",
+              options: [
+                "Connect words in a list form",
+                "Connect two separate clauses",
+                "Connect extra information together",
+                "To introduce a list",
+              ],
+              correctAnswer: "Connect two separate clauses",
+              explanation:
+                "Imagine two separate sentences (separate clauses if we’re being fancy) that are about the same topic, we would use a semi-colon to connect these two sentences.",
+            },
+            {
+              question:
+                "An oxymoron is a great technique to include in your writing. An oxymoron is ____",
+              options: [
+                "Two words that are similar",
+                "Two words that conjoin",
+                "Two words that are contrasting",
+                "Two words that are negative",
+              ],
+              correctAnswer: "Two words that are contrasting",
+              explanation:
+                "An example of this is ‘grew smaller’ these two words are conflicting, but are put together side by side in a sentence",
+            },
+            {
+              question:
+                "A great way to start your creative writing, after your cyclical sentence, is by talking about _____",
+              options: [
+                "The 5 senses",
+                "A conceit",
+                "A simile",
+                "The backstory",
+              ],
+              correctAnswer: "The 5 senses",
+              explanation:
+                "This is a great way to introduce where you are, and how you’re feeling in your creative writing piece (or how somebody else is feeling). It allows you to go deeper with your description and show the examiner your skills.",
+            },
+            {
+              question: "An easy way to get SPAG marks is to create a ____",
+              options: [
+                "Conceit",
+                "Extended metaphor",
+                "Improvised explosive device",
+                "Cyclical structure",
+              ],
+              correctAnswer: "Cyclical structure",
+              explanation:
+                "Remember, cyclical structure is repeating a word/phrase at the beginning and end of the writing. Conceit and extended metaphor are not only the same thing (we did try to trick you) but they would help with the 24 marks, not 16 marks for SPAG.",
             },
           ],
         },
