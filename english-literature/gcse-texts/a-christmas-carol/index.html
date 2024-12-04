@@ -916,6 +916,280 @@
         </div>
       </div>
     </div>
+    <div id="quiz-overlay" class="quiz-overlay">
+      <div class="quiz-modal">
+        <button class="close-btn" onclick="closeQuiz()">×</button>
+        <h1 id="quiz-title"></h1>
+        <h4 id="question-number"></h4>
+        <div id="quiz-question"></div>
+        <div class="divider"></div>
+        <ul id="quiz-options"></ul>
+        <div class="quiz-buttons">
+          <button class="prev-btn" id="prev-btn" onclick="previousQuestion()">
+            Previous Question
+          </button>
+          <button class="next-btn" id="next-btn" onclick="nextQuestion()">
+            Next Question
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- start script -->
+    <script>
+      const quizzes = {
+        "quiz-id1": {
+          title: "Title",
+          questions: [
+            {
+              question: "question",
+              options: ["remove", "remove", "remove", "remove"],
+              correctAnswer: "answer",
+              explanation: "explaination",
+            },
+          ],
+        },
+        "quiz-id2": {
+          title: "Title",
+          questions: [
+            {
+              question: "question",
+              options: ["remove", "remove", "remove", "remove"],
+              correctAnswer: "answer",
+              explanation: "explaination",
+            },
+          ],
+        },
+      };
+
+      let currentQuizId = "";
+      let currentQuestionIndex = 0;
+      let userAnswers = [];
+
+      function startQuiz(quizId) {
+        currentQuizId = quizId;
+        currentQuestionIndex = 0;
+        userAnswers = new Array(quizzes[quizId].questions.length).fill(null);
+
+        const quiz = quizzes[quizId];
+        document.getElementById("quiz-title").textContent = quiz.title;
+        showQuestion();
+        document.getElementById("quiz-overlay").style.display = "flex";
+      }
+
+      function showQuestion() {
+        const quiz = quizzes[currentQuizId];
+        const currentQuestion = quiz.questions[currentQuestionIndex];
+
+        document.getElementById("question-number").textContent = `${
+          currentQuestionIndex + 1
+        } of ${quiz.questions.length} Questions`;
+        document.getElementById("quiz-question").textContent =
+          currentQuestion.question;
+
+        const optionsContainer = document.getElementById("quiz-options");
+        optionsContainer.innerHTML = "";
+
+        currentQuestion.options.forEach((option, index) => {
+          const optionLi = document.createElement("li");
+          optionLi.classList.add("option");
+          optionLi.textContent = option;
+          optionLi.onclick = () => selectAnswer(index);
+          optionsContainer.appendChild(optionLi);
+        });
+
+        document.getElementById("prev-btn").disabled =
+          currentQuestionIndex === 0;
+        document.getElementById("next-btn").textContent =
+          currentQuestionIndex === quiz.questions.length - 1
+            ? "Finish Quiz"
+            : "Next Question";
+        document.getElementById("next-btn").onclick =
+          currentQuestionIndex === quiz.questions.length - 1
+            ? checkAnswers
+            : nextQuestion;
+
+        // previous answer if exists
+        if (userAnswers[currentQuestionIndex] !== null) {
+          const selectedOption =
+            document.querySelectorAll(".option")[
+              userAnswers[currentQuestionIndex]
+            ];
+          selectAnswer(userAnswers[currentQuestionIndex], false);
+        }
+      }
+
+      function selectAnswer(index, isNewSelection = true) {
+        const quiz = quizzes[currentQuizId];
+        const currentQuestion = quiz.questions[currentQuestionIndex];
+        const selectedOption = document.querySelectorAll(".option")[index];
+        const correctOptionIndex = currentQuestion.options.indexOf(
+          currentQuestion.correctAnswer
+        );
+        const correctOption =
+          document.querySelectorAll(".option")[correctOptionIndex];
+
+        // rm any previous selections
+        document.querySelectorAll(".option").forEach((option) => {
+          option.classList.remove("selected", "correct");
+          const explanation = option.querySelector(".explanation");
+          if (explanation) explanation.remove();
+        });
+
+        if (index === correctOptionIndex) {
+          selectedOption.classList.add("correct");
+        } else {
+          selectedOption.classList.add("selected");
+          correctOption.classList.add("correct");
+        }
+
+        // explanation to correct answer
+        const explanationDiv = document.createElement("div");
+        explanationDiv.classList.add("explanation");
+        explanationDiv.textContent = `Reason: ${currentQuestion.explanation}`;
+        correctOption.appendChild(explanationDiv);
+
+        // disable further selections
+        document.querySelectorAll(".option").forEach((option) => {
+          option.onclick = null;
+        });
+
+        if (isNewSelection) {
+          userAnswers[currentQuestionIndex] = index;
+        }
+      }
+
+      function nextQuestion() {
+        if (
+          currentQuestionIndex <
+          quizzes[currentQuizId].questions.length - 1
+        ) {
+          currentQuestionIndex++;
+          showQuestion();
+        }
+      }
+
+      function previousQuestion() {
+        if (currentQuestionIndex > 0) {
+          currentQuestionIndex--;
+          showQuestion();
+        }
+      }
+
+      function checkAnswers() {
+        const quiz = quizzes[currentQuizId];
+        let score = 0;
+
+        userAnswers.forEach((answer, index) => {
+          if (
+            answer !== null &&
+            quiz.questions[index].options[answer] ===
+              quiz.questions[index].correctAnswer
+          ) {
+            score++;
+          }
+        });
+
+        alert(`You scored ${score} out of ${quiz.questions.length}`);
+        closeQuiz();
+      }
+
+      function closeQuiz() {
+        document.getElementById("quiz-overlay").style.display = "none";
+      }
+
+      // quiz buttons event listeners
+      document.querySelectorAll(".start-learning").forEach((button) => {
+        button.addEventListener("click", function () {
+          const quizId = this.getAttribute("data-quiz");
+          startQuiz(quizId);
+        });
+      });
+    </script>
+
+    <!-- start script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const modeToggle = document.getElementById("mode-toggle");
+        const body = document.body;
+
+        // get user's preferred colour scheme from local storage
+        const storedScheme = localStorage.getItem("colourScheme");
+        setColourScheme(
+          storedScheme ||
+            (window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light")
+        );
+
+        // set colour scheme
+        function setColourScheme(scheme) {
+          if (scheme === "dark") {
+            body.classList.remove("light-mode");
+            document.documentElement.style.setProperty("--bg-color", "#1a1a1a");
+            document.documentElement.style.setProperty("--text-color", "#fff");
+            document.documentElement.style.setProperty("--panel-bg", "#2c2c2c");
+            document.documentElement.style.setProperty(
+              "--button-bg",
+              "#4a148c"
+            );
+            document.documentElement.style.setProperty(
+              "--button-hover",
+              "#7b1fa2"
+            );
+            document.documentElement.style.setProperty("--button-text", "#fff");
+            modeToggle.textContent = "Toggle Light Mode";
+          } else {
+            body.classList.add("light-mode");
+            document.documentElement.style.setProperty("--bg-color", "#00d4ff");
+            document.documentElement.style.setProperty("--text-color", "#000");
+            document.documentElement.style.setProperty("--panel-bg", "#fff");
+            document.documentElement.style.setProperty(
+              "--button-bg",
+              "#8a2be2"
+            );
+            document.documentElement.style.setProperty(
+              "--button-hover",
+              "#6a1b9a"
+            );
+            document.documentElement.style.setProperty("--button-text", "#fff");
+            modeToggle.textContent = "Toggle Dark Mode";
+          }
+
+          // save to local storage
+          localStorage.setItem("colourScheme", scheme);
+        }
+
+        // detect changes in system preference
+        window
+          .matchMedia("(prefers-color-scheme: dark)")
+          .addEventListener("change", (e) => {
+            setColourScheme(e.matches ? "dark" : "light");
+          });
+
+        // manual toggle
+        modeToggle.addEventListener("click", () => {
+          setColourScheme(
+            body.classList.contains("light-mode") ? "dark" : "light"
+          );
+        });
+
+        // open sections
+        var acc = document.getElementsByClassName("accordion");
+        for (var i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+            } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+          });
+        }
+      });
+    </script>
+    <!-- end script -->
     <script src="https://cdn.jsdelivr.net/gh/oJezler-git/scrapped-website/key.js"></script>
   </body>
 </html>
