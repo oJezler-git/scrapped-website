@@ -609,15 +609,24 @@
                 <!-- start quiz -->
                 <li>
                   How to Analyse Quiz
-                  <button class="start-learning">Start Quiz</button>
+                  <button class="start-learning" data-quiz="how-to-analyse">
+                    Start Quiz
+                  </button>
                 </li>
                 <li>
                   Analytical Paragraph Structure Quiz
-                  <button class="start-learning">Start Quiz</button>
+                  <button
+                    class="start-learning"
+                    data-quiz="analytical-paragraph-structure"
+                  >
+                    Start Quiz
+                  </button>
                 </li>
                 <li>
                   Conclusion Quiz
-                  <button class="start-learning">Start Quiz</button>
+                  <button class="start-learning" data-quiz="conclusion">
+                    Start Quiz
+                  </button>
                 </li>
                 <!-- end quiz -->
               </ul>
@@ -649,25 +658,198 @@
         <!-- start script -->
         <script>
           const quizzes = {
-            "quiz-id1": {
-              title: "Title",
+            "how-to-analyse": {
+              title: "How To Analyse Quiz",
               questions: [
                 {
+                  question:
+                    "How many steps are there for Analysing (according to Lightup)?",
+                  options: ["1", "2", "3", "4"],
+                  correctAnswer: "4",
+                  explanation: "yeah",
+                },
+                {
+                  question: "What are the 4 steps for analysing?",
+                  options: [
+                    "Zoom out, what it shows, technique and why",
+                    "Technique, what it does, what it shows and why",
+                    "What it does, why it shows that, zoom out and how",
+                    "Technique, what it does, technique, explain",
+                  ],
+                  correctAnswer:
+                    "Technique, what it does, what it shows and why",
+                  explanation: "fr bro",
+                },
+                {
+                  question: "When it says ‘technique’ this means I ___",
+                  options: [
+                    "Pick out a random technique",
+                    "Pick out a technique I’m confident I know the effect of",
+                    "Pick out a technique that sounds impressive",
+                    "Pick out a technique that is short and simple",
+                  ],
+                  correctAnswer:
+                    "Pick out a technique I’m confident I know the effect of",
+                  explanation:
+                    "Always pick out techniques you’re familiar with so you’re able to comment on the effect (e.g. a plosive’s effect is it creates a HARSH sound)",
+                },
+                {
+                  question:
+                    "What does it mean by ‘what it does’ in the structure?",
+                  options: [
+                    "Talk about what the effect of the technique is",
+                    "Talk about what the quote does in terms of meaning",
+                    "Talk about what your point does in relation to the technique",
+                    "Talk about why you’ve picked that technique",
+                  ],
+                  correctAnswer:
+                    "Talk about what the effect of the technique is",
+                  explanation:
+                    "This is why it is important for you to pick a technique you can comment on the effect of, as you literally have to state it in this part of the analysis. E.g. if I picked the technique of alliteration. The alliteration (technique) creates a repetitive tone (what it does)",
+                },
+                {
+                  question:
+                    "When you talk about ‘what is shows’ this means you have to ____",
+                  options: [
+                    "Explain why you’ve said the effect",
+                    "Link the effect to the general meaning",
+                    "Explain the ‘what it does’ but link it to the meaning of the quote",
+                    "Explain why the writer is writing the text",
+                  ],
+                  correctAnswer:
+                    "Explain the ‘what it does’ but link it to the meaning of the quote",
+                  explanation:
+                    "Let’s use the above example. The alliteration on ‘terrible Tuesday’ (technique), creates a repetitive tone (what it does) showing that Tuesdays are repeatedly miserable for Sarah (what it shows). See, we have linked the what it does to what it shows about the quote",
+                },
+                {
+                  question:
+                    "What is the last part of the structure after ‘what it does’?",
+                  options: ["Technique", "Zoom out", "Why", "Link"],
+                  correctAnswer: "Why",
+                  explanation:
+                    "Now we must explain WHY we’ve said this (the part most students leave out)",
+                },
+                {
+                  question: "What words can you use to help you explain WHY?",
+                  options: [
+                    "Therefore, as a result",
+                    "Because, as",
+                    "Thus, consequently",
+                    "However, Furthermore",
+                  ],
+                  correctAnswer: "Because, as",
+                  explanation:
+                    "An easy way to explain why something shows this is saying AS or BECAUSE. Put this at the end of the sentence and you will be forced to explain",
+                },
+                {
                   question: "question",
-                  options: ["remove", "remove", "remove", "remove"],
-                  correctAnswer: "answer",
-                  explanation: "explaination",
+                  options: [
+                    "To really push yourself you should try comment on what the character …",
+                    "Symbolises/ represents/ is a microcosm of",
+                    "Shows to the reader/ audience",
+                  ],
+                  correctAnswer: "Symbolises/ represents/ is a microcosm of",
+                  explanation:
+                    "Symbolise/ emblematic- think about what they represent and what the deeper meaning/ purpose is of their character. Microcosm- when a smaller idea/ concept represents a bigger picture or idea",
                 },
               ],
             },
-            "quiz-id2": {
-              title: "Title",
+            "analytical-paragraph-structure": {
+              title: "Analytical Paragraph Structure Quiz",
               questions: [
                 {
-                  question: "question",
-                  options: ["remove", "remove", "remove", "remove"],
-                  correctAnswer: "answer",
-                  explanation: "explaination",
+                  question:
+                    "What is the short way of summarising our structure?",
+                  options: ["PEEL", "PETAL", "PETATACWL", "PETAETACTWL"],
+                  correctAnswer: "PETATACWL",
+                  explanation: "Think it in 3 parts: (PETA) (TAC) (WL)",
+                },
+                {
+                  question: "What goes after Point, Evidence, Technique",
+                  options: [
+                    "Alternative",
+                    "Analysis",
+                    "Evidence 2",
+                    "Technique",
+                  ],
+                  correctAnswer: "Analysis",
+                  explanation:
+                    "This is where you do your: technique, what it does, what it shows and why",
+                },
+                {
+                  question:
+                    "The structure goes: Point, Evidence, Technique, Analysis, Technique, _____",
+                  options: ["Analysis", "Evidence", "Zoom", "Context"],
+                  correctAnswer: "Analysis",
+                  explanation:
+                    "Here you could put another evidence, or just give another technique to the quote you’ve already got in your essay. If you’re aiming for grades 7+, we recommend doing 2x bits of evidence per paragraph",
+                },
+                {
+                  question:
+                    "The structure goes: Point, Evidence, Technique, Analysis, Technique, Analysis, Context, _____",
+                  options: [
+                    "Writer Intentions",
+                    "Effect on Reader",
+                    "ALT Context",
+                    "Link",
+                  ],
+                  correctAnswer: "Writer Intentions",
+                  explanation: "yh",
+                },
+              ],
+            },
+            conclusion: {
+              title: "Conclusion Quiz",
+              questions: [
+                {
+                  question: "How long should a conclusion be?",
+                  options: [
+                    "A large paragraph",
+                    "3-4 sentences",
+                    "1-2 sentences",
+                    "Unquinquagintillion Paragraphs ",
+                  ],
+                  correctAnswer: "3-4 sentences",
+                  explanation:
+                    "You just want to use it to reinstate your point, you don’t want another full paragraph!",
+                },
+                {
+                  question: "When writing a conclusion, avoid _____",
+                  options: [
+                    "Summarising ideas",
+                    "Giving your final answer",
+                    "Putting in new ideas",
+                    "Keeping it short",
+                  ],
+                  correctAnswer: "Putting in new ideas",
+                  explanation:
+                    "The conclusion is not the time to introduce new ideas. Only put in ideas you’ve already expressed, you’re just summarising these",
+                },
+                {
+                  question:
+                    "Fill in what you need to do when you write a conclusion: restate the words from the question, __________ …",
+                  options: [
+                    "Give an alternative point of view",
+                    "Give an impactful last statement",
+                    "Restate your main 3 points",
+                    "Plead with the examiner to give you a good grade",
+                  ],
+                  correctAnswer: "Restate your main 3 points",
+                  explanation:
+                    "Summarise your main 3 points in a few words, encapsulating your main points",
+                },
+                {
+                  question:
+                    "Fill in what you need to do when you write a conclusion: restate the words from the question, restate your main 3 points, give a final answer, ______",
+                  options: [
+                    "Impactful last statement",
+                    "Give a controversial statement",
+                    "Go into depth about your favourite point",
+                    "Repeat question",
+                  ],
+                  correctAnswer: "Impactful last statement",
+                  explanation:
+                    "This is the last thing the examiner is going to read, make this impactful and bold!",
                 },
               ],
             },
