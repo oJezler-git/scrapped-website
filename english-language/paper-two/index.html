@@ -698,7 +698,6 @@
         <div class="quiz-panel">
           <ul class="quiz-list">
             <!-- start quiz -->
-            <h2>These Quizzes Are Unlikely To Be Done</h2>
             <li>
               Question 1 Quiz
               <button class="start-learning" data-quiz="question-1">
@@ -755,25 +754,483 @@
     <!-- start script -->
     <script>
       const quizzes = {
-        "quiz-id1": {
-          title: "Title",
+        "question-1": {
+          title: "P2 Lan Question 1 Quiz",
           questions: [
             {
-              question: "question",
-              options: ["remove", "remove", "remove", "remove"],
-              correctAnswer: "answer",
-              explanation: "explaination",
+              question: "What does it ask you to do in question 1?",
+              options: [
+                "Tick off 4 true statements",
+                "Write down 4 true statements",
+                "Look at the whole first page and pick out 3 truths and a lie",
+                "Pick out language techniques",
+              ],
+              correctAnswer: "Tick off 4 true statements",
+              explanation: "Tick off 4 true statements",
+            },
+            {
+              question:
+                "In question 1 they will normally give you a set number of lines to find your answer in.",
+              options: ["True", "False"],
+              correctAnswer: "True",
+              explanation:
+                "They will tell you ‘Read again the first part of the source from lines 1 to 4 and list…’ (just like in language paper 1)",
+            },
+            {
+              question: "How long should you spend on this question roughly?",
+              options: [
+                "1-2 minutes",
+                "2-4 minutes",
+                "4-6 minutes",
+                "6-8 minutes",
+              ],
+              correctAnswer: "2-4 minutes",
+              explanation:
+                "Don’t spend any longer on this as this is worth the least amount of marks on the whole paper",
+            },
+            {
+              question:
+                "When I do my paper, this will be the ____ question I do on the paper.",
+              options: ["First", "Middle", "Interquartile Range", "Last"],
+              correctAnswer: "Last",
+              explanation:
+                "We would always recommend to do this question last as it is worth the least amount of marks, if there is any question you can rush, it would be this one!",
             },
           ],
         },
-        "quiz-id2": {
-          title: "Title",
+        "question-2": {
+          title: "P2 Lan Question 2 Quiz",
           questions: [
             {
-              question: "question",
-              options: ["remove", "remove", "remove", "remove"],
-              correctAnswer: "answer",
-              explanation: "explaination",
+              question: "How many marks is question 2 worth?",
+              options: ["4", "8", "12", "16"],
+              correctAnswer: "8",
+              explanation: "yea",
+            },
+            {
+              question: "How long should you spend on question 2 roughly?",
+              options: ["4 minutes", "8 minutes", "10 minutes", "12 minutes"],
+              correctAnswer: "10 minutes",
+              explanation:
+                "This is the perfect amount of time to do the question",
+            },
+            {
+              question: "What does question 2 ask you to do?",
+              options: [
+                "Analyse language techniques",
+                "Compare in detail both sources",
+                "Compare the structures of both sources",
+                "Compare briefly the sources",
+              ],
+              correctAnswer: "Compare briefly the sources",
+              explanation:
+                "You want to pick out clear and insightful comparisons.",
+            },
+            {
+              question: "What techniques does question 2 want you to focus on?",
+              options: [
+                "Structure techniques",
+                "Language techniques",
+                "Language and structure techniques",
+                "None",
+              ],
+              correctAnswer: "None",
+              explanation:
+                "This is not a trick, you don’t need to worry about techniques at all for this question",
+            },
+            {
+              question: "What do 8/8 examples on this question do well?",
+              options: [
+                "Make 1 insightful comparison with a lot of analysis",
+                "Have clear points but make inferences",
+                "Give detailed analysis, zooming in on words with techniques",
+                "Use 6 quotes for each text",
+              ],
+              correctAnswer: "Have clear points but make inferences",
+              explanation:
+                "Clearly compare both texts and go deeper with what it infers/ suggests.",
+            },
+            {
+              question:
+                "In the structure we’ve provided, fill in the blanks in the first bit of the structure: Point about source A, Evidence, ______ …….",
+              options: ["Technique", "Effect on reader", "Zoom", "Analysis"],
+              correctAnswer: "Analysis",
+              explanation:
+                "You don’t need to comment on techniques or effect on the reader in this question",
+            },
+            {
+              question:
+                "Complete the rest of the structure: Point about A, Evidence, Analysis, ________, Point about B….",
+              options: [
+                "Comparison with A",
+                "Comparison with B",
+                "Alternative analysis",
+                "Technique",
+              ],
+              correctAnswer: "Comparison with B",
+              explanation:
+                "This is the time we show the examiner we can make clear and concise comparisons",
+            },
+            {
+              question:
+                "Complete the rest of the structure: Point about A, Evidence, Analysis, Comparison with B, Point about B, ______, Analysis",
+              options: [
+                "Evidence",
+                "Comparison with B",
+                "Zoom",
+                "Alternative analysis",
+              ],
+              correctAnswer: "Evidence",
+              explanation:
+                "A way you could remember the structure is PEA C PEA. Easy!",
+            },
+          ],
+        },
+        "question-3": {
+          title: "P2 Lan Question 3 Quiz",
+          questions: [
+            {
+              question: "How many marks is question 3 worth?",
+              options: ["4", "8", "12", "16"],
+              correctAnswer: "12",
+              explanation: "yeah",
+            },
+            {
+              question: "How long should you spend on question 3 roughly?",
+              options: [
+                "8-10 minutes",
+                "10-12 minutes",
+                "12-15 minutes",
+                "15-17 minutes",
+              ],
+              correctAnswer: "15-17 minutes",
+              explanation:
+                "Depending on how long it takes for your reading time, this is the sweet spot for timing for this question. Go for the lower end of the timing if you feel you’re always rushed for time.",
+            },
+            {
+              question: "What techniques does question 3 want you to focus on?",
+              options: [
+                "Structure techniques",
+                "Language techniques",
+                "Language and structure techniques",
+                "No techniques",
+              ],
+              correctAnswer: "Language techniques",
+              explanation:
+                "This is like Paper 1 Question 2. It is a language question so you can only use language techniques, it will ask you “how does the writer use language to describe X?”",
+            },
+            {
+              question: "Pick out the non-language technique",
+              options: ["Verbs", "Shift in focus", "Connotation", "Oxymoron"],
+              correctAnswer: "Shift in focus",
+              explanation:
+                "We can only use language techniques in this question, shift in focus is structure.",
+            },
+            {
+              question:
+                "What is important to do to ensure you expand on your analysis?",
+              options: [
+                "Pick out a good technique",
+                "Focus on the question",
+                "Say why for everything you say",
+                "Use ambitious vocabulary",
+              ],
+              correctAnswer: "Say why for everything you say",
+              explanation:
+                "If you say that a character in the extract is feeling sad, tell me WHY you’ve said that. Helpful words to help you explain why are ‘as’ and ‘because’",
+            },
+            {
+              question:
+                "A hack the Lightup hub taught me to make this question easier is to ____",
+              options: [
+                "Pick out techniques before I write",
+                "Pick out 3-5 key words that would answer the question",
+                "Speak about context to give deeper analysis",
+                "Spunk all over the exam paper",
+              ],
+              correctAnswer:
+                "Pick out 3-5 key words that would answer the question",
+              explanation:
+                "If you pick out 3-5 key words before, you could use 2 key words to help you pick out evidence in one paragraph and then another 2 key words to pick out evidence for the second paragraph.",
+            },
+            {
+              question:
+                "Question 3 in Paper 2 is different from Question 2 in Paper 1 because….",
+              options: [
+                "You need to provide deeper insight in question 3",
+                "in question 2 you’re required to put in more evidence",
+                "in question 3 your answer is going to be more broad.",
+                "in question 3 your answer need to include context",
+              ],
+              correctAnswer: "You need to provide deeper insight in question 3",
+              explanation:
+                "Question 3 is 4 more marks than question 2, this means that the examiner will be looking more closely to how deep and insightful your ideas can be",
+            },
+            {
+              question:
+                "fill in the missing structure for Question 3: Point, Evidence, ____, Analysis…",
+              options: ["evidence x2", "technique", "Infer", "Zoom"],
+              correctAnswer: "technique",
+              explanation:
+                "Make sure you’re picking out language techniques that you’re able to comment on the effect of them. If you’re unsure on the effect of a technique, that’s no worries, pick another one",
+            },
+            {
+              question:
+                "Fill in the missing structure for Question 3: Point, Evidence, Technique, Analysis, Evidence, _____, Analysis….",
+              options: [
+                "Effect on Reader",
+                "Technique",
+                "Zoom",
+                "Writers Methods",
+              ],
+              correctAnswer: "Technique",
+              explanation:
+                "We repeat the ETA part (Evidence, Technique, Analysis)",
+            },
+            {
+              question:
+                "Fill in the missing structure for Question 3: Point, Evidence, Technique, Analysis, Evidence, Technique, Analysis, _______, Alternative Analysis",
+              options: ["Technique", "Zoom", "Evidence", "Effect on Reader"],
+              correctAnswer: "Zoom",
+              explanation:
+                "This just means pick out 1 key word to zoom in on to show the examiner you can zoom in and out of meanings and words",
+            },
+            {
+              question:
+                "In question 3 of Paper 2, I will write ____ paragraph (s )",
+              options: ["1", "2", "3", "4"],
+              correctAnswer: "2",
+              explanation: "Repeat the PETAETAZA structure twice.",
+            },
+            {
+              question:
+                "It is important to include Alternative analysis because…",
+              options: [
+                "It shows the examiner a different perspective",
+                "It shows the examiner you can follow a structure",
+                "It shows the examiner that you’re being critical and insightful",
+                "It shows the examiner that you understand the text as a whole",
+              ],
+              correctAnswer:
+                "It shows the examiner that you’re being critical and insightful",
+              explanation:
+                "This is a fundamental skill the examiner is looking for in both Literature and Language!",
+            },
+          ],
+        },
+        "question-4": {
+          title: "P2 Lan Question 4 Quiz",
+          questions: [
+            {
+              question: "How many marks is question 4 worth?",
+              options: ["8", "12", "16", "20"],
+              correctAnswer: "16",
+              explanation:
+                "This is the second most heavily weighted question in the paper. (not a reason loool stupid lightuphub)",
+            },
+            {
+              question: "What does question 4 ask you to do in this question?",
+              options: [
+                "See how a writer depicts X",
+                "Argue a statement given",
+                "Talk about the difference between two sources",
+                "List reasons why you disagree with the character",
+              ],
+              correctAnswer: "Talk about the difference between two sources",
+              explanation:
+                "The question will be something like this: Compare how the writers convey their different attitudes to X”",
+            },
+            {
+              question: "How long should you spend on question 4 roughly?",
+              options: [
+                "5- 7 minutes",
+                "12- 15 minutes",
+                "17-20 minutes",
+                "20-22 minutes",
+              ],
+              correctAnswer: "20-22 minutes",
+              explanation:
+                "If you’re worried for time, or take a bit more time to read, go for 20 minutes.",
+            },
+            {
+              question: "What techniques does question 4 want you to pick out?",
+              options: [
+                "Structure techniques",
+                "Language techniques",
+                "Language and structure techniques",
+                "No techniques",
+              ],
+              correctAnswer: "Language and structure techniques",
+              explanation:
+                "The question will want you to compare both sources and use their language and structure devices to help you do this",
+            },
+            {
+              question:
+                "How is the comparison question different from question 2?",
+              options: [
+                "Its not lol",
+                "You just need to go more in depth but it is still about the same focus",
+                "You can use techniques",
+                "You go more in depth and you will have a different focus for the question",
+              ],
+              correctAnswer: "Its not lol",
+              explanation:
+                "it isnt different actually, please someone see this plz im so tired making this at 4am 6/11/24",
+            },
+            {
+              question: "Students who get 16/16 are always ______",
+              options: [
+                "Using the whole source",
+                "Have a balanced comparisons",
+                "Weave insightful comparisons throughout",
+                "Don’t reference a wide range of techniques",
+              ],
+              correctAnswer: "Weave insightful comparisons throughout",
+              explanation:
+                "Make sure you’re fully explaining your comparisons and why the sources are different",
+            },
+            {
+              question:
+                "The Lightup hub recommends we do ____ paragraph (s) for question 4.",
+              options: ["1", "2", "3", "4"],
+              correctAnswer: "3",
+              explanation:
+                "If you’re running out of time on the second paragraph, just make sure you’re weaving comparisons throughout more frequently (you should be doing this anyway!)",
+            },
+            {
+              question:
+                "Fill in the structure for question 4: Point about A, ETA, ___....",
+              options: ["ETA", "WCL", "Comparison", "ETA about B"],
+              correctAnswer: "ETA",
+              explanation:
+                "We repeat ETA as we want to zoom in on source A, you can weave in comparisons here too if you want to strive for the top band.",
+            },
+            {
+              question:
+                "Fill in the structure for question 4: Point about A, ETA, ETA, ______, ETA about B…",
+              options: [
+                "Writers Intentions",
+                "ETA about B",
+                "Zoom",
+                "Comparison",
+              ],
+              correctAnswer: "Comparison",
+              explanation:
+                "This is your chance to fully explain your comparison to ensure you’re making those clear and concise links.",
+            },
+            {
+              question:
+                "Fill in the structure for question 4: Point about A, ETA, ETA, Comparison, ETA about B, ETA about B, ______",
+              options: [
+                "Compare with A",
+                "Explore B in depth",
+                "Alternative analysis",
+                "Context",
+              ],
+              correctAnswer: "Explore B in depth",
+              explanation:
+                "This is your chance to be insightful with your ideas with B and weave in a small comparison with A",
+            },
+          ],
+        },
+        "question-5": {
+          title: "P2 Lan Question 5 Quiz",
+          questions: [
+            {
+              question: "How many marks is this question worth?",
+              options: ["20", "30", "40", "50"],
+              correctAnswer: "40",
+              explanation: "This is worth half of the whole paper!",
+            },
+            {
+              question: "When should you do this question?",
+              options: ["First", "Last", "In the middle", "Whenever"],
+              correctAnswer: "First",
+              explanation:
+                "Don’t make the mistake of leaving this until last, if you run out of time, this is not the question you want to run out of time on.",
+            },
+            {
+              question:
+                "How many marks are for your writing? (not including SPAG)",
+              options: ["20", "22", "24", "30"],
+              correctAnswer: "24",
+              explanation: "nice",
+            },
+            {
+              question: "What is the acronym to help you get 24/24 marks?",
+              options: [
+                "RRREADS My Donkeys Spelling Later",
+                "LLEADS My Fishes Quiz Constantly",
+                "RRREADS My Fishes Quiz Always",
+                "RRREADS My Fishes Quiz Constantly",
+              ],
+              correctAnswer: "RRREADS My Fishes Quiz Constantly",
+              explanation:
+                "This is a way you can guarantee to get all your language devices in to impress the examiner.",
+            },
+            {
+              question:
+                "What does the Q (aka Quiz) stand for in RRREADS My Fishes Quiz Constantly",
+              options: [
+                "Quoting Facts",
+                "Quoting a reliable source",
+                "Quizzes",
+                "Quoting yourself",
+              ],
+              correctAnswer: "Quoting a reliable source",
+              explanation:
+                "You want to get facts from somebody who is reliable in that field. E.g. if you were talking about mental health, you’d get a quote from “UK’s Leading Mental Health Doctor’",
+            },
+            {
+              question: "To get 16/16 on your SPAG you must _______",
+              options: [
+                "Use complex and simple sentences",
+                "Use a few bits of punctuation",
+                "Use some high level vocabulary",
+                "This is so obvious lol",
+              ],
+              correctAnswer: "Use complex and simple sentences",
+              explanation:
+                "The other two you should do, but not use a ‘few’ use LOTS of punctuation and high level vocab.",
+            },
+            {
+              question: "It is important to clearly address your _____",
+              options: ["Audience", "Peers", "Colleagues", "Employees"],
+              correctAnswer: "Audience",
+              explanation:
+                "Whoever it is you’re speaking to, make sure it is clear in the way you address them",
+            },
+            {
+              question:
+                "A good way to also impress the examiner is using the other acronym of _____",
+              options: ["SWEET", "SWEEP", "SLEEP", "SHIIT"],
+              correctAnswer: "SWEEP",
+              explanation: "This is a great way to tackle wider issues.",
+            },
+            {
+              question: "The P in SWEEP represents ____",
+              options: ["People", "Polarisation", "Politics", "Pornography"],
+              correctAnswer: "Politics",
+              explanation:
+                "Politics is a great way to link it to wider issues -think of how something impacts the government, policies that are made",
+            },
+            {
+              question: "The S in SWEEP represents ____",
+              options: [
+                "Society",
+                "Synergy",
+                "Social Grievances",
+                "Sexual Intercourse ",
+              ],
+              correctAnswer: "Society",
+              explanation:
+                "This is the easiest one to link to wider issues, think about how it impacts people, neighbourhoods etc.",
+            },
+            {
+              question: "The W in SWEEP represents ___",
+              options: ["Weather", "World", "Winning together", "Monkey"],
+              correctAnswer: "World",
+              explanation: "yea",
             },
           ],
         },
