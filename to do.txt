@@ -6,18 +6,18 @@
 ❌ >6. change topic descriptions
 ✅ 7. add video links to embedded videos
 ✅ 8. ^ update js and css from acc to rest of stuffs
-❌ >9. download linked resources from urls like https://thelightuphub. and put them into assets (since they may change urls)
+✅ 9. download linked resources from urls like https://thel1ghtuphub. and put them into assets (since they may change urls)
 ❌ 10. add `target="_blank" rel="noopener noreferrer"` to linked aqa files (https://filestore.aqa.org.uk)
 
 11. add quizzes for: 
 ✅ an inspector calls
 ❌ a christmas carol
 ❌ romeo and juliet
-❌ love & relationship poetry
-❌ unseen poetry
-❌ language paper 1 and 2
-❌ essay skills
-❌ revision
+✅ love & relationship poetry
+✅ unseen poetry
+✅ language paper 1 and 2
+✅ essay skills
+✅ revision
 
 ❌ 11. potentially make all the styles into one external file 
 ❌ 12. potentially make all the scripts into one external file 
