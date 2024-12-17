@@ -227,6 +227,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const notifManager = new NotificationManager();
 
   notifManager.addNotification({
+    id: "v1.1.0",
+    content:
+      "v1.1.0: All quizzes fully finished, UI for them will be updated soon.",
+  });
+
+  notifManager.addNotification({
     id: "v1.0.0",
     content:
       "v1.0.0: Initial release. This website has finally been completed, expect new features soon.",

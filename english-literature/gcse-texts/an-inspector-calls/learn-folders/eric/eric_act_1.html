@@ -188,6 +188,32 @@
         height: 100%;
       }
 
+      .video-fallback {
+        text-align: center;
+        padding: 10px;
+        margin-top: 10px;
+        background-color: var(--container-bg);
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s;
+      }
+
+      .video-fallback p {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+
+      .video-fallback a {
+        color: var(--link-color);
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .video-fallback a:hover {
+        text-decoration: underline;
+      }
+
       #sidebar-toggle,
       #mode-toggle {
         transition: opacity 0.5s ease-in-out;
@@ -288,16 +314,23 @@
 
         .main-content {
           width: 100%;
+
           padding-left: 0;
+
           order: 1;
         }
 
         .sidebar {
           width: 100%;
+
           max-height: none;
+
           padding-right: 0;
+
           padding-left: 0;
+
           order: 2;
+
           margin-top: 20px;
         }
 
@@ -307,6 +340,7 @@
 
         .main-content-expanded {
           width: 100%;
+
           padding-left: 0;
         }
 
@@ -340,6 +374,7 @@
 
         #mode-toggle {
           top: 30px;
+
           right: 10px;
         }
       }
@@ -351,6 +386,7 @@
 
         .button {
           padding: 8px 16px;
+
           font-size: 14px;
         }
       }
@@ -777,12 +813,88 @@
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // pdf
       const pdfUrl = "../../aic-pdfs/Eric/Eric act 1.pdf";
-      document.getElementById("pdf-embed").src = pdfUrl;
-      document
-        .getElementById("open-pdf-button")
-        .addEventListener("click", function () {
-          window.open(pdfUrl, "_blank");
+      const pdfEmbed = document.getElementById("pdf-embed");
+      const pdfFallback = document.getElementById("pdf-fallback");
+      const directPdfLink = document.getElementById("direct-pdf-link");
+      const openPdfButton = document.getElementById("open-pdf-button");
+
+      // check if device is mobile
+      function isMobileDevice() {
+        return (
+          typeof window.orientation !== "undefined" ||
+          navigator.userAgent.indexOf("IEMobile") !== -1
+        );
+      }
+
+      // PDF display
+      function handlePdfDisplay() {
+        if (isMobileDevice()) {
+          // Hide embed and button, show fallback for mobile
+          pdfEmbed.style.display = "none";
+          openPdfButton.style.display = "none";
+          pdfFallback.style.display = "block";
+          directPdfLink.href = pdfUrl;
+        } else {
+          // Show embed and button, hide fallback for desktop
+          pdfEmbed.src = pdfUrl;
+          openPdfButton.style.display = "block";
+          pdfFallback.style.display = "none";
+        }
+      }
+
+      // call on page load
+      document.addEventListener("DOMContentLoaded", handlePdfDisplay);
+
+      // open in new tab button
+      openPdfButton.addEventListener("click", function () {
+        window.open(pdfUrl, "_blank");
+      });
+
+      //////////////////////////////////////////////////////////////////////////////////////////////////
+      // youtube video for mobile
+      document.addEventListener("DOMContentLoaded", function () {
+        const videoIframe = document.getElementById("video-iframe");
+        const directLink = document.getElementById("direct-video-link");
+        const videoFallback = document.getElementById("video-fallback");
+
+        // handle video loading
+        videoIframe.addEventListener("load", function () {
+          videoFallback.style.display = "none";
         });
+
+        videoIframe.addEventListener("error", function () {
+          videoFallback.style.display = "block";
+        });
+
+        // extract video ID
+        function getVideoId(embedUrl) {
+          const match = embedUrl.match(/embed\/([\w-]+)/);
+          return match ? match[1] : "";
+        }
+
+        // set direct link if iframe src changes
+        const observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
+            if (
+              mutation.type === "attributes" &&
+              mutation.attributeName === "src"
+            ) {
+              const videoId = getVideoId(videoIframe.src);
+              if (videoId) {
+                directLink.href = `https://www.youtube.com/watch?v=${videoId}`;
+              }
+            }
+          });
+        });
+
+        observer.observe(videoIframe, { attributes: true });
+
+        // initial direct link if iframe has a src
+        const initialVideoId = getVideoId(videoIframe.src);
+        if (initialVideoId) {
+          directLink.href = `https://www.youtube.com/watch?v=${initialVideoId}`;
+        }
+      });
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // dark mode
       const modeToggle = document.getElementById("mode-toggle");

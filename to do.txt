@@ -9,9 +9,9 @@
 ✅ 9. download linked resources from urls like https://thel1ghtuphub. and put them into assets (since they may change urls)
 ❌ 10. add `target="_blank" rel="noopener noreferrer"` to linked aqa files (https://filestore.aqa.org.uk)
 
-11. add quizzes for: 
+✅ 11. add quizzes for: 
 ✅ an inspector calls
-❌ a christmas carol
+✅ a christmas carol
 ✅ romeo and juliet
 ✅ love & relationship poetry
 ✅ unseen poetry
@@ -22,3 +22,7 @@
 ❌ 11. potentially make all the styles into one external file 
 ❌ 12. potentially make all the scripts into one external file 
 ❌ 13. potentially minify all code
+
+❌ 14. update new js for mobile (all pages)
+
+15. 
