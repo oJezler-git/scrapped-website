@@ -632,6 +632,14 @@
               height="500px"
               type="application/pdf"
             />
+            <div id="pdf-fallback" class="video-fallback" style="display: none">
+              <p>
+                Mobile Device Detected:
+                <a href="" id="direct-pdf-link" target="_blank" rel="noopener"
+                  >Open PDF directly</a
+                >
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -725,43 +733,82 @@
       });
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // dark mode
-      const modeToggle = document.getElementById("mode-toggle");
-      const body = document.body;
+      document.addEventListener("DOMContentLoaded", function () {
+        const modeToggle = document.getElementById("mode-toggle");
+        const body = document.body;
 
-      function setColourScheme(scheme) {
-        if (scheme === "dark") {
-          body.classList.remove("light-mode");
-          body.classList.add("dark-mode");
-          modeToggle.textContent = "Toggle Light Mode";
-        } else {
-          body.classList.remove("dark-mode");
-          body.classList.add("light-mode");
-          modeToggle.textContent = "Toggle Dark Mode";
+        // get users preferred colour scheme from local storage
+        const storedScheme = localStorage.getItem("colourScheme");
+
+        setColourScheme(
+          storedScheme ||
+            (window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light")
+        );
+
+        function setColourScheme(scheme) {
+          const darkModeStyles = {
+            "--background-color": "#1a1a1a",
+            "--text-color": "#fff",
+            "--container-bg": "#333",
+            "--separator-color": "#ff8a4c",
+            "--link-color": "#ff8a4c",
+            "--ticklist-bg": "#ff8a4c",
+            "--ticklist-color": "#ff8a4c",
+            "--ticklist-bg-rgb": "255, 138, 76",
+            "--pdf-preview-bg": "#2a2a2a",
+          };
+
+          const lightModeStyles = {
+            "--background-color": "#00d4ff",
+            "--text-color": "#000",
+            "--container-bg": "#fff",
+            "--separator-color": "#8a2be2",
+            "--link-color": "#8a2be2",
+            "--ticklist-bg": "#8a2be2",
+            "--ticklist-color": "#8a2be2",
+            "--ticklist-bg-rgb": "138, 43, 226",
+            "--pdf-preview-bg": "#e0ffff",
+          };
+
+          // apply styles based on scheme
+          const stylesToApply =
+            scheme === "dark" ? darkModeStyles : lightModeStyles;
+
+          for (const [property, value] of Object.entries(stylesToApply)) {
+            document.documentElement.style.setProperty(property, value);
+          }
+
+          // update the body classes and modeToggle text
+          if (scheme === "dark") {
+            body.classList.remove("light-mode");
+            body.classList.add("dark-mode");
+            modeToggle.textContent = "Toggle Light Mode";
+          } else {
+            body.classList.remove("dark-mode");
+            body.classList.add("light-mode");
+            modeToggle.textContent = "Toggle Dark Mode";
+          }
+
+          // save to local storage
+          localStorage.setItem("colourScheme", scheme);
         }
-      }
-      // check system preference for dark mode
-      if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
-        setColourScheme("dark");
-      } else {
-        setColourScheme("light");
-      }
-      // detect changes in system preference
-      window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .addEventListener("change", (e) => {
-          setColourScheme(e.matches ? "dark" : "light");
+
+        // detect changes in system preference
+        window
+          .matchMedia("(prefers-color-scheme: dark)")
+          .addEventListener("change", (e) => {
+            setColourScheme(e.matches ? "dark" : "light");
+          });
+
+        // manual toggle
+        modeToggle.addEventListener("click", () => {
+          setColourScheme(
+            body.classList.contains("light-mode") ? "dark" : "light"
+          );
         });
-      // manual toggle
-      modeToggle.addEventListener("click", () => {
-        body.classList.toggle("dark-mode");
-        if (body.classList.contains("dark-mode")) {
-          modeToggle.textContent = "Toggle Light Mode";
-        } else {
-          modeToggle.textContent = "Toggle Dark Mode";
-        }
       });
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // sidebar open and close

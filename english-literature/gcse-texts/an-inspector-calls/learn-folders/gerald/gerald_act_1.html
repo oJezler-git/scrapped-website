@@ -793,6 +793,14 @@
               loading="lazy"
               allowfullscreen
             ></iframe>
+            <div id="video-fallback" class="video-fallback">
+              <p>
+                Video not loading?
+                <a href="" id="direct-video-link" target="_blank" rel="noopener"
+                  >Watch directly on YouTube</a
+                >
+              </p>
+            </div>
           </div>
           <button class="button-purple" id="open-pdf-button">
             Open PDF in New Tab
@@ -805,6 +813,14 @@
               height="500px"
               type="application/pdf"
             />
+            <div id="pdf-fallback" class="video-fallback" style="display: none">
+              <p>
+                Mobile Device Detected:
+                <a href="" id="direct-pdf-link" target="_blank" rel="noopener"
+                  >Open PDF directly</a
+                >
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -813,51 +829,166 @@
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // pdf
       const pdfUrl = "../../aic-pdfs/Gerald/Gerald act 1.pdf";
-      document.getElementById("pdf-embed").src = pdfUrl;
-      document
-        .getElementById("open-pdf-button")
-        .addEventListener("click", function () {
-          window.open(pdfUrl, "_blank");
+      const pdfEmbed = document.getElementById("pdf-embed");
+      const pdfFallback = document.getElementById("pdf-fallback");
+      const directPdfLink = document.getElementById("direct-pdf-link");
+      const openPdfButton = document.getElementById("open-pdf-button");
+
+      // check if device is mobile
+      function isMobileDevice() {
+        return (
+          typeof window.orientation !== "undefined" ||
+          navigator.userAgent.indexOf("IEMobile") !== -1
+        );
+      }
+
+      // PDF display
+      function handlePdfDisplay() {
+        if (isMobileDevice()) {
+          // Hide embed and button, show fallback for mobile
+          pdfEmbed.style.display = "none";
+          openPdfButton.style.display = "none";
+          pdfFallback.style.display = "block";
+          directPdfLink.href = pdfUrl;
+        } else {
+          // Show embed and button, hide fallback for desktop
+          pdfEmbed.src = pdfUrl;
+          openPdfButton.style.display = "block";
+          pdfFallback.style.display = "none";
+        }
+      }
+
+      // call on page load
+      document.addEventListener("DOMContentLoaded", handlePdfDisplay);
+
+      // open in new tab button
+      openPdfButton.addEventListener("click", function () {
+        window.open(pdfUrl, "_blank");
+      });
+
+      //////////////////////////////////////////////////////////////////////////////////////////////////
+      // youtube video for mobile
+      document.addEventListener("DOMContentLoaded", function () {
+        const videoIframe = document.getElementById("video-iframe");
+        const directLink = document.getElementById("direct-video-link");
+        const videoFallback = document.getElementById("video-fallback");
+
+        // handle video loading
+        videoIframe.addEventListener("load", function () {
+          videoFallback.style.display = "none";
         });
+
+        videoIframe.addEventListener("error", function () {
+          videoFallback.style.display = "block";
+        });
+
+        // extract video ID
+        function getVideoId(embedUrl) {
+          const match = embedUrl.match(/embed\/([\w-]+)/);
+          return match ? match[1] : "";
+        }
+
+        // set direct link if iframe src changes
+        const observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
+            if (
+              mutation.type === "attributes" &&
+              mutation.attributeName === "src"
+            ) {
+              const videoId = getVideoId(videoIframe.src);
+              if (videoId) {
+                directLink.href = `https://www.youtube.com/watch?v=${videoId}`;
+              }
+            }
+          });
+        });
+
+        observer.observe(videoIframe, { attributes: true });
+
+        // initial direct link if iframe has a src
+        const initialVideoId = getVideoId(videoIframe.src);
+        if (initialVideoId) {
+          directLink.href = `https://www.youtube.com/watch?v=${initialVideoId}`;
+        }
+      });
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // dark mode
-      const modeToggle = document.getElementById("mode-toggle");
-      const body = document.body;
+      document.addEventListener("DOMContentLoaded", function () {
+        const modeToggle = document.getElementById("mode-toggle");
+        const body = document.body;
 
-      function setColourScheme(scheme) {
-        if (scheme === "dark") {
-          body.classList.remove("light-mode");
-          body.classList.add("dark-mode");
-          modeToggle.textContent = "Toggle Light Mode";
-        } else {
-          body.classList.remove("dark-mode");
-          body.classList.add("light-mode");
-          modeToggle.textContent = "Toggle Dark Mode";
+        // get users preferred colour scheme from local storage
+        const storedScheme = localStorage.getItem("colourScheme");
+
+        setColourScheme(
+          storedScheme ||
+            (window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light")
+        );
+
+        function setColourScheme(scheme) {
+          const darkModeStyles = {
+            "--background-color": "#1a1a1a",
+            "--text-color": "#fff",
+            "--container-bg": "#333",
+            "--separator-color": "#ff8a4c",
+            "--link-color": "#ff8a4c",
+            "--ticklist-bg": "#ff8a4c",
+            "--ticklist-color": "#ff8a4c",
+            "--ticklist-bg-rgb": "255, 138, 76",
+            "--pdf-preview-bg": "#2a2a2a",
+          };
+
+          const lightModeStyles = {
+            "--background-color": "#00d4ff",
+            "--text-color": "#000",
+            "--container-bg": "#fff",
+            "--separator-color": "#8a2be2",
+            "--link-color": "#8a2be2",
+            "--ticklist-bg": "#8a2be2",
+            "--ticklist-color": "#8a2be2",
+            "--ticklist-bg-rgb": "138, 43, 226",
+            "--pdf-preview-bg": "#e0ffff",
+          };
+
+          // apply styles based on scheme
+          const stylesToApply =
+            scheme === "dark" ? darkModeStyles : lightModeStyles;
+
+          for (const [property, value] of Object.entries(stylesToApply)) {
+            document.documentElement.style.setProperty(property, value);
+          }
+
+          // update the body classes and modeToggle text
+          if (scheme === "dark") {
+            body.classList.remove("light-mode");
+            body.classList.add("dark-mode");
+            modeToggle.textContent = "Toggle Light Mode";
+          } else {
+            body.classList.remove("dark-mode");
+            body.classList.add("light-mode");
+            modeToggle.textContent = "Toggle Dark Mode";
+          }
+
+          // save to local storage
+          localStorage.setItem("colourScheme", scheme);
         }
-      }
-      // check system preference for dark mode
-      if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
-        setColourScheme("dark");
-      } else {
-        setColourScheme("light");
-      }
-      // detect changes in system preference
-      window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .addEventListener("change", (e) => {
-          setColourScheme(e.matches ? "dark" : "light");
+
+        // detect changes in system preference
+        window
+          .matchMedia("(prefers-color-scheme: dark)")
+          .addEventListener("change", (e) => {
+            setColourScheme(e.matches ? "dark" : "light");
+          });
+
+        // manual toggle
+        modeToggle.addEventListener("click", () => {
+          setColourScheme(
+            body.classList.contains("light-mode") ? "dark" : "light"
+          );
         });
-      // manual toggle
-      modeToggle.addEventListener("click", () => {
-        body.classList.toggle("dark-mode");
-        if (body.classList.contains("dark-mode")) {
-          modeToggle.textContent = "Toggle Light Mode";
-        } else {
-          modeToggle.textContent = "Toggle Dark Mode";
-        }
       });
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // sidebar open and close
