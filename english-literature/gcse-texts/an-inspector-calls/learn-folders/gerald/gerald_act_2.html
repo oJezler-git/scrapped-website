@@ -917,7 +917,7 @@
         const modeToggle = document.getElementById("mode-toggle");
         const body = document.body;
 
-        // get user's preferred colour scheme from local storage
+        // get users preferred colour scheme from local storage
         const storedScheme = localStorage.getItem("colourScheme");
 
         setColourScheme(
@@ -953,7 +953,7 @@
             "--pdf-preview-bg": "#e0ffff",
           };
 
-          // Apply styles based on scheme
+          // apply styles based on scheme
           const stylesToApply =
             scheme === "dark" ? darkModeStyles : lightModeStyles;
 
@@ -990,7 +990,6 @@
           );
         });
       });
-
       //////////////////////////////////////////////////////////////////////////////////////////////////
       // sidebar open and close
       const sidebarToggle = document.getElementById("sidebar-toggle");
