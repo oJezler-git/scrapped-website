@@ -227,15 +227,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const notifManager = new NotificationManager();
 
   notifManager.addNotification({
+    id: "v1.1.1",
+    content:
+      "v1.1.1: Feat: rm bg from MOST PDF's for printing add %20p before .pdf tutorial https://i.imgur.com/vfX1frk.png  ",
+  });
+
+  notifManager.addNotification({
     id: "v1.1.0",
     content:
-      "v1.1.0: All quizzes fully finished, UI for them will be updated soon.",
+      "v1.1.0: Feat: All quizzes fully finished, UI for them will be updated soon.",
   });
 
   notifManager.addNotification({
     id: "v1.0.0",
     content:
-      "v1.0.0: Initial release. This website has finally been completed, expect new features soon.",
+      "v1.0.0: Chore: This website has finally been completed, expect new features soon.",
   });
 
   notifManager.addNotification({
