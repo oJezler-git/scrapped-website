@@ -229,6 +229,12 @@ document.addEventListener("DOMContentLoaded", () => {
   notifManager.addNotification({
     id: "v1.1.1",
     content:
+      "v1.1.1: Note: https://science.ojezler.com has been complete, this is a mark me clone without the AI (for obvious reasons) you can still access the questions and answers.  ",
+  });
+
+  notifManager.addNotification({
+    id: "v1.1.1",
+    content:
       "v1.1.1: Feat: rm bg from MOST PDF's for printing add %20p before .pdf tutorial https://i.imgur.com/vfX1frk.png  ",
   });
 
